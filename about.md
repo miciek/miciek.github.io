@@ -1,11 +1,13 @@
 ---
 layout: page
-title: About
+title: About me
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+<p>This is a blog about programming and stuff that we do in order to make software projects happen.
+I write mostly to remember things better, but also to share things that fascinate me.</p>
 
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
-
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+<img src="/images/me.jpg" alt="Michał Płachta" class="avatar" />
+<p>
+  Follow me on <a href="https://twitter.com/miciek">Twitter</a>, if you want to know what stuff will get here in the near future.
+</p>
