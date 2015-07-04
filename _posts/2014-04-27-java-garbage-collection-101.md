@@ -3,7 +3,7 @@ layout: post
 title: Java Garbage Collection 101
 date: 2014-04-27 14:24:23
 summary: Do you have an interview tomorrow and want to refresh your knowledge on garbage collection? Or maybe you are new to this topic and just want to start somewhere? Either way, this is a place for you. In this post, I will go from fundamentals to the practical implementations and will introduce you to several GC buzzwords.
-categories: java
+tags: java garbage-collection beginner
 ---
 
 Do you have an interview tomorrow and want to refresh your knowledge on garbage collection? Or maybe you are new to this topic and just want to start somewhere? Either way, this is a place for you. In this post, I will go from fundamentals to the practical implementations and will introduce you to several GC buzzwords. I will also provide some links to other helpful blog posts, articles and videos. Please use them if you feel I am being too liberal.
