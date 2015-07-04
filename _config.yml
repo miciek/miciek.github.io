@@ -1,5 +1,5 @@
 # Site settings
-title:       Polyglot Programmer's Blog 
+title:       Polyglot Programmer's Blog
 email:       miciek@gmail.com
 author:      Michał Płachta
 description: "I write mostly to remember things better. I do Scala, JavaScript and a little bit of many others."
@@ -10,13 +10,13 @@ url:         "http://michalplachta.com"
 google_analytics:
 
 # Optional features
-animated:           false
+animated:           true
 show_related_posts: false
-show_post_footers:  false
+show_post_footers:  true
 
 # Disqus post comments
 # (leave blank to disable Disqus)
-disqus_shortname:
+disqus_shortname: michalplachta
 
 # Social icons
 show_social_icons: false
