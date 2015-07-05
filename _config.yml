@@ -7,7 +7,7 @@ baseurl:     ""
 url:         "http://michalplachta.com"
 
 # Google analytics
-google_analytics:
+google_analytics: UA-50961043-2
 
 # Optional features
 animated:           true
