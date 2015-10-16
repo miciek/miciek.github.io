@@ -284,10 +284,14 @@ Until now, we have been concerned only about the performance of our service. Per
 Scalability of a system is how adding more resources affects its performance. E.g. doubling the throughput by doubling the resources is linear scalability.
 
 ## Problems with single-noded applications
+Our application supports several junctions and processing of each of them is done concurrently. We can scale up by adding more CPU power (cores). What about scaling out?
 
 ## Step 6: Making our web service scalable
+Classical approach to scaling out in JVM world is by adding instances and making them connect to each other. In our case this would look like that:
 
-Sharded - one node:
+
+
+### Sharded - one node:
 {% highlight bash %}
 ± % cat URLs.txt | parallel -j 5 'ab -ql -n 2000 -c 1 -k {}' | grep 'Requests per second'
 Requests per second:    68.39 [#/sec] (mean)
@@ -297,7 +301,7 @@ Requests per second:    64.86 [#/sec] (mean)
 Requests per second:    64.54 [#/sec] (mean)
 {% endhighlight %}
 
-Sharded - two nodes:
+### Sharded - two nodes:
 {% highlight bash %}
 ± % cat URLs.txt | parallel -j 5 'ab -ql -n 2000 -c 1 -k {}' | grep 'Requests per second'
 Requests per second:    106.80 [#/sec] (mean)
