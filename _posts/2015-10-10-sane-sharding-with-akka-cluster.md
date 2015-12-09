@@ -10,7 +10,7 @@ Writing distributed applications is very hard, especially when you start develop
 ## Our case: The Conveyor Junction Web Service
 Imagine we want to write a web service that is called each time a container appears on the junction of the conveyor.
 
-![Conveyor Split]({{ site.url }}/images/shoesorter.gif)
+![Conveyor Split](http://i.imgur.com/mctb4HC.gif)
 
 This web service is going to define one endpoint, which will be hit each time a container is scanned before the junction. The endpoint should return an id of the target conveyor. The container will be then pushed onto target conveyor by the hardware.
 
@@ -22,17 +22,20 @@ This web service is going to define one endpoint, which will be hit each time a 
 }
 {% endhighlight %}
 
-Initial setup (what we already have):
-- the `Container` storage that can be queried,
-- the `Junction` storage that can be queried,
-- the `whereShouldContainerGo` function which returns the decision for a `Container` on the passed as one of the parameters (aka *business logic*) - the call to this function takes 5-10 ms.
+Before we start implementation, I'd like to point out some assumptions:
 
-We need to implement an HTTP Service which uses the business logic function. We will not focus on the functionality, but the performance and scalability. The only functional requirement is that for each junction, the decisions should be made sequentially in the order of scanned containers.
+- we use simple `Container` objects with id only (persistence layer can be added later).
+- we use simple `Junction` objects (same story),
+- *business logic* is already defined in the `whereShouldContainerGo` function which returns the decision for a `Container` on the `Junction` passed as one of the parameters - the call to this function takes about 5-10 ms.
+
+We need to implement an HTTP Service which uses the business logic function. We will not focus on the functionality (hence above assumptions), but the performance and scalability. The only functional requirement that matters is that for each junction the decisions should be made sequentially in the order of scanned containers.
+
+You can implement the same service and do the same performance analysis as you read the article by checking out [akka-sharding-example repository on GitHub](https://github.com/miciek/akka-sharding-example). Each step in this blog post has a corresponding [branch](https://github.com/miciek/akka-sharding-example/branches) in the repository to make your life easier.
 
 ## We will use Akka
-We will use plain Akka, no additional extensions, especially no clustering (yet). Just simple app running on one JVM. I want to show that even without thinking about scalability, it is still reasonably easy to add it later. We will be able to do this just because of the right choice now.
+We will use plain Akka, no additional extensions, especially no clustering (yet). Just simple app running on one JVM. I want to show that even without thinking about scalability, it is still reasonably easy to add it later. We will be able to do this just because of the choice we are making now.
 
-## Step 1: Defining domain and internal API
+## Step 0: Defining domain and internal API
 Let's define what language our components (actors) will use to communicate and how our domain will be modeled. This can be easily represented using Scala case classes:
 
 {% highlight scala %}
@@ -57,8 +60,8 @@ object Messages {
 
 Our service won't receive any JSON data, it will just return JSON object: `Go(targetConveyor)`. It will be automatically marshaled into JSON thanks to the implicit default conversion defined in its companion object.
 
-## Step 2: Creating REST Interface layer
-Now it's time to code something real. To implement the HTTP service we will use `spray-http` with `spray-json`. The service will only define one endpoint and based on the passed parameters, it will call our business logic function and return the result wrapped in `Go` object.
+## Step 1: Creating REST Interface layer
+Now it's time to code something real. To implement the HTTP service we will use `spray-http` with `spray-json`. Our service will only define one endpoint and, based on the passed parameters, it will call our business logic function and return the result wrapped in `Go` object.
 
 {% highlight scala %}
 class RestInterface(exposedPort: Int) extends Actor with HttpServiceBase {
@@ -83,17 +86,17 @@ class RestInterface(exposedPort: Int) extends Actor with HttpServiceBase {
 }
 {% endhighlight %}
 
-I defined an actor which will be handling HTTP Requests. Inside this actor I created a `route` which is constructed from nested `Directives`.
+I defined an actor which would be handling HTTP Requests. Inside this actor I created a `route` which is constructed from nested `Directives`.
 
-- `path` directive applies the given `PathMatcher` to the HTTP request path and after successful matching, passes the request to its nested route. Additionally, I extract two values from the path, `junctionId` and `containerId`.
-- `get` directive makes sure only `HTTP GET` method requests are passed into its nested route.
+- `path` directive applies the given `PathMatcher` to the HTTP request path and after successful matching, passes the request to its nested route. Additionally, it extracts two values from the path, `junctionId` and `containerId`.
+- `get` directive makes sure only `HTTP GET` method requests are passed into its nested routes.
 - `complete` directive accepts a marshallable object and returns it as HTTP response. In this case I don't use any blocking operations and return `Future[Go]` as my object. The real response will be returned when this `Future` completes.
 
 Right now we have almost everything we need to do our first test run. The only missing bit is the entry point for the application.
 
 {% highlight scala %}
 object SingleNodeApp extends App {
-  implicit val system = ActorSystem("shoesorter")
+  implicit val system = ActorSystem("sorter")
   system.actorOf(RestInterface.props(8080))
 }
 {% endhighlight %}
@@ -115,14 +118,14 @@ Server: spray-can/1.3.3
 
 We see that after scanning container #3 on junction #2, our service made a decision to push the container onto conveyor `CVR_2_9288`.
 
-## Step 3: Performance testing
+## Performance testing
 Let's simulate 10000 calls of our web service, checking the decision for 5 junctions. We will use [ab (ApacheBench)](http://httpd.apache.org/docs/2.2/programs/ab.html) and [parallel (GNU Parallel)](http://www.gnu.org/software/parallel/). For each junction we will simulate a sequence of calls (using `ab`). The parallelisation will kick in on the web service level. We will use `parallel` in order to make parallel calls for 5 different junctions.
 
 ### Note about performance testing on a laptop
 Remember that numbers presented in this section may (and will) differ depending on a machine, OS, running apps, network, etc. But for the purpose of this post, they are sufficient.
 
 ### Note about constraining Akka
-In order for all of our tests to be meaningful we will need to constraint Akka. I will be using a 4-core processor. For each running Actor System, we will constraint the parallelism of its default `MessageDispatcher` to 2. This will allow us to simulate a service which struggles for resources.
+In order for all of our tests to be meaningful we will need to constraint Akka. I am using a 4-core processor. For each running Actor System, we will constraint the parallelism of its default `MessageDispatcher` to 2. This will allow us to simulate a service which struggles to get resources.
 
 {% highlight json %}
 actor {
@@ -152,11 +155,11 @@ http://127.0.0.1:8080/junctions/5/decisionForContainer/7
 
 {% highlight bash %}
 ± % cat URLs.txt | parallel -j 5 'ab -ql -n 2000 -c 1 -k {}' | grep 'Requests per second'
-Requests per second:    44.78 [#/sec] (mean)
-Requests per second:    44.22 [#/sec] (mean)
-Requests per second:    43.77 [#/sec] (mean)
-Requests per second:    43.82 [#/sec] (mean)
-Requests per second:    43.98 [#/sec] (mean)
+Requests per second:    34.78 [#/sec] (mean)
+Requests per second:    34.22 [#/sec] (mean)
+Requests per second:    33.77 [#/sec] (mean)
+Requests per second:    33.82 [#/sec] (mean)
+Requests per second:    33.98 [#/sec] (mean)
 {% endhighlight %}
 
 We defined our 5 URLs (one for each junction) to be called in parallel, and each of them:
@@ -166,7 +169,7 @@ We defined our 5 URLs (one for each junction) to be called in parallel, and each
 
 We are only interested in `Requests per second`. As you see, the throughput of our service is around 44 requests per second. Let's put it into perspective by introducing
 
-## Step 4: One actor per junction
+## Step 2: One actor per junction
 We just have one actor (= one thread) that sequentially makes a decision for all junctions. We know we can do better by trying to process junctions in parallel (they are independent).
 
 Firstly let's add a new message to our `Messages`.
@@ -217,7 +220,7 @@ Let's pass this actor to our `RestInterface` during construction phase.
 
 {% highlight scala %}
 object SingleNodeApp extends App {
-  implicit val system = ActorSystem("shoesorter")
+  implicit val system = ActorSystem("sorter")
 
   val oneDecider = system.actorOf(SortingDecider.props)
   system.actorOf(RestInterface.props(oneDecider, config getInt "application.exposed-port"))
@@ -235,7 +238,10 @@ Requests per second:    34.50 [#/sec] (mean)
 Requests per second:    34.52 [#/sec] (mean)
 {% endhighlight %}
 
-It made things even worse. Our code is still sequential, but we added another layer of abstraction. But we are not done yet. We need to create another layer: an actor that will create `SortingDeciders` per junction and proxy `WhereShouldIGo` to the right ones. This way our system will make decisions concurrently.
+It made things even worse. Our code is still sequential, but we added another layer of abstraction. But we are not done yet.
+
+## Step 3: One actor per junction + routing
+We need to create another layer: an actor that will create `SortingDeciders` per junction and proxy `WhereShouldIGo` to the right ones. This way our system will make decisions in parallel.
 
 {% highlight scala %}
 class DecidersGuardian extends Actor {
@@ -278,7 +284,7 @@ Requests per second:    66.88 [#/sec] (mean)
 Requests per second:    66.28 [#/sec] (mean)
 {% endhighlight %}
 
-## Step 5: Scalability testing
+## Scalability testing
 Until now, we have been concerned only about the performance of our service. Performance is how fast something can be done in terms of time. `Requests per second` metric that we have been using so far is a good example. So what's the difference between performance and scalability?
 
 Scalability of a system is how adding more resources affects its performance. E.g. doubling the throughput by doubling the resources is linear scalability.
@@ -286,7 +292,7 @@ Scalability of a system is how adding more resources affects its performance. E.
 ## Problems with single-noded applications
 Our application supports several junctions and processing of each of them is done concurrently. We can scale up by adding more CPU power (cores). What about scaling out?
 
-## Step 6: Making our web service scalable
+## Step 4: Making our web service scalable
 Classical approach to scaling out in JVM world is by adding instances and making them connect to each other. In our case this would look like that:
 
 
