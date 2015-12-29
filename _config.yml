@@ -6,6 +6,8 @@ description: "I write mostly to remember things better. I do Scala, JavaScript a
 baseurl:     ""
 url:         "http://michalplachta.com"
 
+gems: [jekyll-paginate]
+
 # Google analytics
 google_analytics: UA-50961043-2
 
@@ -32,7 +34,8 @@ flattr_button:
 
 # Post sharing icons
 show_sharing_icons: false
-share_text: 'Share this post!'
+share_text: 'Share'
+
 # Change to 'true' to enable individual icons
 share_facebook: false
 share_twitter: false
@@ -50,5 +53,6 @@ redcarpet:
   extensions: ['smart', 'tables', 'with_toc_data']
 permalink:    pretty
 paginate:     3
+paginate_path: "page:num"
 sass:
   compressed: true
