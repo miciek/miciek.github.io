@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Scalability using Sharding from Akka Cluster
-date: 2015-10-10 09:00
+date: 2016-01-23 10:00
 summary: This tutorial explains how we can easily transform our application into clustered one with the help of Akka toolkit.
 tags: how-to akka scala sharding scalability
 ---
