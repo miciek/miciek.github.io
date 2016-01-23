@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Scalability using Sharding from Akka Cluster
-date: 2016-01-23 10:00
+date: 2016-01-23 13:05
 summary: This tutorial explains how we can easily transform our application into clustered one with the help of Akka toolkit.
 tags: how-to akka scala sharding scalability
 ---
@@ -102,6 +102,8 @@ object SingleNodeApp extends App {
 }
 {% endhighlight %}
 
+
+
 Let's run this application and see how it works.
 
 {% highlight bash %}
@@ -117,7 +119,10 @@ Server: spray-can/1.3.3
 }
 {% endhighlight %}
 
-We see that after scanning container #3 on junction #2, our service made a decision to push the container onto conveyor `CVR_2_9288`.
+We see that after scanning container #3 on junction #2, our service made a decision to push the container onto conveyor `CVR_2_9288`. The current architecture looks like this:
+
+![Just REST](/images/scalability-using-sharding-from-akka-cluster/step1.png)
+
 
 ## Performance testing
 Let's simulate 10000 calls of our web service, checking the decision for 5 junctions. We will use [ab (ApacheBench)](http://httpd.apache.org/docs/2.2/programs/ab.html) and [parallel (GNU Parallel)](http://www.gnu.org/software/parallel/). For each junction we will simulate a sequence of calls (using `ab`). The parallelisation will kick in on the web service level. We will use `parallel` in order to make parallel calls for 5 different junctions.
@@ -173,6 +178,8 @@ We are only interested in `Requests per second`. As you see, the throughput of o
 
 ## Step 2: One actor per junction
 We just have one actor (= one thread) that sequentially makes a decision for all junctions. We know we can do better by trying to process junctions in parallel (because they are independent).
+
+![One actor per junction](/images/scalability-using-sharding-from-akka-cluster/step2.png)
 
 Firstly let's add a new message to our `Messages`.
 
@@ -247,6 +254,8 @@ Nothing, we gained nothing. Our code is still sequential and we added yet anothe
 ## Step 3: One actor per junction + routing
 We need to create another layer: an actor that will create `SortingDeciders` per junction and proxy `WhereShouldIGo` messages to the right ones. This way our system will make decisions in parallel.
 
+![One actor per junction + routing](/images/scalability-using-sharding-from-akka-cluster/step3.png)
+
 {% highlight scala %}
 class DecidersGuardian extends Actor {
   def receive = {
@@ -287,16 +296,20 @@ Scalability of a system is how adding more resources affects its performance. E.
 ## Step 4: Making our web service scalable
 We can scale out by adding more computers and run our app on each of them. Then we can manually forward traffic to the specific computer based on the request.
 
-This is manual scaling out. There are several drawbacks to this method. We need to maintain some business logic in the load balancer, we don't have any redundancy and the app doesn't scale automatically (e.g. we need to adjust the whole setup each time we add a new junction).
+![Manual scaling out](/images/scalability-using-sharding-from-akka-cluster/step4m.png)
 
-Furtunately, we don't have to do all those things manually, because there is a [Akka Cluster extension](http://doc.akka.io/docs/akka/2.4.1/scala/cluster-sharding.html) that does just that (and even more). We will make our `SortingDecider` sharded. Instances of this actor will be automatically created based on `Junction ID` in the request. We will run two instances of our application (two nodes). Together they will form an Akka Cluster. All nodes in the cluster will be used by Sharding Extension to create and migrate `SortingDecider` actors. Node that we don't have to change any of the existing code to add sharding to the application.
+This technique is called manual scaling out. There are several drawbacks to this method. We need to maintain some business logic in the load balancer, we don't have any redundancy and we need to adjust the whole setup each time we add a new junction.
+
+Furtunately, we don't have to do all those things manually, because there is a [Akka Cluster extension](http://doc.akka.io/docs/akka/2.4.1/scala/cluster-sharding.html) that does just that (and even more). We will make our `SortingDecider` sharded. Instances of this actor will be automatically created based on `Junction ID` in the request. We will run two instances of our application (two nodes). Together they will form an Akka Cluster. All nodes in the cluster will be used by Sharding Extension to create and migrate `SortingDecider` actors. We will be able to add and remove nodes as we go and Akka will automatically use those resources. Note that we don't have to change any of the existing code in order to add sharding to the application. Additionally, We won't need our `DecidersGuardian` becuase all of its responsibilities will be migrated to Akka's `ShardRegion`.
+
+![Automatic scaling out](/images/scalability-using-sharding-from-akka-cluster/step4.png)
 
 There are just two steps that we need to do in order to shard `SortingDecider`. First step is to create a companion object which defines `props`, `shardName` and two "hashing functions":
 
-- `extractShardId` - TODO
-- `extractEntityId` - TODO
+- `extractShardId` - this function defines a shard id based on incoming messages. Shards are just sets of our actors. One such a set can only be present on one node and Akka tries to have a similar number of shards on each available node. So, just by defining this function we can control how many shards our application supports. In our case, we only support 2 shards (see code below), 
+- `extractEntityId` - this function defines the entity id, that is the unique identifier of an actor that will process this message. 
 
-This is how it looks in the code:
+Both functions are called each time a `ShardRegion` receives a message. First a `extractShardId` function is called and it returns a shard id. Then Akka checks on which node this particular shard is kept. If this is another node, the message is forwarded there without additional work from our side. If this is the right node, `extractEntityId` function is evaluated. It returns entity id, which is an identifier of the particular actor. The message is forwarded to the actor and is processed there. If the actor doesn't exist, it is automatically created. In our case we will have one actor per junction, so our `extractEntityId` function will return just junction id. This is how it looks in the code:
 
 {% highlight scala %}
 object SortingDecider {
@@ -343,6 +356,10 @@ object ShardedApp extends App {
 When we run just one node, this should be the same as our manual solution. Let's check whether this is true.
 
 {% highlight bash %}
+java -jar target/SortingDecider-1.0-SNAPSHOT-uber.jar
+{% endhighlight %}
+
+{% highlight bash %}
 ± % cat URLs.txt | parallel -j 5 'ab -ql -n 2000 -c 1 -k {}' | grep 'Requests per second'
 Requests per second:    68.39 [#/sec] (mean)
 Requests per second:    66.30 [#/sec] (mean)
@@ -354,7 +371,11 @@ Requests per second:    64.54 [#/sec] (mean)
 As you see, we get a similar `Requests per second` values, because we still use just one JVM instance (= one computer). In this scenario, the application can only scale up.
 
 ### Running two nodes
-When we run the second node, it should automatically form a cluster with the first one and then use both nodes to create `SortingDecider` actors. This should also make our application process more requests. 
+When we run the second node, it should automatically form a cluster with the first one and then use both nodes to create `SortingDecider` actors. This should also make our application process more requests. We use the same jar to run the second node, we just need to redefine exposed web interface port and Akka Cluster node port:
+
+{% highlight bash %}
+java -Dapplication.exposed-port=8081 -Dclustering.port=2552 -jar target/SortingDecider-1.0-SNAPSHOT-uber.jar
+{% endhighlight %}
 
 Before we execute our test, we also need to set up a simple round-robin based load balancer:
 
@@ -362,7 +383,7 @@ Before we execute our test, we also need to set up a simple round-robin based lo
 haproxy -f src/main/resources/haproxy.conf
 {% endhighlight %}
 
-This will run a server on port `8000` and just forward all the traffic to both `8080` (our first node) and `8081` (our second node) equally. In our last test, we will use a different `URLs` file (`shardedURLs.txt`) to accomodate for this change.
+This will run a server on port `8000` and just forward all the traffic to both `8080` (our first node) and `8081` (our second node) interchangeably. In our last test, we will use a different `URLs` file (`shardedURLs.txt`) to accomodate for this change.
 
 {% highlight bash %}
 ± % cat shardedURLs.txt | parallel -j 5 'ab -ql -n 2000 -c 1 -k {}' | grep 'Requests per second'
@@ -375,3 +396,15 @@ Requests per second:    100.07 [#/sec] (mean)
 
 As we see, we have improved the performance noticeably.
 
+## What you learnt
+In this tutorial you learnt:
+
+- how to create a web application using Akka and Spray,
+- how to scale up application using actor model,
+- how to scale out the application using Akka Cluster and Sharding extension,
+- how to test the performance and scalability of the web application.
+
+You can implement the same service and do the same performance analysis as you read the article by checking out [akka-sharding-example repository on GitHub](https://github.com/miciek/akka-sharding-example). Each step in this blog post (see titles) has a corresponding [branch](https://github.com/miciek/akka-sharding-example/branches) in the repository to make your life easier. If you want to implement just Step 4, please check out `step3` branch and follow the blog section.
+
+## Bonus: Akka HTTP
+There is also a [bonus branch](https://github.com/miciek/akka-sharding-example/tree/akka-vs-spray) in the repository that uses Akka HTTP instead of Spray. This implementation behaves slightly different and I will blog about this in the near future. 
