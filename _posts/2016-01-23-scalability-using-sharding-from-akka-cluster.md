@@ -277,7 +277,7 @@ object SingleNodeApp extends App {
 }
 {% endhighlight %}
 
-Right now, when our `RestInterface` gets 2 messages for different junctions, it will forward them to two different actors and they will be able to make decision in parallel. Therefore, we should get a substantial improvement:
+Right now, when our `RestInterface` gets 2 messages for different junctions, it will forward them to two different actors and they will be able to make decisions in parallel. Therefore, we should get a substantial improvement:
 
 {% highlight bash %}
 ± % cat URLs.txt | parallel -j 5 'ab -ql -n 2000 -c 1 -k {}' | grep 'Requests per second'
@@ -294,20 +294,20 @@ Until now, we have been concerned only about the performance of our service. Per
 Scalability of a system is how adding more resources affects its performance. E.g. doubling the throughput by doubling the resources is linear scalability. In our example, when we add more CPUs, we should be able to scale thanks to the Akka and actor model. This approach is called **scaling up**. What about **scaling out**, i.e. adding more computers to improve the performance?
 
 ## Step 4: Making our web service scalable
-We can scale out by adding more computers and run our app on each of them. Then we can manually forward traffic to the specific computer based on the request.
+We can scale out by adding more computers (or JVMs) and run our app on each of them. Then we can manually forward traffic to the specific computer based on the request.
 
 ![Manual scaling out](/images/scalability-using-sharding-from-akka-cluster/step4m.png)
 
-This technique is called manual scaling out. There are several drawbacks to this method. We need to maintain some business logic in the load balancer, we don't have any redundancy and we need to adjust the whole setup each time we add a new junction.
+This technique is called manual scaling out. There are several drawbacks to this method. We need to maintain some business logic in the load balancer, we don't have any redundancy and we need to adjust the whole setup each time we add a new junction or computer.
 
-Furtunately, we don't have to do all those things manually, because there is a [Akka Cluster extension](http://doc.akka.io/docs/akka/2.4.1/scala/cluster-sharding.html) that does just that (and even more). We will make our `SortingDecider` sharded. Instances of this actor will be automatically created based on `Junction ID` in the request. We will run two instances of our application (two nodes). Together they will form an Akka Cluster. All nodes in the cluster will be used by Sharding Extension to create and migrate `SortingDecider` actors. We will be able to add and remove nodes as we go and Akka will automatically use those resources. Note that we don't have to change any of the existing code in order to add sharding to the application. Additionally, We won't need our `DecidersGuardian` becuase all of its responsibilities will be migrated to Akka's `ShardRegion`.
+Furtunately, we don't have to do all those things manually. Instead, we can use [Akka Cluster extension](http://doc.akka.io/docs/akka/2.4.1/scala/cluster-sharding.html) that does just that (and even more). We will make our `SortingDecider` sharded. Instances of this actor will be automatically created based on junction id in the request. We will run two instances of our application (two nodes). Together they will form an Akka Cluster. All nodes in the cluster will be used by Sharding extension to create and migrate `SortingDecider` actors. We will be able to add and remove nodes as we go and Akka will automatically use those resources. Note that we don't have to change any of the existing code in order to add sharding to the application. Additionally, we won't need our `DecidersGuardian` becuase all of its responsibilities will be migrated to Akka's `ShardRegion`.
 
 ![Automatic scaling out](/images/scalability-using-sharding-from-akka-cluster/step4.png)
 
 There are just two steps that we need to do in order to shard `SortingDecider`. First step is to create a companion object which defines `props`, `shardName` and two "hashing functions":
 
 - `extractShardId` - this function defines a shard id based on incoming messages. Shards are just sets of our actors. One such a set can only be present on one node and Akka tries to have a similar number of shards on each available node. So, just by defining this function we can control how many shards our application supports. In our case, we only support 2 shards (see code below), 
-- `extractEntityId` - this function defines the entity id, that is the unique identifier of an actor that will process this message. 
+- `extractEntityId` - this function defines the entity id, that is the unique identifier of an actor that will process this message. Akka creates those actors automatically based on the `Props` we have defined.
 
 Both functions are called each time a `ShardRegion` receives a message. First a `extractShardId` function is called and it returns a shard id. Then Akka checks on which node this particular shard is kept. If this is another node, the message is forwarded there without additional work from our side. If this is the right node, `extractEntityId` function is evaluated. It returns entity id, which is an identifier of the particular actor. The message is forwarded to the actor and is processed there. If the actor doesn't exist, it is automatically created. In our case we will have one actor per junction, so our `extractEntityId` function will return just junction id. This is how it looks in the code:
 
@@ -353,7 +353,7 @@ object ShardedApp extends App {
 {% endhighlight %}
 
 ### Running one node
-When we run just one node, this should be the same as our manual solution. Let's check whether this is true.
+Let's run just one node. The output of the performance test should be the same as in our manual solution. Let's check whether this is true.
 
 {% highlight bash %}
 java -jar target/SortingDecider-1.0-SNAPSHOT-uber.jar
@@ -404,7 +404,7 @@ In this tutorial you learnt:
 - how to scale out the application using Akka Cluster and Sharding extension,
 - how to test the performance and scalability of the web application.
 
-You can implement the same service and do the same performance analysis as you read the article by checking out [akka-sharding-example repository on GitHub](https://github.com/miciek/akka-sharding-example). Each step in this blog post (see titles) has a corresponding [branch](https://github.com/miciek/akka-sharding-example/branches) in the repository to make your life easier. If you want to implement just Step 4, please check out `step3` branch and follow the blog section.
+You can implement the same service and do the same performance analysis by checking out [akka-sharding-example repository on GitHub](https://github.com/miciek/akka-sharding-example). Each step in this blog post (see titles) has a corresponding [branch](https://github.com/miciek/akka-sharding-example/branches) in the repository to make your life easier. If you want to implement Step 4, please check out `step3` branch and follow the blog section.
 
 ## Bonus: Akka HTTP
 There is also a [bonus branch](https://github.com/miciek/akka-sharding-example/tree/akka-vs-spray) in the repository that uses Akka HTTP instead of Spray. This implementation behaves slightly different and I will blog about this in the near future. 
