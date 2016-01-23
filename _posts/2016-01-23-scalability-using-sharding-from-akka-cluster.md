@@ -233,8 +233,8 @@ Let's pass this actor to our `RestInterface` during construction phase.
 object SingleNodeApp extends App {
   implicit val system = ActorSystem("sorter")
 
-  val decider = system.actorOf(Props(new SortingDecider))
-  system.actorOf(Props(new RestInterface(decider, 8080)))
+  val decider = system.actorOf(Props[SortingDecider])
+  system.actorOf(Props(classOf[RestInterface], decider, 8080))
 }
 {% endhighlight %}
 
@@ -261,7 +261,7 @@ class DecidersGuardian extends Actor {
   def receive = {
     case m: WhereShouldIGo =>
       val name = s"J${m.junction.id}"
-      val actor = context.child(name) getOrElse context.actorOf(Props(new SortingDecider))
+      val actor = context.child(name) getOrElse context.actorOf(Props[SortingDecider])
       actor forward m
   }
 }
@@ -272,8 +272,8 @@ Let's add our new `DecidersGuardian` actor as a dependency for `RestInterface`:
 object SingleNodeApp extends App {
   implicit val system = ActorSystem("sorter")
 
-  val decider = system.actorOf(Props(new DecidersGuardian))
-  system.actorOf(Props(new RestInterface(decider, 8080)))
+  val decider = system.actorOf(Props[DecidersGuardian])
+  system.actorOf(Props(classOf[RestInterface], decider, 8080))
 }
 {% endhighlight %}
 
@@ -348,7 +348,7 @@ object ShardedApp extends App {
     extractEntityId = SortingDecider.extractEntityId)
 
   val decider = ClusterSharding(system).shardRegion(SortingDecider.shardName)
-  system.actorOf(Props(new RestInterface(decider, config getInt "application.exposed-port")))
+  system.actorOf(Props(classOf[RestInterface], decider, config getInt "application.exposed-port"))
 }
 {% endhighlight %}
 
