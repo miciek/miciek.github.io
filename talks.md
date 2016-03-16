@@ -10,8 +10,8 @@ You can see all my past and future speaking gigs at [my Lanyrd profile page](htt
   - *Lambda Days (February 2016)*
   - [Video](https://www.youtube.com/watch?v=oMfF9V52DT4)
   - [Slides](https://speakerdeck.com/miciek/purely-functional-web-apps)
-  - [Backend Code](https://github.com/miciek/mrstats-haskell-servant)
-  - [Frontend Code](https://github.com/miciek/mrstats-frontend-elm)
+  - [Backend Code](https://github.com/miciek/mr-stats-haskell-servant)
+  - [Frontend Code](https://github.com/miciek/mr-stats-frontend-elm)
 1. **Everything Flows: A Polyglot's Heaven** 
   - *Boiling Frogs (January 2016)*
   - [Slides](https://docs.google.com/presentation/d/1dMbwDT5tcb95a1YTLTWABejkU-whFASF3B6Lc86L_OE/edit?usp=sharing)
