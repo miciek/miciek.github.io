@@ -8,4 +8,4 @@ This is a blog about programming and stuff that we do in order to make software 
 
 Follow me on [Twitter](https://twitter.com/miciek), if you want to know what stuff will get here in the near future. See my [Github](https://github.com/miciek) to see what I am currently up to.
 
-![Michał Płachta]({{ site.url }}/images/me.jpg)
+![Michał Płachta]({{ site.url }}/images/me_conference.jpg)
