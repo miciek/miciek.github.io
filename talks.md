@@ -6,9 +6,20 @@ permalink: /talks/
 
 You can see all my past and future speaking gigs at [my Lanyrd profile page](http://lanyrd.com/profile/miciek-2071/). Here is the list of my talks with videos and slides (where applicable):
 
+1. **Building multiplayer game using Reactive Streams** 
+  - *Kraków Scala User Group (February 2016)*
+  - [Video (PL)](https://www.youtube.com/watch?v=MKEbuLsah50)
+  - [Slides](https://speakerdeck.com/miciek/building-multiplayer-game-using-reactive-streams)
+  - [Frontend Code](https://github.com/miciek/web-snake-react-bacon)
+  - [Backend Code](https://github.com/miciek/snake-multiplayer-akka-streams)
 1. **Purely Functional Web Apps** 
   - *Lambda Days (February 2016)*
   - [Video](https://www.youtube.com/watch?v=oMfF9V52DT4)
+  - [Slides](https://speakerdeck.com/miciek/purely-functional-web-apps)
+  - [Backend Code](https://github.com/miciek/mr-stats-haskell-servant)
+  - [Frontend Code](https://github.com/miciek/mr-stats-frontend-elm)
+1. **Purely Functional Web Apps** 
+  - *Lambda Lounge (February 2016)*
   - [Slides](https://speakerdeck.com/miciek/purely-functional-web-apps)
   - [Backend Code](https://github.com/miciek/mr-stats-haskell-servant)
   - [Frontend Code](https://github.com/miciek/mr-stats-frontend-elm)
