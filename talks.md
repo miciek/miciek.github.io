@@ -25,6 +25,7 @@ You can see all my past and future speaking gigs at [my Lanyrd profile page](htt
   - [Frontend Code](https://github.com/miciek/mr-stats-frontend-elm)
 1. **Everything Flows: A Polyglot's Heaven** 
   - *Boiling Frogs (January 2016)*
+  - [Video (PL)](https://www.youtube.com/watch?v=J8n8j0_6wYU)
   - [Slides](https://docs.google.com/presentation/d/1dMbwDT5tcb95a1YTLTWABejkU-whFASF3B6Lc86L_OE/edit?usp=sharing)
   - [Frontend Code](https://github.com/miciek/web-snake-react-bacon)
   - [Backend Code](https://github.com/miciek/snake-multiplayer-akka-streams)
