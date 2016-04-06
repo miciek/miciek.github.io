@@ -6,6 +6,11 @@ permalink: /talks/
 
 You can see all my past and future speaking gigs at [my Lanyrd profile page](http://lanyrd.com/profile/miciek-2071/). Here is the list of my talks with videos and slides (where applicable):
 
+
+1. **Building Snake using Streams** 
+  - *Meet.js Summit (March 2016)*
+  - [Slides](https://speakerdeck.com/miciek/building-snake-using-streams)
+  - [Code](https://github.com/miciek/web-snake-react-bacon)
 1. **Building multiplayer game using Reactive Streams** 
   - *Kraków Scala User Group (February 2016)*
   - [Video (PL)](https://www.youtube.com/watch?v=MKEbuLsah50)
