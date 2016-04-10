@@ -6,7 +6,7 @@ summary:
 tags: javascript tutorial reactive functional bacon react.js how-to streams
 ---
 
-Wanna learn how to write functional and reactive frontend applications? It's 2016 and things have changed a lot since GWT, jQuery and even Angular... That's why I came up with an idea of writing a simple web game using only the "current best practices". The code of this sample application can be found on my [github repo](). But before I start implementing the game, I want to write about 3 "whys".
+Wanna learn how to write functional and reactive frontend applications? It's 2016 and things have changed a lot since GWT, jQuery and even Angular... That's why I came up with an idea of writing a simple web game using only the "current best practices". The code of this sample application can be found on my [github repo](https://github.com/miciek/web-snake-react-bacon). But before I start implementing the game, I want to write about 3 "whys".
 
 ##Why JavaScript?
 Frontend technologies can be really overwhelming. All things change very quickly. If you don't want to be dependent on these changes, you need to use one thing that has survived: JavaScript. And it's not a bad thing nowadays. ES6, the newest version of JavaScript, is very cool. It's still not fully supported, and until it isn't we can use some transpilers to the current JavaScript version (ES5). In our case, we will write in ES6 and use Babel to transpile it to ES5 automatically.
@@ -66,7 +66,7 @@ export default class Vector {
 {% endhighlight %}
 
 ### Static board
-Now we will create our first *React* component, which will be called... Board!
+Now we will create our first *React* component, which will be called... `Board`!
 
 {% highlight js %}
 // Board.jsx
@@ -88,7 +88,7 @@ React.render(<Board size={new Vector(20, 20)} />, document.getElementById("app")
 
 Let's run `npm start` and see that right now the browser displays
 
-{% highlight %}
+{% highlight html %}
 This is board 20 x 20
 {% endhighlight %}
 
@@ -99,7 +99,7 @@ To render the Board, React engine calls `render` function. It has access to the 
 Let's make our board fancier. We will use Flexbox to generate a grid and each cell will have one of three colors: grey if empty, green if snake and red if fruit. These are our styles:
 
 {% highlight css %}
-// style.css
+/* style.css */
 
 .board {
   display: flex;
