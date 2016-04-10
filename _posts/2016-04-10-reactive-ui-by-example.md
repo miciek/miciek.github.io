@@ -6,7 +6,7 @@ summary:
 tags: javascript tutorial reactive functional bacon react.js how-to streams
 ---
 
-Wanna learn how to write functional and reactive frontend applications? It's 2016 and things have changed a lot since GWT, jQuery and even Angular... That's why I came up with an idea of writing a simple web game using only the "current best practices". The code of this sample application can be found on my [github repo](https://github.com/miciek/web-snake-react-bacon). But before I start implementing the game, I want to write about 3 "whys".
+Wanna learn how to write functional and reactive frontend applications? It's 2016 and things have changed a lot since GWT, jQuery and even Angular... That's why I came up with an idea of writing a simple web game using only the "current best practices". The code of this sample application can be found on my [GitHub repo](https://github.com/miciek/web-snake-react-bacon). But before I start implementing the game, I want to write about 3 "whys".
 
 ##Why JavaScript?
 Frontend technologies can be really overwhelming. All things change very quickly. If you don't want to be dependent on these changes, you need to use one thing that has survived: JavaScript. And it's not a bad thing nowadays. ES6, the newest version of JavaScript, is very cool. It's still not fully supported, and until it isn't we can use some transpilers to the current JavaScript version (ES5). In our case, we will write in ES6 and use Babel to transpile it to ES5 automatically.
@@ -65,7 +65,7 @@ export default class Vector {
 }
 {% endhighlight %}
 
-### Static board
+### Board component
 Now we will create our first *React* component, which will be called... `Board`!
 
 {% highlight js %}
@@ -92,9 +92,9 @@ Let's run `npm start` and see that right now the browser displays
 This is board 20 x 20
 {% endhighlight %}
 
-Not the coolest thing, but let's see what's happening inside. `main.jsx` is an entry point to the application. It defines the root React component that will contain all other components and will be rendered inside our empty element called "app" which is defined inside `index.html` file. The `Board` component gets one property called `size` which is a Vector(20, 20). That means that our board will have 20 rows and 20 columns.
+Not the coolest thing, but let's see what's happening inside. `main.jsx` is an entry point to the application. It defines the root React component that will contain all other components and will be rendered inside our empty element called "app" which is defined inside `index.html` file. The `Board` component gets one property called `size` which is a `Vector(20, 20)`. That means that our board will have 20 rows and 20 columns.
 
-To render the Board, React engine calls `render` function. It has access to the properties that are passed to the component from the "outside world". For now, it just renders them inside `h1` object (which is then rendered in the browser as `h1` HTML tag).
+To render the Board, React engine calls `render` function. It has access to the properties that are passed to the component from the "outside world". For now, it just puts them inside `h1` object (which is then rendered in the browser as `h1` HTML tag).
 
 Let's make our board fancier. We will use Flexbox to generate a grid and each cell will have one of three colors: grey if empty, green if snake and red if fruit. These are our styles:
 
@@ -157,10 +157,140 @@ export default class Board extends Component {
 }
 {% endhighlight %}
 
-There are just 2 things going on here. The first one is called `propTypes`. The properties that are passed to our component (like `size`) can be "type-checked" by React. Here, we are saying that `size` is a `Vector`, `snakePositions` is an array of `Vectors`, and fruitPosition is another `Vector`. All of them are required. If doesn't pass any of them or passes an object with a wrong type, React will show us a warning (only in dev mode). This feature is just for our convenience.
+There are just 2 things going on here. The first one is called `propTypes`. The properties that are passed to our component (like `size`) can be "type-checked" by React. Here, we are saying that `size` is a `Vector`, `snakePositions` is an array of `Vectors`, and fruitPosition is another `Vector`. All of them are required. If parent component doesn't pass any of them or passes an object with a wrong type, React will show us a warning.
 
 In the new `render` function we just generate a `div` hierarchy and use `classnames` lib to use a proper style for each cell.
+
+That's it! We have our static board, which has a very nice API (3 properties that must be passed). Now we will use it in our second React component.
+
+### SnakeGame component
+`SnakeGame` component will define our game logic and will delegate drawing to its child component: `Board`. Let's first define all `props` and our `render` function:
+
+{% highlight js %}
+export default class SnakeGame extends Component {
+  static propTypes = {
+    boardSize: PropTypes.instanceOf(Vector).isRequired
+  }
+
+  static defaultProps = {
+    initialSnakePosition: new Vector(0, 0),
+    initialSnakeDirection: new Vector(0, 1),
+    initialSnakeLength: 3
+  }
+
+  state = {
+    snakePositions: [],
+    fruitPosition: Vector.random(this.props.boardSize),
+    score: 0
+  }
+
+  // ... (see Streams section)
+
+  render() {
+    return (
+      <div className={style.game}>
+        <div className={style.log}>Score: {this.state.score}</div>
+        <Board size={this.props.boardSize} snakePositions={this.state.snakePositions} fruitPosition={this.state.fruitPosition}/>
+      </div>
+    )
+  }
+}
+{% endhighlight %}
+
+There is one new thing here: `state`. You can treat `state` as internal props. They behave similarly: if `state` or `props` change, the `render` function is called. The only difference is that `props` are passed from the outside and `state` can only be set inside the component.
+
+They are 3 state values managed by the component: `snakePositions`, `fruitPosition` and `score`. We are using them inside our `render` function, which uses our `Board` component to render the current board. Each time we change one of the `state` values, `render` function is called which in turn calls `Board`'s `render` function.
+
+We defined four props: `boardSize`, which must be defined, and 3 initial game properties, which have default values (although they can be set from the outside just like `boardSize`).
+
+### Snake logic using streams
+Let's define our first streams! We will use [Bacon.js](https://baconjs.github.io/) as our streams library, but any other library would suffice. Their APIs are also very similar so learning one API is often enough. Each *stream operator* that I am going to introduce will have a link to a wonderful [RxMarbles website](http://rxmarbles.com/) where you can interactively learn how this particular operator works.
+
+{% highlight js %}
+export default class SnakeGame extends Component {
+  // ...
+
+  inputStreams() {
+    const ticks = Bacon.interval(100)
+    const keys = Bacon.fromEvent(document.body, "keyup").map(".keyCode")
+    const lefts = keys.filter(key => key === 37)
+    const rights = keys.filter(key => key === 39)
+    return { ticks, lefts, rights }
+    }
+
+  // ...
+}
+{% endhighlight %}
+
+We created 4 streams:
+
+ - `ticks` is a stream that outputs an empty object each 100ms,
+ - `keys` is a stream that outputs a `KeyboardEvent` object each time user presses a key,
+ - `lefts` is a stream that outputs a `KeyboardEvent` object each time user presses the left arrow key (code = 37),
+ - `rights` is a stream that outputs a `KeyboardEvent` object each time user presses the right arrow key (code = 39).
+
+It's worth noting that both `lefts` and `rights` streams are build on top the same stream (`keys`). We used [filter operator](http://rxmarbles.com/#filter).
+
+Let's use the streams we've just created to do some magic.
+
+{% highlight js %}
+export default class SnakeGame extends Component {
+  // ...
+
+  snakeHeadPositions({ ticks, lefts, rights }) {
+    const leftRotations = lefts.map(() => Vector.rotateLeft)
+    const rightRotations = rights.map(() => Vector.rotateRight)
+    const actions = leftRotations.merge(rightRotations)
+
+    const directions = actions.scan(this.props.initialSnakeDirection, (dir, f) => f(dir))
+    return directions
+              .sampledBy(ticks)
+              .scan(this.props.initialSnakePosition, (pos, dir) => pos.add(dir).mod(this.props.boardSize))
+  }
+
+  // ...
+}
+{% endhighlight %}
+
+We created the first 3 streams using two stream operators: [map](http://rxmarbles.com/#map) and [merge](http://rxmarbles.com/#merge):
+
+ - `leftRotations` is a stream of functions; each time user presses the left arrow key, this stream outputs a `rotateLeft` *function* (yes, function),
+ - `rightRotations` is a stream of functions; each time user presses the right arrow key, this stream outputs a `rotateRight` *function* (yes, function),
+ - `actions` is a stream that outputs values from both `leftRotations` and `rightRotations`; each time user wants to change direction of the snake, this stream outputs a function that we need to apply to a current direction to get a new one.
+
+`directions` stream is more involved. It uses the [scan operator](http://rxmarbles.com/#scan), which lets us accumulate values. In this case we are accumulating *current snake direction* starting with a value defined in `props`. Each time user wants to change the direction (by pressing left or right arrow key) this stream outputs a new direction.
+
+`snakeHeadPositions` function returns a stream of... well, positions of snake's head. This stream is created using two operators: `scan` and [sampledBy](http://rxmarbles.com/#sample). `directions` stream is sampled using `ticks` stream, so each time there is an object in `ticks`, the returned stream outputs the last value from `directions` stream. Then the resulting stream is piped through `scan` operator, which accumulates directions and outputs a new position of snake's head each time there is a new object in `ticks` (effectively every 100ms).
+
+### Eating and scoring
+The last thing we need to do is to connect all the dots and add eating and scoring logic using the streams we have already defined.
+
+{% highlight js %}
+export default class SnakeGame extends Component {
+  // ...
+
+  componentDidMount() {
+    const snakeHeadPositions = this.snakeHeadPositions(this.inputStreams())
+    const snakes = snakeHeadPositions.scan([], (snake, head) => {
+      const biggerSnake = _.union(snake, [head])
+      const validSnake = _.last(biggerSnake, this.props.initialSnakeLength + this.state.score)
+      return validSnake
+    })
+    snakes.onValue(snake => this.setState({ snakePositions: snake }))
+
+    const fruitEatenEvents = snakeHeadPositions.filter(head => head.equals(this.state.fruitPosition))
+    fruitEatenEvents.onValue(() => this.setState({ score: this.state.score + 1 }))
+    fruitEatenEvents.map(() => Vector.random(this.props.boardSize))
+                    .onValue(fruit => this.setState({ fruitPosition: fruit }))
+  }
+
+  // ...
+}
+{% endhighlight %}
+
 
 ### Resources
  - [Empty Snake GitHub project with all boilerplate in place](https://github.com/miciek/web-snake-react-bacon/tree/workshop-init) - just checkout and start coding. Together with this post you should be able to create a simple Snake game,
  - [The current working version of the code](https://github.com/miciek/web-snake-react-bacon/) - if you just want to review the code I created, checkout this repository and run it with `npm start`.
+ - [RxMarbles](http://rxmarbles.com/) - learn stream operators interactively!
+ -
