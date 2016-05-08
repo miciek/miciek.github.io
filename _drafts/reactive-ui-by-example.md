@@ -293,4 +293,3 @@ export default class SnakeGame extends Component {
  - [Empty Snake GitHub project with all boilerplate in place](https://github.com/miciek/web-snake-react-bacon/tree/workshop-init) - just checkout and start coding. Together with this post you should be able to create a simple Snake game,
  - [The current working version of the code](https://github.com/miciek/web-snake-react-bacon/) - if you just want to review the code I created, checkout this repository and run it with `npm start`.
  - [RxMarbles](http://rxmarbles.com/) - learn stream operators interactively!
- -
