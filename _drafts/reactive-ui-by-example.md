@@ -1,32 +1,31 @@
 ---
 layout: post
 title: Reactive UI by example
-date: 2016-04-10 18:00
 summary:
 tags: javascript tutorial reactive functional bacon react.js how-to streams
 ---
 
-Wanna learn how to write functional and reactive frontend applications? It's 2016 and things have changed a lot since GWT, jQuery and even Angular... That's why I came up with an idea of writing a simple web game using only the "current best practices". The code of this sample application can be found on my [GitHub repo](https://github.com/miciek/web-snake-react-bacon). But before I start implementing the game, I want to write about 3 "whys".
+Wanna learn how to write functional and reactive frontend applications? It's 2016 and things have changed a lot since GWT, jQuery and even Angular... That's why I came up with an idea of writing a simple web game using only the "current best practices". The code of this sample application can be found in my [GitHub repo](https://github.com/miciek/web-snake-react-bacon). But before I start implementing the game, I want to write about 3 "whys".
 
 ##Why JavaScript?
-Frontend technologies can be really overwhelming. All things change very quickly. If you don't want to be dependent on these changes, you need to use one thing that has survived: JavaScript. And it's not a bad thing nowadays. ES6, the newest version of JavaScript, is very cool. It's still not fully supported, and until it isn't we can use some transpilers to the current JavaScript version (ES5). In our case, we will write in ES6 and use Babel to transpile it to ES5 automatically.
+Frontend technologies can be really overwhelming. All things change very quickly. If you don't want to be dependent on these changes, you need to use one thing that has survived: JavaScript. And it's not a bad thing nowadays. ES6, the newest version of JavaScript, is very cool. It's still not fully supported. However, we can use some transpilers to the current JavaScript version (ES5). In our case, we will write in ES6 and use Babel to transpile it to ES5 automatically.
 
 ##Why React?
-In React we develop independent components that can be composed and form bigger components. Components are immutable-friendly. We don't need any "vars"/"lets" in our code. Our immutable data is created and then flows in one direction (down the component hierarchy). You may want to compare components and plain functions. Just like each function has input and output, each React component takes "state" object and "props" object and then produces "HTML". And when "called" with the same "state" and "props", it will always produce the same "HTML".
+In React we develop independent components that can be composed and form bigger components. Components are immutable-friendly. We don't need any "vars"/"lets" in our code. Our immutable data is created and then flows in one direction (down the component hierarchy). You may want to compare components and plain functions. Just like each function has input and output, each React component takes "state" object and "props" object and then produces "HTML" object. And when "called" with the same "state" and "props", it will always produce the same "HTML".
 
-To sum up, React supports declarative approach to writing user interface. And if you have ever written user interface imperatively, you will see a big difference.
+React supports declarative approach to writing user interface. And if you have ever written user interface imperatively, you will see a big difference.
 
-But that's not all! React applications performance is very good without even thinking about it. Your components don't really produce HTML, but JavaScript objects. Those objects form a hierarchy that is called the virtual DOM. Virtual DOM is processed by React engine and only changed things are propagated to the real browser DOM. That's why our component can be called many times in a row without affecting the performance. If it produces the same virtual DOM objects, nothing will happen in the browser. Hail to the declarative programming!
+But that's not all! React applications performance is very good without even thinking about it. Your components don't really produce HTML, but JavaScript objects. Those objects form a hierarchy that is called the virtual DOM. Virtual DOM is processed by React engine and only changed things are propagated to the real browser's DOM. That's why our component can be called many times in a row without affecting the performance. If it produces the same virtual DOM objects, nothing will happen in the browser. Hail to the declarative programming!
 
-And one last thing. React is simple. It does one thing and does it well. It isn't even a MVC framework. It's just a V framework. It only does View. You can use whatever you want for model and whatever you want to control the flow of the data. And if we can choose, we always choose streams!
+And one last thing. React is simple. It does one thing and does it well. It isn't even a MVC framework. It's just a V framework. It only does View. You can use whatever you want for model and whatever you want to control the flow of the data. And if we can choose, we always choose streams to control the flow of the data!
 
 ##Why Streams?
 When developing web applications, we need to deal with many different events flying around. User pressed something, new data came from the outside, timer went off and so on. Classic approach to this "event spaghetti" is to use callbacks. We don't like callbacks because they tend to form "callback hells". Nobody likes any kind of hell.
 
-In order to achieve this, we need to stop focusing on individual events and start thinking about streams of events. When the smallest notion we have is a stream, we can declaratively define what happens when something appears in this stream. We can transform our streams using map & filter functions. We can combine our data using merge & combine functions.
+In order to achieve sanity, we need to stop focusing on individual events and start thinking about streams of events. When the smallest notion we have is a stream, we can declaratively define what happens when something appears in this stream. We can transform our streams using map & filter functions. We can combine our data using merge & combine functions.
 
 ##Enough! Enter Snake!
-Let's create a web Snake game. This won't take long I promise. About 100 lines of code and we are done! If you want to follow the steps that I am describing here, please checkout the [the empty snake project](https://github.com/miciek/web-snake-react-bacon/tree/workshop-init) and develop the game as you are reading!
+Let's create a web Snake game. This won't take long, I promise. About 100 lines of code and we are done! If you want to follow the steps that I am describing here, please checkout the [the empty snake project](https://github.com/miciek/web-snake-react-bacon/tree/workshop-init) and develop the game as you are reading!
 
 ### Vector
 In order to do anything productive, we need to create a Vector class which will hold our 2D positions and sizes.
@@ -92,7 +91,7 @@ Let's run `npm start` and see that right now the browser displays
 This is board 20 x 20
 {% endhighlight %}
 
-Not the coolest thing, but let's see what's happening inside. `main.jsx` is an entry point to the application. It defines the root React component that will contain all other components and will be rendered inside our empty element called "app" which is defined inside `index.html` file. The `Board` component gets one property called `size` which is a `Vector(20, 20)`. That means that our board will have 20 rows and 20 columns.
+Not the coolest thing, but let's see what's happening inside. `main.jsx` is an entry point to the application. It defines the root React component that will contain all other components and will be rendered inside our empty DOM element called "app" which is defined inside `index.html` file. The `Board` component gets one property called `size` which is a `Vector(20, 20)`. That means that our board will have 20 rows and 20 columns.
 
 To render the Board, React engine calls `render` function. It has access to the properties that are passed to the component from the "outside world". For now, it just puts them inside `h1` object (which is then rendered in the browser as `h1` HTML tag).
 
@@ -199,12 +198,12 @@ export default class SnakeGame extends Component {
 
 There is one new thing here: `state`. You can treat `state` as internal props. They behave similarly: if `state` or `props` change, the `render` function is called. The only difference is that `props` are passed from the outside and `state` can only be set inside the component.
 
-They are 3 state values managed by the component: `snakePositions`, `fruitPosition` and `score`. We are using them inside our `render` function, which uses our `Board` component to render the current board. Each time we change one of the `state` values, `render` function is called which in turn calls `Board`'s `render` function.
+There are 3 state values managed by the component: `snakePositions`, `fruitPosition` and `score`. We are using them inside our `render` function, which uses our `Board` component to render the current board. Each time we change one of the `state` values, `render` function is called which in turn calls `Board`'s `render` function.
 
-We defined four props: `boardSize`, which must be defined, and 3 initial game properties, which have default values (although they can be set from the outside just like `boardSize`).
+We defined four props: `boardSize`, which must be defined, and 3 initial game properties, which have default values (they can also be set from the outside just like `boardSize`).
 
 ### Snake logic using streams
-Let's define our first streams! We will use [Bacon.js](https://baconjs.github.io/) as our streams library, but any other library would suffice. Their APIs are also very similar so learning one API is often enough. Each *stream operator* that I am going to introduce will have a link to a wonderful [RxMarbles website](http://rxmarbles.com/) where you can interactively learn how this particular operator works.
+Let's define our first streams! We will use [Bacon.js](https://baconjs.github.io/) as our streams library, but any other streams library would suffice. Their APIs are also very similar so learning one API is often enough. Each *stream operator* that I am going to introduce will have a link to a wonderful [RxMarbles website](http://rxmarbles.com/) where you can interactively learn how this particular operator works.
 
 {% highlight js %}
 export default class SnakeGame extends Component {
@@ -252,10 +251,10 @@ export default class SnakeGame extends Component {
 }
 {% endhighlight %}
 
-We created the first 3 streams using two stream operators: [map](http://rxmarbles.com/#map) and [merge](http://rxmarbles.com/#merge):
+We created 3 additional streams using two stream operators: [map](http://rxmarbles.com/#map) and [merge](http://rxmarbles.com/#merge):
 
  - `leftRotations` is a stream of functions; each time user presses the left arrow key, this stream outputs a `rotateLeft` *function* (yes, function),
- - `rightRotations` is a stream of functions; each time user presses the right arrow key, this stream outputs a `rotateRight` *function* (yes, function),
+ - `rightRotations` is a stream of functions; each time user presses the right arrow key, this stream outputs a `rotateRight` *function*,
  - `actions` is a stream that outputs values from both `leftRotations` and `rightRotations`; each time user wants to change direction of the snake, this stream outputs a function that we need to apply to a current direction to get a new one.
 
 `directions` stream is more involved. It uses the [scan operator](http://rxmarbles.com/#scan), which lets us accumulate values. In this case we are accumulating *current snake direction* starting with a value defined in `props`. Each time user wants to change the direction (by pressing left or right arrow key) this stream outputs a new direction.
