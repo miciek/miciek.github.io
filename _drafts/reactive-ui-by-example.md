@@ -22,10 +22,10 @@ And one last thing. React is simple. It does one thing and does it well. It isn'
 ##Why Streams?
 When developing web applications, we need to deal with many different events flying around. User pressed something, new data came from the outside, timer went off and so on. Classic approach to this "event spaghetti" is to use callbacks. We don't like callbacks because they tend to form "callback hells". Nobody likes any kind of hell.
 
-In order to achieve sanity, we need to stop focusing on individual events and start thinking about streams of events. When the smallest notion we have is a stream, we can declaratively define what happens when something appears in this stream. We can transform our streams using map & filter functions. We can combine our data using merge & combine functions.
+In order to achieve sanity, we need to stop focusing on individual events and start thinking about streams of events. When the smallest notion we have is a stream, we can declaratively define what happens when something appears in this stream. We can transform our streams using map & filter functions. We can combine our streams using merge & combine functions.
 
 ##Enough! Enter Snake!
-Let's create a web Snake game. This won't take long, I promise. About 100 lines of code and we are done! If you want to follow the steps that I am describing here, please checkout the [the empty snake project](https://github.com/miciek/web-snake-react-bacon/tree/workshop-init) and develop the game as you are reading!
+Let's create a web Snake game. This won't take long, I promise. About 100 lines of code and we are done! If you want to follow the steps that I am describing here, please checkout the [the empty snake project](https://github.com/miciek/web-snake-react-bacon/tree/workshop-init) and develop the game while you are reading!
 
 ### Vector
 In order to do anything productive, we need to create a Vector class which will hold our 2D positions and sizes.
@@ -85,7 +85,7 @@ and main.jsx which will bootstrap our app:
 React.render(<Board size={new Vector(20, 20)} />, document.getElementById("app"))
 {% endhighlight %}
 
-Let's run `npm start` and see that right now the browser displays
+Let's run `npm start` and see that right now the browser displays:
 
 {% highlight html %}
 This is board 20 x 20
@@ -140,13 +140,22 @@ export default class Board extends Component {
   }
 
   render() {
-    const { size, snakePositions, fruitPosition } = this.props
+    const {size, snakePositions, fruitPosition} = this.props
     const rows = _.range(size.y).map(y => {
       const cells = _.range(size.x).map(x => {
         const pos = new Vector(x, y)
-        const maybeSnakeStyle = { [style.snake]: snakePositions.find(x => x.equals(pos)) }
-        const maybeFruitStyle = { [style.fruit]: fruitPosition.equals(pos) }
-        return <div key={x} className={ classNames(style.cell, maybeSnakeStyle, maybeFruitStyle) }/>
+        const maybeSnakeStyle = { 
+          [style.snake]:snakePositions.find(x=>x.equals(pos))
+        }
+        const maybeFruitStyle = { 
+          [style.fruit]: fruitPosition.equals(pos) 
+        }
+        return 
+        <div key={x} 
+          className={ classNames(style.cell,
+                                 maybeSnakeStyle,
+                                 maybeFruitStyle) }
+         />
       })
       return <div key={y} className={style.row}>{cells}</div>
     })
@@ -183,7 +192,7 @@ export default class SnakeGame extends Component {
     score: 0
   }
 
-  // ... (see Streams section)
+  // ... (see Snake logic using streams section)
 
   render() {
     return (
@@ -203,7 +212,7 @@ There are 3 state values managed by the component: `snakePositions`, `fruitPosit
 We defined four props: `boardSize`, which must be defined, and 3 initial game properties, which have default values (they can also be set from the outside just like `boardSize`).
 
 ### Snake logic using streams
-Let's define our first streams! We will use [Bacon.js](https://baconjs.github.io/) as our streams library, but any other streams library would suffice. Their APIs are also very similar so learning one API is often enough. Each *stream operator* that I am going to introduce will have a link to a wonderful [RxMarbles website](http://rxmarbles.com/) where you can interactively learn how this particular operator works.
+Let's define our first streams! We will use [Bacon.js](https://baconjs.github.io/) as our streams library, but any other streams library would suffice. Their APIs are also very similar so learning one API is often enough. Each *stream operator* that I am going to introduce will have a link to a wonderful [RxMarbles website](http://rxmarbles.com/) where you can interactively learn how a particular operator works.
 
 {% highlight js %}
 export default class SnakeGame extends Component {
@@ -257,12 +266,12 @@ We created 3 additional streams using two stream operators: [map](http://rxmarbl
  - `rightRotations` is a stream of functions; each time user presses the right arrow key, this stream outputs a `rotateRight` *function*,
  - `actions` is a stream that outputs values from both `leftRotations` and `rightRotations`; each time user wants to change direction of the snake, this stream outputs a function that we need to apply to a current direction to get a new one.
 
-`directions` stream is more involved. It uses the [scan operator](http://rxmarbles.com/#scan), which lets us accumulate values. In this case we are accumulating *current snake direction* starting with a value defined in `props`. Each time user wants to change the direction (by pressing left or right arrow key) this stream outputs a new direction.
+`directions` stream is more involved. It uses the [scan operator](http://rxmarbles.com/#scan), which lets us accumulate values. In this case we are accumulating *current snake direction* starting with a value defined in `props`. Each time user wants to change the direction (by pressing left or right arrow key) this stream outputs a new direction. TODO: better description + image
 
-`snakeHeadPositions` function returns a stream of... well, positions of snake's head. This stream is created using two operators: `scan` and [sampledBy](http://rxmarbles.com/#sample). `directions` stream is sampled using `ticks` stream, so each time there is an object in `ticks`, the returned stream outputs the last value from `directions` stream. Then the resulting stream is piped through `scan` operator, which accumulates directions and outputs a new position of snake's head each time there is a new object in `ticks` (effectively every 100ms).
+`snakeHeadPositions` function returns a stream of... well, positions of snake's head. This stream is created using two operators: `scan` and [sampledBy](http://rxmarbles.com/#sample). `directions` stream is sampled using `ticks` stream, so each time there is an object in `ticks`, the returned stream outputs the last value from `directions` stream. Then the resulting stream is piped through `scan` operator, which accumulates directions and outputs a new position of snake's head each time there is a new object in `ticks` (effectively every 100ms). TODO: explain accumaltion better
 
 ### Eating and scoring
-The last thing we need to do is to connect all the dots and add eating and scoring logic using the streams we have already defined.
+Now we need to connect all the dots and add eating and scoring logic using the streams we have already defined. Please pay attention how much reusability we have here. We are building new functionalities using already defined streams.
 
 {% highlight js %}
 export default class SnakeGame extends Component {
@@ -287,8 +296,15 @@ export default class SnakeGame extends Component {
 }
 {% endhighlight %}
 
+Let's dive into details. The code above makes our snake bigger by using `scan` operator again. It accumulates values from `snakeHeadPositions` into an array of last `initialSnakeLength + score` elements. This array is then passed to our `Board` component and rendered.
 
-### Resources
+`snakeHeadPositions` stream can also be reused as a building block to implement "eating a fruit functionality". We need to use `filter` operator to create a new stream called `fruitEatenEvents`. An element appears in this stream only when head of the snake is exactly on fruit's position. We can then `map` each value from this stream into random position and send it to our `Board` component. Its `render` function will be called and new fruit will be displayed. It will happen each time snake eats an old fruit.
+
+`fruitEatenEvents` stream can also be reused to implement "scoring functionality". Each time there is a value in this stream, we need to increment the `score`.
+
+That's it! We have just implemented basic snake game functionality using reactive approach! TODO: working game
+
+### Resources TODO: link to the game and slides 
  - [Empty Snake GitHub project with all boilerplate in place](https://github.com/miciek/web-snake-react-bacon/tree/workshop-init) - just checkout and start coding. Together with this post you should be able to create a simple Snake game,
  - [The current working version of the code](https://github.com/miciek/web-snake-react-bacon/) - if you just want to review the code I created, checkout this repository and run it with `npm start`.
  - [RxMarbles](http://rxmarbles.com/) - learn stream operators interactively!
