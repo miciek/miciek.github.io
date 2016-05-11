@@ -282,7 +282,11 @@ We created 3 additional streams using two stream operators: [map](http://rxmarbl
 
 `directions` stream is more involved. It uses the [scan operator](http://rxmarbles.com/#scan), which lets us accumulate values. In this case we are accumulating *actions* stream values into a *current snake direction* starting with a value defined in `props`. When a new value appears in `actions` stream it gets accumulated using function passed as `scan`'s second parameter. Each time user wants to change the direction (by pressing left or right arrow key) this stream outputs a new direction. 
 
+![Directions Stream](/images/reactive-ui-by-example/directionsDiagram.png)
+
 `snakeHeadPositions` function returns a stream of... well, positions of snake's head. This stream is created using two operators: `scan` and [sampledBy](http://rxmarbles.com/#sample). `directions` stream is sampled using `ticks` stream, so each time there is an object in `ticks`, the returned stream outputs the last value from `directions` stream. Then the resulting stream is piped through `scan` operator, which accumulates directions into a position and outputs it as snake's head. The returned stream outputs a new position each time there is a new object in `ticks` (effectively every 100ms). 
+
+![Sampled Directions Stream used to get Snake Head Positions Stream](/images/reactive-ui-by-example/snakeHeadPositionsDiagram.png)
 
 ### Eating and scoring
 Now we need to connect all the dots and add eating and scoring logic using the streams we have already defined. Please pay attention how much reusability we have here. We are building new functionalities using already defined streams.
