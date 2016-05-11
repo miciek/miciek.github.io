@@ -72,7 +72,8 @@ Now we will create our first *React* component, which will be called... `Board`!
 
 export default class Board extends React.Component {
   render() {
-    return <h1>this is board {this.props.size.x} x {this.props.size.y}</h1>
+  return <h1>this is board {this.props.size.x}
+              x {this.props.size.y}</h1>
   }
 }
 {% endhighlight %}
@@ -82,7 +83,8 @@ and main.jsx which will bootstrap our app:
 {% highlight js %}
 // main.jsx
 
-React.render(<Board size={new Vector(20, 20)} />, document.getElementById("app"))
+React.render(<Board size={new Vector(20, 20)} />,
+             document.getElementById("app"))
 {% endhighlight %}
 
 Let's run `npm start` and see that right now the browser displays:
@@ -197,8 +199,12 @@ export default class SnakeGame extends Component {
   render() {
     return (
       <div className={style.game}>
-        <div className={style.log}>Score: {this.state.score}</div>
-        <Board size={this.props.boardSize} snakePositions={this.state.snakePositions} fruitPosition={this.state.fruitPosition}/>
+        <div className={style.log}>
+          Score: {this.state.score}
+        </div>
+        <Board size={this.props.boardSize}
+               snakePositions={this.state.snakePositions}
+               fruitPosition={this.state.fruitPosition}/>
       </div>
     )
   }
@@ -220,7 +226,8 @@ export default class SnakeGame extends Component {
 
   inputStreams() {
     const ticks = Bacon.interval(100)
-    const keys = Bacon.fromEvent(document.body, "keyup").map(".keyCode")
+    const keys = Bacon.fromEvent(document.body, "keyup")
+                      .map(".keyCode")
     const lefts = keys.filter(key => key === 37)
     const rights = keys.filter(key => key === 39)
     return { ticks, lefts, rights }
@@ -246,14 +253,21 @@ export default class SnakeGame extends Component {
   // ...
 
   snakeHeadPositions({ ticks, lefts, rights }) {
-    const leftRotations = lefts.map(() => Vector.rotateLeft)
-    const rightRotations = rights.map(() => Vector.rotateRight)
-    const actions = leftRotations.merge(rightRotations)
+    const leftRotations =
+          lefts.map(() => Vector.rotateLeft)
+    const rightRotations = 
+          rights.map(() => Vector.rotateRight)
+    const actions = 
+          leftRotations.merge(rightRotations)
 
-    const directions = actions.scan(this.props.initialSnakeDirection, (dir, f) => f(dir))
+    const directions = actions.scan(
+                  this.props.initialSnakeDirection,
+                  (dir, f) => f(dir))
     return directions
               .sampledBy(ticks)
-              .scan(this.props.initialSnakePosition, (pos, dir) => pos.add(dir).mod(this.props.boardSize))
+              .scan(this.props.initialSnakePosition,
+                (pos, dir) => pos.add(dir)
+                                 .mod(this.props.boardSize))
   }
 
   // ...
@@ -266,9 +280,9 @@ We created 3 additional streams using two stream operators: [map](http://rxmarbl
  - `rightRotations` is a stream of functions; each time user presses the right arrow key, this stream outputs a `rotateRight` *function*,
  - `actions` is a stream that outputs values from both `leftRotations` and `rightRotations`; each time user wants to change direction of the snake, this stream outputs a function that we need to apply to a current direction to get a new one.
 
-`directions` stream is more involved. It uses the [scan operator](http://rxmarbles.com/#scan), which lets us accumulate values. In this case we are accumulating *current snake direction* starting with a value defined in `props`. Each time user wants to change the direction (by pressing left or right arrow key) this stream outputs a new direction. TODO: better description + image
+`directions` stream is more involved. It uses the [scan operator](http://rxmarbles.com/#scan), which lets us accumulate values. In this case we are accumulating *actions* stream values into a *current snake direction* starting with a value defined in `props`. When a new value appears in `actions` stream it gets accumulated using function passed as `scan`'s second parameter. Each time user wants to change the direction (by pressing left or right arrow key) this stream outputs a new direction. 
 
-`snakeHeadPositions` function returns a stream of... well, positions of snake's head. This stream is created using two operators: `scan` and [sampledBy](http://rxmarbles.com/#sample). `directions` stream is sampled using `ticks` stream, so each time there is an object in `ticks`, the returned stream outputs the last value from `directions` stream. Then the resulting stream is piped through `scan` operator, which accumulates directions and outputs a new position of snake's head each time there is a new object in `ticks` (effectively every 100ms). TODO: explain accumaltion better
+`snakeHeadPositions` function returns a stream of... well, positions of snake's head. This stream is created using two operators: `scan` and [sampledBy](http://rxmarbles.com/#sample). `directions` stream is sampled using `ticks` stream, so each time there is an object in `ticks`, the returned stream outputs the last value from `directions` stream. Then the resulting stream is piped through `scan` operator, which accumulates directions into a position and outputs it as snake's head. The returned stream outputs a new position each time there is a new object in `ticks` (effectively every 100ms). 
 
 ### Eating and scoring
 Now we need to connect all the dots and add eating and scoring logic using the streams we have already defined. Please pay attention how much reusability we have here. We are building new functionalities using already defined streams.
@@ -278,12 +292,14 @@ export default class SnakeGame extends Component {
   // ...
 
   componentDidMount() {
-    const snakeHeadPositions = this.snakeHeadPositions(this.inputStreams())
-    const snakes = snakeHeadPositions.scan([], (snake, head) => {
-      const biggerSnake = _.union(snake, [head])
-      const validSnake = _.last(biggerSnake, this.props.initialSnakeLength + this.state.score)
-      return validSnake
-    })
+    const snakeHeadPositions = 
+      this.snakeHeadPositions(this.inputStreams())
+    const snakes = snakeHeadPositions.scan([], 
+      (snake, head) => {
+        const biggerSnake = _.union(snake, [head])
+        const validSnake = _.last(biggerSnake, this.props.initialSnakeLength + this.state.score)
+        return validSnake
+      })
     snakes.onValue(snake => this.setState({ snakePositions: snake }))
 
     const fruitEatenEvents = snakeHeadPositions.filter(head => head.equals(this.state.fruitPosition))
