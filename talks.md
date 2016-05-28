@@ -6,7 +6,15 @@ permalink: /talks/
 
 You can see all my past and future speaking gigs at [my Lanyrd profile page](http://lanyrd.com/profile/miciek-2071/). Here is the list of my talks with videos and slides (where applicable):
 
-
+1. **Sane Sharding with Akka Cluster**
+  - *jPrime (May 2016)*
+  - [Slides](https://speakerdeck.com/miciek/sane-sharding-with-akka-cluster)
+  - [Code](https://github.com/miciek/akka-sharding-example)
+1. **Building Snake using Streams** 
+  - *Geecon (May 2016)*
+  - [Slides](https://speakerdeck.com/miciek/building-snake-using-streams-geecon-2016)
+  - [Frontend Code](https://github.com/miciek/web-snake-react-bacon)
+  - [Backend Code](https://github.com/miciek/snake-multiplayer-akka-streams)
 1. **Building Snake using Streams** 
   - *Meet.js Summit (March 2016)*
   - [Slides](https://speakerdeck.com/miciek/building-snake-using-streams)
@@ -40,7 +48,7 @@ You can see all my past and future speaking gigs at [my Lanyrd profile page](htt
   - [Code](https://github.com/miciek/web-snake-react-bacon)
 1. **Sane Sharding with Akka Cluster**
   - *33rd Degree 4 Charity (December 2015)*
-  - [Slides](http://www.slideshare.net/miciek/sane-sharding-with-akka-cluster-53948027)
+  - [Slides](https://speakerdeck.com/miciek/sane-sharding-with-akka-cluster)
   - [Code](https://github.com/miciek/akka-sharding-example)
 1. **Sharding with Akka Cluster: From Theory to Production**
   - *JDD 2015 (October 2015)*
