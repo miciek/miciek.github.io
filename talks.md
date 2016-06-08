@@ -8,6 +8,7 @@ You can see all my past and future speaking gigs at [my Lanyrd profile page](htt
 
 1. **Sane Sharding with Akka Cluster**
   - *[jPrime](http://jprime.io) (May 2016)*
+  - [Video](https://www.youtube.com/watch?v=f06Otw_DuQU)
   - [Slides](https://speakerdeck.com/miciek/sane-sharding-with-akka-cluster)
   - [Code](https://github.com/miciek/akka-sharding-example)
 1. **Building Snake using Streams** 
