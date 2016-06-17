@@ -6,6 +6,12 @@ permalink: /talks/
 
 You can see all my past and future speaking gigs at [my Lanyrd profile page](http://lanyrd.com/profile/miciek-2071/). Here is the list of my talks with videos and slides (where applicable):
 
+1. **Building multiplayer game using Streams** 
+  - *[Devoxx UK](http://www.devoxx.co.uk) (June 2016)*
+  - [Video](https://www.youtube.com/watch?v=iKTFalVfoSU)
+  - [Slides](https://speakerdeck.com/miciek/building-multiplayer-game-using-streams-devoxx-uk-2016)
+  - [Frontend Code](https://github.com/miciek/web-snake-react-bacon)
+  - [Backend Code](https://github.com/miciek/snake-multiplayer-akka-streams)
 1. **Sane Sharding with Akka Cluster**
   - *[jPrime](http://jprime.io) (May 2016)*
   - [Video](https://www.youtube.com/watch?v=f06Otw_DuQU)
