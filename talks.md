@@ -4,8 +4,29 @@ title: My Talks
 permalink: /talks/
 ---
 
-You can see all my past and future speaking gigs at [my Lanyrd profile page](http://lanyrd.com/profile/miciek-2071/). Here is the list of my talks with videos and slides (where applicable):
+You can see all my past and future speaking gigs at [my Lanyrd profile page](http://lanyrd.com/profile/miciek-2071/). Here is the list of my talks with videos and slides (where available):
 
+1. **Building multiplayer game using Streams** 
+  - *[Voxxed Days Belgrade](https://belgrade.voxxeddays.com/) (September 2016)*
+  - [Slides](https://speakerdeck.com/miciek/building-multiplayer-game-using-streams-v2)
+  - [Frontend Code](https://github.com/miciek/web-snake-react-bacon)
+  - [Backend Code](https://github.com/miciek/snake-multiplayer-akka-streams)
+1. **Building multiplayer game using Streams** 
+  - *[JavaOne 2016](https://www.oracle.com/javaone/) (September 2016)*
+  - [Slides](https://speakerdeck.com/miciek/building-multiplayer-game-using-streams-v2)
+  - [Frontend Code](https://github.com/miciek/web-snake-react-bacon)
+  - [Backend Code](https://github.com/miciek/snake-multiplayer-akka-streams)
+1. **Building multiplayer game using Streams** 
+  - *[SF Scala meetup](http://www.meetup.com/SF-Scala/) (September 2016)*
+  - [Video](https://www.youtube.com/watch?v=yRmqKuC1WYU)
+  - [Slides](https://speakerdeck.com/miciek/building-multiplayer-game-using-streams-v2)
+  - [Frontend Code](https://github.com/miciek/web-snake-react-bacon)
+  - [Backend Code](https://github.com/miciek/snake-multiplayer-akka-streams)
+1. **Building multiplayer game using Streams** 
+  - *[Scalapolis 2016](http://www.scalapolis.pl) (September 2016)*
+  - [Slides](https://speakerdeck.com/miciek/building-multiplayer-game-using-streams-v2)
+  - [Frontend Code](https://github.com/miciek/web-snake-react-bacon)
+  - [Backend Code](https://github.com/miciek/snake-multiplayer-akka-streams)
 1. **Building multiplayer game using Streams** 
   - *[Devoxx UK](http://www.devoxx.co.uk) (June 2016)*
   - [Video](https://www.youtube.com/watch?v=iKTFalVfoSU)
