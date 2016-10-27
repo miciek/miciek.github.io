@@ -25,7 +25,7 @@ The talk is divided into two parts: backend & frontend. The first part of the ta
   - [Frontend Code](https://github.com/miciek/mr-stats-frontend-elm)
 
 ##### Given at 
-  - *[Haskell eXchange](https://skillsmatter.com/conferences/7276-haskell-exchange-2016) (October 2016)*
+  - *[Haskell eXchange](https://skillsmatter.com/conferences/7276-haskell-exchange-2016) (October 2016)* [short version] [[Video](https://skillsmatter.com/skillscasts/8892-purely-functional-web-apps-with-servant-and-elm)]
   - *[Lambda Days](http://www.lambdadays.org) (February 2016)* [[Video](https://www.youtube.com/watch?v=oMfF9V52DT4)]
   - *Lambda Lounge (February 2016)*
 
