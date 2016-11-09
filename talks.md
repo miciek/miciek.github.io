@@ -6,7 +6,21 @@ permalink: /talks/
 
 You can see all my past and future speaking gigs at [my Lanyrd profile page](http://lanyrd.com/profile/miciek-2071/). Here is the list of my talks with videos and slides (where available):
 
-### Purely Functional Web Apps 
+
+### I can haz no Futures?
+Learn how simple functional patterns can be used to make your business logic cleaner and more testable.
+
+Asynchronous programming brings a lot of Futures to your code. Bad news is that they are not essential to what your application really does… You end up with Futures of assertions in your unit tests or, even worse, with Await or expectNoMsg calls.
+
+This is a live coding talk. First I will code an application using Futures in both business logic and unit tests. Then I will get rid of Futures without losing asynchronicity. In the second part, I will do a step by step refactoring of a simple Akka actor system. In both cases I will use typeclasses from [Cats library](http://typelevel.org/cats/).
+
+  - [Slides](https://speakerdeck.com/miciek/i-can-haz-no-futures)
+  - [Code](https://github.com/miciek/playing-with-cats)
+
+##### Given at
+  - *[Kraków Scala User Group](http://www.meetup.com/Krakow-Scala-User-Group/) (November 2016)* 
+
+### Purely Functional Web Apps
 Are you familiar with the following recipe? 
 
   - First define an API and its documentation. 
@@ -70,7 +84,7 @@ Under the hood there will be Scala and Akka Cluster with sharding extension. Akk
   - *[jPrime](http://jprime.io) (May 2016)* [[Video](https://www.youtube.com/watch?v=f06Otw_DuQU)]
   - *[33rd Degree 4 Charity](http://www.33degree.org) (December 2015)*
   - *[JDD 2015](http://www.jdd.org.pl) (October 2015)* [[Video](https://www.youtube.com/watch?v=2oYytf5Y1rY)]
-  - *Kraków Scala User Group (April 2015)* 
+  - *[Kraków Scala User Group](http://www.meetup.com/Krakow-Scala-User-Group/) (April 2015)* 
 
 ### Reactive UI by example
 A live coding of Snake game using JavaScript, React and streams.
@@ -86,4 +100,4 @@ Introduction to typeclasses.
   - [Slides](http://slides.com/miciek/typeclasses#/)
 
 ##### Given at
-  - *Kraków Scala User Group (March 2015)* [[Video PL](https://www.youtube.com/watch?v=v-gT4Z82CF4)]
+  - *[Kraków Scala User Group](http://www.meetup.com/Krakow-Scala-User-Group/) (March 2015)* [[Video PL](https://www.youtube.com/watch?v=v-gT4Z82CF4)]
