@@ -61,7 +61,7 @@ The talk is divided into 3 parts. In the first part you will learn how to create
   - *[SF Scala meetup](http://www.meetup.com/SF-Scala/) (September 2016)* [[Video](https://www.youtube.com/watch?v=yRmqKuC1WYU)]
   - *[Scalapolis 2016](http://www.scalapolis.pl) (September 2016)*
   - *[Devoxx UK](http://www.devoxx.co.uk) (June 2016)* [[Video](https://www.youtube.com/watch?v=iKTFalVfoSU)]
-  - *[Geecon](http://geecon.org) (May 2016)*
+  - *[Geecon](http://geecon.org) (May 2016)* [[Video](https://vimeo.com/185781741)]
   - *[Meet.js Summit](http://summit.meetjs.pl) (March 2016)* [short version] [[Video](https://www.youtube.com/watch?v=JdOpkQ-dMxo/) [Slides](https://speakerdeck.com/miciek/building-snake-using-streams)]
   - *Kraków Scala User Group (February 2016)* [[Video PL](https://www.youtube.com/watch?v=MKEbuLsah50)]
   - *[Boiling Frogs](http://www.boilingfrogs.pl) (January 2016)* [[Video PL](https://www.youtube.com/watch?v=J8n8j0_6wYU)]
