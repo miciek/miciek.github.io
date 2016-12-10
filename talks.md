@@ -6,6 +6,30 @@ permalink: /talks/
 
 You can see all my past and future speaking gigs at [my Lanyrd profile page](http://lanyrd.com/profile/miciek-2071/). Here is the list of my talks with videos and slides (where available):
 
+### Building muliplayer game using Streams
+In this talk you will learn how stream-based programming can be used to implement web frontend and multiplayer backend of the classic game: Snake.
+
+Building dynamic applications using imperative approach tends to create lots of unmaintainable code. Stream-based programming tries to solve this problem by introducing fully declarative way of defining application logic. While using streams, you will focus on WHAT needs to be done, not HOW and WHEN. 
+
+The talk is divided into 3 parts. In the first part you will learn how to create a frontend of the Snake web game using streams as building blocks. Then, we will move to the server side and use Scala and Akka Streams library to create backend service that will allow the game to be played by multiple players. In the third part, we will discuss reactive streams and how they make asynchronous communication safe.
+
+  - [Slides](https://speakerdeck.com/miciek/building-multiplayer-game-using-streams-v2)
+  - [Frontend Code](https://github.com/miciek/web-snake-react-bacon)
+  - [Backend Code](https://github.com/miciek/snake-multiplayer-akka-streams)
+
+##### Given at
+  - *[Scala eXchange](https://skillsmatter.com/conferences/7432-scala-exchange-2016#overview) (December 2016)* [[Video](https://skillsmatter.com/skillscasts/8979-building-multiplayer-game-using-streams)]
+  - *[Code Europe](https://www.codeeurope.pl) (December 2016)*
+  - *[Topconf Tallinn](http://topconf.com/tallinn-2016/) (November 2016)*
+  - *[Voxxed Days Belgrade](https://belgrade.voxxeddays.com/) (September 2016)* [[Video](https://www.youtube.com/watch?v=u7Ab7UDfWdQ)]
+  - *[JavaOne](https://www.oracle.com/javaone/) (September 2016)*
+  - *[SF Scala meetup](http://www.meetup.com/SF-Scala/) (September 2016)* [[Video](https://www.youtube.com/watch?v=yRmqKuC1WYU)]
+  - *[Scalapolis](http://www.scalapolis.pl) (September 2016)*
+  - *[Devoxx UK](http://www.devoxx.co.uk) (June 2016)* [[Video](https://www.youtube.com/watch?v=iKTFalVfoSU)]
+  - *[Geecon](http://geecon.org) (May 2016)* [[Video](https://vimeo.com/185781741)]
+  - *[Meet.js Summit](http://summit.meetjs.pl) (March 2016)* [short version] [[Video](https://www.youtube.com/watch?v=JdOpkQ-dMxo/) [Slides](https://speakerdeck.com/miciek/building-snake-using-streams)]
+  - *Kraków Scala User Group (February 2016)* [[Video PL](https://www.youtube.com/watch?v=MKEbuLsah50)]
+  - *[Boiling Frogs](http://www.boilingfrogs.pl) (January 2016)* [[Video PL](https://www.youtube.com/watch?v=J8n8j0_6wYU)]
 
 ### I can haz no Futures?
 Learn how simple functional patterns can be used to make your business logic cleaner and more testable.
@@ -43,30 +67,6 @@ The talk is divided into two parts: backend & frontend. The first part of the ta
   - *[Lambda Days](http://www.lambdadays.org) (February 2016)* [[Video](https://www.youtube.com/watch?v=oMfF9V52DT4)]
   - *Lambda Lounge (February 2016)*
 
-
-### Building muliplayer game using Streams
-In this talk you will learn how stream-based programming can be used to implement web frontend and multiplayer backend of the classic game: Snake.
-
-Building dynamic applications using imperative approach tends to create lots of unmaintainable code. Stream-based programming tries to solve this problem by introducing fully declarative way of defining application logic. While using streams, you will focus on WHAT needs to be done, not HOW and WHEN. 
-
-The talk is divided into 3 parts. In the first part you will learn how to create a frontend of the Snake web game using streams as building blocks. Then, we will move to the server side and use Scala and Akka Streams library to create backend service that will allow the game to be played by multiple players. In the third part, we will discuss reactive streams and how they make asynchronous communication safe.
-
-  - [Slides](https://speakerdeck.com/miciek/building-multiplayer-game-using-streams-v2)
-  - [Frontend Code](https://github.com/miciek/web-snake-react-bacon)
-  - [Backend Code](https://github.com/miciek/snake-multiplayer-akka-streams)
-
-##### Given at
-  - *[Voxxed Days Belgrade](https://belgrade.voxxeddays.com/) (September 2016)* [[Video](https://www.youtube.com/watch?v=u7Ab7UDfWdQ)]
-  - *[JavaOne 2016](https://www.oracle.com/javaone/) (September 2016)*
-  - *[SF Scala meetup](http://www.meetup.com/SF-Scala/) (September 2016)* [[Video](https://www.youtube.com/watch?v=yRmqKuC1WYU)]
-  - *[Scalapolis 2016](http://www.scalapolis.pl) (September 2016)*
-  - *[Devoxx UK](http://www.devoxx.co.uk) (June 2016)* [[Video](https://www.youtube.com/watch?v=iKTFalVfoSU)]
-  - *[Geecon](http://geecon.org) (May 2016)* [[Video](https://vimeo.com/185781741)]
-  - *[Meet.js Summit](http://summit.meetjs.pl) (March 2016)* [short version] [[Video](https://www.youtube.com/watch?v=JdOpkQ-dMxo/) [Slides](https://speakerdeck.com/miciek/building-snake-using-streams)]
-  - *Kraków Scala User Group (February 2016)* [[Video PL](https://www.youtube.com/watch?v=MKEbuLsah50)]
-  - *[Boiling Frogs](http://www.boilingfrogs.pl) (January 2016)* [[Video PL](https://www.youtube.com/watch?v=J8n8j0_6wYU)]
-
-
 ### Sane Sharding with Akka Cluster
 Writing distributed applications is very hard, especially when you start developing them as single-noded ones. Programmers tend to focus on functionalities first, leaving the scalability issues for later. Fortunately, Akka gives us many tools for scaling out and we can use them very early in the development process. You will learn how to take advantage of these features.
 
@@ -83,7 +83,7 @@ Under the hood there will be Scala and Akka Cluster with sharding extension. Akk
   - *[Voxxed Days Belgrade](https://belgrade.voxxeddays.com/) (September 2016)* [[Video](https://www.youtube.com/watch?v=PEh7wADUKuQ)]
   - *[jPrime](http://jprime.io) (May 2016)* [[Video](https://www.youtube.com/watch?v=f06Otw_DuQU)]
   - *[33rd Degree 4 Charity](http://www.33degree.org) (December 2015)*
-  - *[JDD 2015](http://www.jdd.org.pl) (October 2015)* [[Video](https://www.youtube.com/watch?v=2oYytf5Y1rY)]
+  - *[JDD](http://www.jdd.org.pl) (October 2015)* [[Video](https://www.youtube.com/watch?v=2oYytf5Y1rY)]
   - *[Kraków Scala User Group](http://www.meetup.com/Krakow-Scala-User-Group/) (April 2015)* 
 
 ### Reactive UI by example
