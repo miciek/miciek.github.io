@@ -8,6 +8,46 @@ There are only two hard things in Computer Science: cache invalidation and namin
 
 Spotting a bad name is not very hard, but both good and great names go unnoticed. Names allow developers to share their current understanding with future developers (including themselves). Research shows that identifiers can take about 70% of modern software's source code<sup>[3](#concise-naming)</sup>, so one can argue that a naming strategy is the main contributor to software comprehension problems. We can take this hypothesis even further and state that a good understanding of naming problem may make you and your team go a lot faster. 
 
+## What's the impact of naming?
+Before we dig into the naming problem itself, I'd like to stop for a bit and think about the impact of naming. We know that identifiers take around 70% of source code, but do we know *how much time can our team save by having good identifier names*? Secondly, can we use the information about time savings to make better decisions while programming or reviewing someone else's code? I'd like to have a strategy for making a quick decision about names without depending on my faulty intuition.
+
+Uncle Bob wrote that *"the ratio of time spent reading versus writing is well over 10 to 1"*<sup>[4](#clean-code)</sup>. This is probably true for *some* codebases. But let's not stop there and try to find a more accurate number based on real-life data. Data can be found in the [Microsoft Research paper](https://www.microsoft.com/en-us/research/publication/maintaining-mental-models-a-study-of-developer-work-habits/) that is a summary of responses from several hundred professional developers working at Microsoft.
+
+Researchers created a developer activity catalogue:
+
+- designing,
+- writing,
+- understanding the code,
+- editing,
+- unit testing,
+- communicating,
+- code maintenance overhead (building, compiling),
+- other code related activities,
+- non code activities.
+
+It turned out that *"no single activity accounts for most of developer's time"*. The median times spent on each activity were very close. The research showed that those numbers are also a subject of vast variability depending on teams and lifecycles. Based on median values from the paper, **"understanding the code" activity accounts for about 10% of average developer's time.** Same can be written about both *writing* and *communicating* activities, which are also related to identifier naming<sup>[5](#work-habits)</sup>. 
+
+Initially I wanted to know only how much time we spend on reading the code, but there was another side of this research that grabbed my attention. Developers were asked to name *the most difficult problems* they face in their work. The highest scoring problem was related to *understanding the code* activity and was serious for 66% of respondents.
+
+| This is a serious problem for me                   | % agree |
+| -------------------------------------------------- | ------- | 
+| Understanding the rationale behind a piece of code | 66%     |
+| Understanding code that someone else wrote         | 56%     | 
+| Understanding the history of a piece of code       | 51%     | 
+| Understanding code that I wrote a while ago        | 17%     |
+
+*Most serious problems for Microsoft developers*<sup>[5](#work-habits)</sup>
+
+---
+
+Another research went into even more detail. Researchers analysed the impact of different attributes of the names on programmer's ability to process them <sup>[6](#identifier-length)</sup>. They concluded that **"longer names take an average of 20.1 s longer to process."**
+
+Based on the research and experiments, we can conclude that:
+
+- we spent substantial amount of time trying to understand the code,
+- understanding the rationale behind a piece of code is the most difficult problem we face,
+- longer names take an average of 20 seconds to process and this means that if you only have long descriptive identifiers, 70% of your code takes very long to process.
+
 ## Cargo cult of naming advices
 Unfortunately, I think I don't really understand the naming problem. Instead, I have always followed *"good naming practices"* almost blindly. Majority of "naming convention"-related advices in professional literature are very superficial. They state that I should or should not do something and then "prove" that advice with some anecdotes. 
 
@@ -42,56 +82,13 @@ But my feelings aside, let's list the problems with this kind of "best practices
 
 In this post I am going to give you some experimental research data and formal definitions of good names. This way you can become a better programmer by moving away from *folklore* of naming practices and base your naming skills on *science*. 
 
-## What's the impact of naming?
-Before we dig into the naming problem itself, I'd like to stop for a bit and think about the impact of naming. We know that identifiers take around 70% of source code, but do we know *how much time can our team save by having good identifier names*? Secondly, can we use the information about time savings to make better decisions while programming or reviewing someone else's code? I'd like to have a strategy to answering questions like:
-
-- "How long can I think about this naming this thing?"
-- "Should I pick out and comment on this particular name in my colleague's pull request?"
-
-Uncle Bob wrote that *"the ratio of time spent reading versus writing is well over 10 to 1"*<sup>[4](#clean-code)</sup>. This is probably true for *some* codebases. But let's not stop there and try to find a more accurate number based on real-life data. Data can be found in the [Microsoft Research paper](https://www.microsoft.com/en-us/research/publication/maintaining-mental-models-a-study-of-developer-work-habits/) that is a summary of responses from several hundred professional developers working at Microsoft.
-
-Researchers created a developer activity catalogue:
-
-- designing,
-- writing,
-- understanding the code,
-- editing,
-- unit testing,
-- communicating,
-- code maintenance overhead (building, compiling),
-- other code related activities,
-- non code activities.
-
-It turned out that *"no single activity accounts for most of developer's time"*. The median times spent on each activity were very close. The research showed that those numbers are also a subject of vast variability depending on teams and lifecycles. Based on median values from the paper, **"understanding the code" activity accounts for about 10% of average developer's time.** Same can be written about both *writing* and *communicating* activities, which are also related to identifier naming<sup>[5](#work-habits)</sup>. 
-
-Initially I wanted to know only how much time we spend on reading the code, but there was another side of this research that grabbed my attention. Developers were asked to name *the most difficult problems* they face in their work. The highest scoring problem was related to *understanding the code* activity and was serious for 66% of respondents.
-
-| This is a serious problem for me                   | % agree |
-| -------------------------------------------------- | ------- | 
-| Understanding the rationale behind a piece of code | 66%     |
-| Understanding code that someone else wrote         | 56%     | 
-| Understanding the history of a piece of code       | 51%     | 
-| Understanding code that I wrote a while ago        | 17%     |
-
-*Most serious problems for Microsoft developers*<sup>[5](#work-habits)</sup>
-
----
-
-As a side note, the funny thing about the above data is that only 17% of respondents stated that the code they write is hard to understand. 
-
-Another research went into even more detail. Researchers analysed the impact of different attributes of the names on programmer's ability to process them <sup>[6](#identifier-length)</sup>. They concluded that **"longer names take an average of 20.1 s longer to process."** More on that later in this article.
-
-Based on the research and experiments, we can conclude that:
-
-- we spent substantial amount of time trying to understand the code,
-- understanding the rationale behind a piece of code is the most difficult problem we face,
-- longer names take an average of 20 seconds to process and this means that if you only have long descriptive identifiers, 70% of your code takes very long to process.
-
 ## Why naming is so hard?
 
 We now see that naming problem has a big impact on code comprehension. The naming activity may look straightforward, but we all know it isn't! In this section I want to go through the main reasons explaining why is that a case.
 
-> The hardest thing about choosing good names is that it requires good descriptive skills and a shared cultural background.<sup>[4](#clean-code)</sup>
+> The hardest thing about choosing good names is that it requires good descriptive skills and a shared cultural background.
+>
+> "Clean Code" <sup>[4](#clean-code)</sup>
 
 ### Formal definition of a name
 In the great paper about consistent and concise naming<sup>[3](#concise-naming)</sup>, authors introduced two spaces, denoted `C` and `N`:
@@ -112,7 +109,9 @@ Having this definition, we can now try to find out what does it mean for the nam
 
 ![Homonyms & Synonyms](/images/naming-practices/homonyms-synonyms.svg)
 
-> The mixture of synonyms and homonyms, which is commonly found in source codes, maximizes confusion and aggravates comprehension efforts enormously.<sup>[3](#concise-naming)</sup>
+> The mixture of synonyms and homonyms, which is commonly found in source codes, maximizes confusion and aggravates comprehension efforts enormously.
+>
+> -- Deißenböck & Pizka <sup>[3](#concise-naming)</sup>
 
 #### Rule #1: Choose consistent names
 A naming relation `R` is **consistent** if and only if the mapping is *bijective*, i.e. each identifier name from `N` is paired with only one concept from `C` and each concept from `C` is paired with only one identifier name from `N`.
@@ -132,7 +131,9 @@ Sounds easy, right? But, what if your concept space `C` had two permutation-like
 
 Unfortunately, then naming any function `permutation` would not be concise (it would be correct, though). Why? Because it is a *generalization* of at least two concepts from your concept space `C`.
 
-> The key to keep comprehensibility and detailing of identifiers in balance is to control the content of the concept space `C`!<sup>[3](#concise-naming)</sup>
+> The key to keep comprehensibility and detailing of identifiers in balance is to control the content of the concept space `C`!
+>
+> -- Deißenböck & Pizka <sup>[3](#concise-naming)</sup>
 
 #### Advices from "Clean Code" revisited
 Let's go back to *"Clean code"* book advises that we tend to follow and talk about. Having the aforementioned formal definition and 3 rules of good names we can convert the advices from the book to those 3 rules!
@@ -166,7 +167,8 @@ Now we know that in order to create names, we need to precisely name the concept
 
 There are multiple research papers on identifier quality. Lawrie and others observed that longer names can make the other programmer slower (and even 20s slower for reading one identifier alone! <sup>[6](#identifier-length)</sup>). They attributed this fact to overloading a programmer’s short-term memory. They also tested and confirmed the hypothesis that using names that include ties to programmer persistent memory can vastly improve code comprehension (programmers can remember them easily and they stay longer in the memory). For example: `toString` has strong ties to Java programmers memory, while `getJournalEntry` doesn't.
 
-> Maximal comprehension occurs when the pressure to create longer more expressive names is balanced against limited programmer short-term memory resources. <sup>[6](#identifier-length)</sup>
+> Maximal comprehension occurs when the pressure to create longer more expressive names is balanced against limited programmer short-term memory resources. 
+> -- Binkley, Lawrie, Maex, Morrell <sup>[6](#identifier-length)</sup>
 
 ### Rule #4: Choose shorter names
 Whenever you are naming a concept, you need to choose a name that will minimise comprehension time. Choose as fewer syllables as possible and use words that have ties to programmer's (or your coworkers) memory.
