@@ -82,7 +82,7 @@ But my feelings aside, let's list the problems with this kind of "best practices
 
 In this post I am going to give you some experimental research data and formal definitions of good names. This way you can become a better programmer by moving away from *folklore* of naming practices and base your naming skills on *science*. 
 
-## Why naming is so hard?
+## Dealing with the naming problem
 
 We now see that naming problem has a big impact on code comprehension. The naming activity may look straightforward, but we all know it isn't! In this section I want to go through the main reasons explaining why is that a case.
 
@@ -170,7 +170,7 @@ There are multiple research papers on identifier quality. Lawrie and others obse
 > Maximal comprehension occurs when the pressure to create longer more expressive names is balanced against limited programmer short-term memory resources. 
 > -- Binkley, Lawrie, Maex, Morrell <sup>[6](#identifier-length)</sup>
 
-### Rule #4: Choose shorter names
+#### Rule #4: Choose shorter names
 Whenever you are naming a concept, you need to choose a name that will minimise comprehension time. Choose as fewer syllables as possible and use words that have ties to programmer's (or your coworkers) memory.
 
 **But doesn't it contradict the previous rules?** How can we choose names that are both concise and very short? Again, the power lies in *controlling the whole concept space*. In order to have short & concise names, we need to make sure that our concept space is as small as possible. And this alone is a hard work, because every time someone wants to introduce a new concept, we need to be able to rethink the whole set again!
