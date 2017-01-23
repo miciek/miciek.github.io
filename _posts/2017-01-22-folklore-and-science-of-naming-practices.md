@@ -209,13 +209,15 @@ Deißenböck and Pizka run an experiment with their students that included a ren
 - the problem was ignored for a couple of weeks,
 - after some time students working on the program were not able to comprehend its original meaning,
 - they considered it a mess,
-- re-engineering was very extensive even though the program was fairly small (13000 LOC).<sup>[3](#concise-naming)</sup>
+- re-engineering was very extensive even though the program was fairly small (13,000 LOC).<sup>[3](#concise-naming)</sup>
 
 The above can also be easily confirmed by looking at quantity of different identifiers used in open source projects. Data taken from [Concise and Consistent Naming paper](#concise-naming):
 
 - **Eclipse 3.0M7** - 94,829 different identifiers (around the same number of words as in Oxford Advanced Learner’s Dictionary) which are compounds of 7,233 unique words,
-- **Sun’s JDK 1.4.2** (1.3 MLOC) - 42,869 different identifiers that are compounds of 6,426 different words (you need to know around 5,000 English words to understand academic papers),
+- **Sun’s JDK 1.4.2** (1.3 MLOC) - 42,869 different identifiers that are compounds of 6,426 different words ,
 - **Tomcat 5.0.30** (317 kLOC) - 11,656 different identifiers composed from 2,587 words.
+
+As you see, some popular software projects use thousands of unique words in their source codes. If you compare those numbers with the amount of English words needed to understand academic papers (5,000), you can see that they are definitely too big. This means there ale lots of synonyms in the sources and renaming anything would require a substantial amount of manual, error-prone work.
 
 ## Conclusion
 Naming is hard. We dived deep into the topic and extracted 4 rules of naming that all developers should follow. However, following those rules in today's development environments is very hard and requires a lot of manual work. The biggest problem of naming is that programmers don't have tools to analyse and stop *names decay*. And since names are about 70% of the source code, this contributes hugely to software decay as a whole. To get better at naming, we need to invent better tools. 
