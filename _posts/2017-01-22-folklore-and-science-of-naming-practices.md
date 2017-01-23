@@ -218,7 +218,7 @@ The above can also be easily confirmed by looking at quantity of different ident
 - **Tomcat 5.0.30** (317 kLOC) - 11,656 different identifiers composed from 2,587 words.
 
 ## Conclusion
-Naming is hard. We dived deep into the topic and extracted 4 rules of naming that all developers should follow. However, following those rules in today's development environments is very hard, if not impossible. The biggest problem of naming is that programmers don't have tools to analyse and stop *names decay*. And since names are about 70% of the source, this contributes hugely to software decay as a whole. To get better at naming, we need to invent better tools. 
+Naming is hard. We dived deep into the topic and extracted 4 rules of naming that all developers should follow. However, following those rules in today's development environments is very hard and requires a lot of manual work. The biggest problem of naming is that programmers don't have tools to analyse and stop *names decay*. And since names are about 70% of the source code, this contributes hugely to software decay as a whole. To get better at naming, we need to invent better tools. 
 
 ---
 - <small><a name="two-hard-things">1</a>: Quote attributed to [Phil Karlton](https://martinfowler.com/bliki/TwoHardThings.html)</small>
