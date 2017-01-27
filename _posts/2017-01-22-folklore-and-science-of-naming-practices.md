@@ -168,6 +168,7 @@ Now we know that in order to create names, we need to precisely name the concept
 There are multiple research papers on identifier quality. Lawrie and others observed that longer names can make the other programmer slower (and even 20s slower for reading one identifier alone! <sup>[6](#identifier-length)</sup>). They attributed this fact to overloading a programmer’s short-term memory. They also tested and confirmed the hypothesis that using names that include ties to programmer persistent memory can vastly improve code comprehension (programmers can remember them easily and they stay longer in the memory). For example: `toString` has strong ties to Java programmers memory, while `getJournalEntry` doesn't.
 
 > Maximal comprehension occurs when the pressure to create longer more expressive names is balanced against limited programmer short-term memory resources. 
+>
 > -- Binkley, Lawrie, Maex, Morrell <sup>[6](#identifier-length)</sup>
 
 #### Rule #4: Choose shorter names
