@@ -6,6 +6,20 @@ permalink: /talks/
 
 You can see all my past and future speaking gigs at [my Lanyrd profile page](http://lanyrd.com/profile/miciek-2071/). Here is the list of my talks with videos and slides (where available):
 
+### I can haz no Futures?
+Learn how simple functional patterns can be used to make your business logic cleaner and more testable.
+
+Asynchronous programming brings a lot of Futures to your code. Bad news is that they are not essential to what your application really does… You end up with Futures of assertions in your unit tests or, even worse, with Await or expectNoMsg calls.
+
+This is a live coding talk. First I will code an application using Futures in both business logic and unit tests. Then I will get rid of Futures without losing asynchronicity. In the second part, I will do a step by step refactoring of a simple Akka actor system. In both cases I will use typeclasses from [Cats library](http://typelevel.org/cats/).
+
+  - [Slides](https://speakerdeck.com/miciek/i-can-haz-no-futures)
+  - [Code](https://github.com/miciek/playing-with-cats)
+
+##### Given at
+  - *Techees @ Ocado Technology meetup (January 2017)*
+  - *[Kraków Scala User Group](http://www.meetup.com/Krakow-Scala-User-Group/) (November 2016)* [[Video](https://www.youtube.com/watch?v=EHQXLp2YL2M)]
+
 ### Building muliplayer game using Streams
 In this talk you will learn how stream-based programming can be used to implement web frontend and multiplayer backend of the classic game: Snake.
 
@@ -30,19 +44,6 @@ The talk is divided into 3 parts. In the first part you will learn how to create
   - *[Meet.js Summit](http://summit.meetjs.pl) (March 2016)* [short version] [[Video](https://www.youtube.com/watch?v=JdOpkQ-dMxo/) [Slides](https://speakerdeck.com/miciek/building-snake-using-streams)]
   - *Kraków Scala User Group (February 2016)* [[Video PL](https://www.youtube.com/watch?v=MKEbuLsah50)]
   - *[Boiling Frogs](http://www.boilingfrogs.pl) (January 2016)* [[Video PL](https://www.youtube.com/watch?v=J8n8j0_6wYU)]
-
-### I can haz no Futures?
-Learn how simple functional patterns can be used to make your business logic cleaner and more testable.
-
-Asynchronous programming brings a lot of Futures to your code. Bad news is that they are not essential to what your application really does… You end up with Futures of assertions in your unit tests or, even worse, with Await or expectNoMsg calls.
-
-This is a live coding talk. First I will code an application using Futures in both business logic and unit tests. Then I will get rid of Futures without losing asynchronicity. In the second part, I will do a step by step refactoring of a simple Akka actor system. In both cases I will use typeclasses from [Cats library](http://typelevel.org/cats/).
-
-  - [Slides](https://speakerdeck.com/miciek/i-can-haz-no-futures)
-  - [Code](https://github.com/miciek/playing-with-cats)
-
-##### Given at
-  - *[Kraków Scala User Group](http://www.meetup.com/Krakow-Scala-User-Group/) (November 2016)* [[Video](https://www.youtube.com/watch?v=EHQXLp2YL2M)]
 
 ### Purely Functional Web Apps
 Are you familiar with the following recipe? 
