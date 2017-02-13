@@ -17,6 +17,7 @@ This is a live coding talk. First I will code an application using Futures in bo
   - [Code](https://github.com/miciek/playing-with-cats)
 
 ##### Given at
+  - *[Lambda Days](http://www.lambdadays.org) (February 2017)*
   - *Techees @ Ocado Technology meetup (January 2017)*
   - *[Kraków Scala User Group](http://www.meetup.com/Krakow-Scala-User-Group/) (November 2016)* [[Video](https://www.youtube.com/watch?v=EHQXLp2YL2M)]
 
