@@ -33,7 +33,7 @@ The talk is divided into 3 parts. In the first part you will learn how to create
   - [Backend Code](https://github.com/miciek/snake-multiplayer-akka-streams)
 
 ##### Given at
-  - *[ReactSphere](https://reactsphere.org/) (March 2017)*
+  - *[ReactSphere](https://reactsphere.org/) (March 2017)* [[Video](https://www.youtube.com/watch?v=BIU1Sg67FN8)]
   - *[Scala eXchange](https://skillsmatter.com/conferences/7432-scala-exchange-2016#overview) (December 2016)* [[Video](https://skillsmatter.com/skillscasts/8979-building-multiplayer-game-using-streams)]
   - *[Code Europe](https://www.codeeurope.pl) (December 2016)*
   - *[Topconf Tallinn](http://topconf.com/tallinn-2016/) (November 2016)*
