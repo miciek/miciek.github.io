@@ -6,6 +6,13 @@ permalink: /talks/
 
 You can see all my past and future speaking gigs at [my Lanyrd profile page](http://lanyrd.com/profile/miciek-2071/). Here is the list of my talks with videos and slides (where available):
 
+### Developer on Detox
+
+  - [Slides](https://speakerdeck.com/miciek/developer-on-detox)
+
+##### Given at
+  - *[Boiling Frogs](http://www.boilingfrogs.pl) (February 2017)* [[Video PL](https://www.youtube.com/watch?v=sQ88r0Ri3M0)]
+
 ### I can haz no Futures?
 Learn how simple functional patterns can be used to make your business logic cleaner and more testable.
 
