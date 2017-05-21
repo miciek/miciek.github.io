@@ -6,7 +6,25 @@ permalink: /talks/
 
 You can see all my past and future speaking gigs at [my Lanyrd profile page](http://lanyrd.com/profile/miciek-2071/). Here is the list of my talks with videos and slides (where available):
 
+### A Pragmatist's Guide to Functional Geekery
+Basic functional concepts like immutable data, second-order functions, lambdas and function composition can already be found in the modern programmer’s toolkit. 
+
+During this talk you will learn about more advanced functional concepts and how they can solve real problems. I will talk about pattern matching, algebraic data types, type classes, functional abstractions and folding. 
+
+I will show you a practical example written using today’s Java functional constructs and build up from there. I will use only JVM-based languages to show yo u how they can improve the code, make it more maintainable and testable. 
+
+  - [Slides](https://speakerdeck.com/miciek/pragmatists-guide-to-functional-geekery)
+
+##### Given at
+  - *[Geecon](http://geecon.org) (May 2017)*
+  - *[Devoxx UK](http://www.devoxx.co.uk) (May 2017)* [[Video](https://www.youtube.com/watch?v=3bkb6U5jJbs)]
+
 ### Developer on Detox
+Let's meet John Craft - a great software craftsman. Today is his last day at work before long holidays. John has just given his functionality to review and wants to leave at 6:00 PM.
+
+This is a story of a code review, in which the reviewer found a few unfortunate issues at the worst possible time - 5 minutes before the holidays.
+
+Let’s put ourselves in John's shoes and try to decide what is the best solution for a true craftsman, who is interested in both quality and good design. I will talk about illusions, intuition, and decision making.
 
   - [Slides](https://speakerdeck.com/miciek/developer-on-detox)
 
