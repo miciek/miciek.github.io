@@ -16,6 +16,7 @@ I will show you a practical example written using today’s Java functional cons
   - [Slides](https://speakerdeck.com/miciek/pragmatists-guide-to-functional-geekery)
 
 ##### Given at
+  - *[jPrime](http://jprime.io) (May 2017)*
   - *[Geecon](http://geecon.org) (May 2017)*
   - *[Devoxx UK](http://www.devoxx.co.uk) (May 2017)* [[Video](https://www.youtube.com/watch?v=3bkb6U5jJbs)]
 
