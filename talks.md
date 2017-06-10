@@ -14,6 +14,7 @@ During this talk you will learn about more advanced functional concepts and how 
 I will show you a practical example written using today’s Java functional constructs and build up from there. I will use only JVM-based languages to show yo u how they can improve the code, make it more maintainable and testable. 
 
   - [Slides](https://speakerdeck.com/miciek/pragmatists-guide-to-functional-geekery)
+  - [Code](https://github.com/miciek/galactic-twitter)
 
 ##### Given at
   - *[jPrime](http://jprime.io) (May 2017)*
