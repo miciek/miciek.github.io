@@ -17,6 +17,9 @@ I will show you a practical example written using today’s Java functional cons
   - [Code](https://github.com/miciek/galactic-twitter)
 
 ##### Given at
+  - *[Devoxx Community Day](http://www.devoxx.pl) (June 2017)*
+  - *[Devoxx PL](http://www.devoxx.pl) (June 2017)*
+  - *[JBCNConf](http://www.jbcnconf.com/2017/) (June 2017)*
   - *[jPrime](http://jprime.io) (May 2017)*
   - *[Geecon](http://geecon.org) (May 2017)*
   - *[Devoxx UK](http://www.devoxx.co.uk) (May 2017)* [[Video](https://www.youtube.com/watch?v=3bkb6U5jJbs)]
