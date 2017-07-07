@@ -6,6 +6,20 @@ permalink: /talks/
 
 You can see all my past and future speaking gigs at [my Lanyrd profile page](http://lanyrd.com/profile/miciek-2071/). Here is the list of my talks with videos and slides (where available):
 
+### Developer on Detox
+Let's meet John Craft - a great software craftsman. Today is his last day at work before long holidays. John has just given his functionality to review and wants to leave at 6:00 PM.
+
+This is a story of a code review, in which the reviewer found a few unfortunate issues at the worst possible time - 5 minutes before the holidays.
+
+Let’s put ourselves in John's shoes and try to decide what is the best solution for a true craftsman, who is interested in both quality and good design. I will talk about illusions, intuition, and decision making.
+
+  - [Slides](https://speakerdeck.com/miciek/developer-on-detox)
+
+##### Given at
+  - *[Confitura](https://2016.confitura.pl/) (July 2017)*
+  - *[Quality Excites](https://qualityexcites.pl/) (June 2017)*
+  - *[Boiling Frogs](http://www.boilingfrogs.pl) (February 2017)* [[Video PL](https://www.youtube.com/watch?v=sQ88r0Ri3M0)]
+
 ### Pragmatist's Guide to Functional Geekery
 Basic functional concepts like immutable data, second-order functions, lambdas and function composition can already be found in the modern programmer’s toolkit. 
 
@@ -23,18 +37,6 @@ I will show you a practical example written using today’s Java functional cons
   - *[jPrime](http://jprime.io) (May 2017)*
   - *[Geecon](http://geecon.org) (May 2017)*
   - *[Devoxx UK](http://www.devoxx.co.uk) (May 2017)* [[Video](https://www.youtube.com/watch?v=3bkb6U5jJbs)]
-
-### Developer on Detox
-Let's meet John Craft - a great software craftsman. Today is his last day at work before long holidays. John has just given his functionality to review and wants to leave at 6:00 PM.
-
-This is a story of a code review, in which the reviewer found a few unfortunate issues at the worst possible time - 5 minutes before the holidays.
-
-Let’s put ourselves in John's shoes and try to decide what is the best solution for a true craftsman, who is interested in both quality and good design. I will talk about illusions, intuition, and decision making.
-
-  - [Slides](https://speakerdeck.com/miciek/developer-on-detox)
-
-##### Given at
-  - *[Boiling Frogs](http://www.boilingfrogs.pl) (February 2017)* [[Video PL](https://www.youtube.com/watch?v=sQ88r0Ri3M0)]
 
 ### I can haz no Futures?
 Learn how simple functional patterns can be used to make your business logic cleaner and more testable.
