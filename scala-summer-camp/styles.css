@@ -279,6 +279,14 @@ a img {
   color: #fff;
 }
 
+.contact-card.mdl-card.twitter-color {
+  background: #00aced;
+}
+
+.contact-card.mdl-card.slack-color {
+  background: #e01765;
+}
+
 .link-menu:hover {
   cursor: pointer;
 }
@@ -290,21 +298,18 @@ a img {
   margin-right: 20px;
 }
 
-.organizer-link {
-  cursor: pointer;
-}
-
 .section-body {
   margin-left: 12px;
 }
 
 .card-icon {
-  margin-right: 20px;
+  margin-right: 10px;
   width: 40px;
 }
 
 /**** Mobile layout ****/
-@media (max-width: 900px) {
+
+@media (max-width: 1200px) {
   .navigation-container {
     display: none;
   }
@@ -316,9 +321,15 @@ a img {
   .mobile-title {
     display: block !important;
     position: absolute;
-    left: calc(50% - 70px);
+    left: calc(50% - 95px);
     top: 12px;
     transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@media (max-width: 900px) {
+  .organizer-body {
+    visibility: hidden;
   }
 
   .more-button {
@@ -339,9 +350,5 @@ a img {
     font-size: 16px;
     margin: 0 16px;
     padding-top: 8px;
-  }
-
-  .footer .mdl-mega-footer--bottom-section {
-    display: none;
   }
 }
