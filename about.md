@@ -4,7 +4,9 @@ title: About me
 permalink: /about/
 ---
 
-This is a blog about programming and stuff that we do in order to make software projects happen. I write mostly to remember things better, but also to share things that fascinate me.
+I am a polyglot software engineer specialised in developing distributed applications. Also a tea drinker, cyclist & functional programming enthusiast. I love the human component in software projects. I currently work as team leader at <a href="http://ocadotechnology.com">Ocado Technology</a>, where we are building actor-based software for automated warehouses.
+
+This is a blog about programming and stuff related to programming and managing software projects. I write mostly to remember things better, but also to share things that fascinate me.
 
 Follow me on [Twitter](https://twitter.com/miciek), if you want to know what stuff will get here in the near future. See my [Github](https://github.com/miciek) to see what I am currently up to.
 
