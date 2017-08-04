@@ -197,14 +197,14 @@ a img {
   top: 6px;
 }
 
-.more-section {
-  padding: 80px 0;
+.section {
+  padding: 30px 0;
   max-width: 1044px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.more-section .section-title {
+.section .section-title {
   margin-left: 12px;
   padding-bottom: 24px;
 }
@@ -247,38 +247,60 @@ a img {
   font-size: 16px;
 }
 
-.footer {
-  background-color: #fafafa;
-  position: relative;
+.contact-card.mdl-card {
+  background: #3e4eb8;
 }
 
-.footer a:hover {
-  color: #8bc34a;
+.contact-card > .mdl-card__actions {
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
-.footer .mdl-mega-footer--top-section::after {
-  border-bottom: none;
+.contact-card > .mdl-card__title {
+  align-items: flex-start;
 }
 
-.footer .mdl-mega-footer--middle-section::after {
-  border-bottom: none;
+.contact-card > .mdl-card__title > h4 {
+  margin-top: 0;
 }
 
-.footer .mdl-mega-footer--bottom-section {
-  position: relative;
+.contact-card > .mdl-card__actions {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
 }
 
-.footer .mdl-mega-footer--bottom-section a {
-  margin-right: 2em;
+.contact-card > .mdl-card__actions > .material-icons {
+  padding-right: 10px;
 }
 
-.footer .mdl-mega-footer--right-section a .material-icons {
-  position: relative;
-  top: 6px;
+.contact-card > .mdl-card__title,
+.contact-card > .mdl-card__actions,
+.contact-card > .mdl-card__actions > .mdl-button {
+  color: #fff;
 }
 
 .link-menu:hover {
   cursor: pointer;
+}
+
+.organizer-avatar {
+  cursor: pointer;
+  float: left;
+  background-color: transparent;
+  margin-right: 20px;
+}
+
+.organizer-link {
+  cursor: pointer;
+}
+
+.section-body {
+  margin-left: 12px;
+}
+
+.card-icon {
+  margin-right: 20px;
+  width: 40px;
 }
 
 /**** Mobile layout ****/
