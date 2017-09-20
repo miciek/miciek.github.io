@@ -73,11 +73,11 @@ The talk is divided into 3 parts. In the first part you will learn how to create
   - *[Topconf Tallinn](http://topconf.com/tallinn-2016/) (November 2016)*
   - *[Voxxed Days Belgrade](https://belgrade.voxxeddays.com/) (September 2016)* [[Video](https://www.youtube.com/watch?v=u7Ab7UDfWdQ)]
   - *[JavaOne](https://www.oracle.com/javaone/) (September 2016)*
-  - *[SF Scala meetup](http://www.meetup.com/SF-Scala/) (September 2016)* [[Video](https://www.youtube.com/watch?v=yRmqKuC1WYU)]
+  - *[SF Scala meetup](http://www.meetup.com/SF-Scala/) (September 2016)* [[Video](https://www.youtube.com/watch?v=VZWxFDqDV28)]
   - *[Scalapolis](http://www.scalapolis.pl) (September 2016)*
   - *[Devoxx UK](http://www.devoxx.co.uk) (June 2016)* [[Video](https://www.youtube.com/watch?v=iKTFalVfoSU)]
   - *[Geecon](http://geecon.org) (May 2016)* [[Video](https://vimeo.com/185781741)]
-  - *[Meet.js Summit](http://summit.meetjs.pl) (March 2016)* [short version] [[Video](https://www.youtube.com/watch?v=JdOpkQ-dMxo/) [Slides](https://speakerdeck.com/miciek/building-snake-using-streams)]
+  - *[Meet.js Summit](http://summit.meetjs.pl) (March 2016)* [short version] [[Video](https://www.youtube.com/watch?v=JdOpkQ-dMxo/)]
   - *Kraków Scala User Group (February 2016)* [[Video PL](https://www.youtube.com/watch?v=MKEbuLsah50)]
   - *[Boiling Frogs](http://www.boilingfrogs.pl) (January 2016)* [[Video PL](https://www.youtube.com/watch?v=J8n8j0_6wYU)]
 
