@@ -1,7 +1,7 @@
 # Site settings
-title:       Polyglot Programmer's Blog
+title:       Michał Płachta's Blog
 author:      Michał Płachta
-description: "I write mostly to remember things better. I do Scala, JavaScript and a little bit of many others."
+description: "I write mostly to remember things better. I do Scala, Elm, JavaScript and a little bit of many others."
 url:         "http://michalplachta.com"
 
 gems: [jekyll-paginate]
