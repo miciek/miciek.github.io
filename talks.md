@@ -18,7 +18,7 @@ Let’s put ourselves in John's shoes and try to decide what is the best solutio
 ##### Given at
   - *[BBQ4.IT](http://bbq4.it/) (September 2017)*
   - *[Confitura](https://2017.confitura.pl/) (July 2017)* [[Video PL](https://www.youtube.com/watch?v=O3MB56R_eqw)]
-  - *[Quality Excites](https://qualityexcites.pl/) (June 2017)*
+  - *[Quality Excites](https://qualityexcites.pl/) (June 2017)* [[Video PL](https://www.youtube.com/watch?v=19G0Iqz24g8)]
   - *[Boiling Frogs](http://www.boilingfrogs.pl) (February 2017)* [[Video PL](https://www.youtube.com/watch?v=sQ88r0Ri3M0)]
 
 ### Pragmatist's Guide to Functional Geekery
