@@ -6,6 +6,19 @@ permalink: /talks/
 
 You can see all my past and future speaking gigs at [my Lanyrd profile page](http://lanyrd.com/profile/miciek-2071/). Here is the list of my talks with videos and slides (where available):
 
+### Freestyle, Free & Tagless: Separation of Concerns on Steroids
+You will learn how to cut your applications into isolated, independent pieces using Freestyle library with free monads or tagless final style. The session is based on a multiplayer, purely functional version of Prisoner’s Dillema.
+
+Our applications frequently consist of business logic, communication, persistence, caches & logging. We always want to keep them apart and reason about each of them individually. However, this is very difficult to achieve in practice.
+
+Enter free monad. It lets us decouple those concerns by dividing our program into algebras and interpreters. I will show you an application built on top of free monad in Scala & Cats. You will learn how to create pure & declarative DSLs, side-effecting interpreters and how to use them together. Then I will introduce Freestyle library and show how it makes the code more concise. At the end I will compare the free monad approach to another technique used to decouple concerns: final tagless.
+
+  - [Slides](https://speakerdeck.com/miciek/freestyle-free-and-tagless-separation-of-concerns-on-steroids)
+  - [Code](https://github.com/miciek/free-prisoners)
+
+##### Given at
+  - *[Scala eXchange](https://skillsmatter.com/conferences/8784-scala-exchange-2017) (December 2017)* [[Video](https://skillsmatter.com/skillscasts/10961-freestyle-free-and-tagless-separation-of-concerns-on-steroids)]
+
 ### Developer on Detox
 Let's meet John Craft - a great software craftsman. Today is his last day at work before long holidays. John has just given his functionality to review and wants to leave at 6:00 PM.
 
