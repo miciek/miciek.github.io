@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Best Scala talks I've seen in 2016"
-summary: 
 tags: scala talks summary functional doobie typeclass type-level shapeless
 ---
 
