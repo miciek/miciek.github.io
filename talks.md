@@ -37,9 +37,9 @@ Let’s put ourselves in John's shoes and try to decide what is the best solutio
 ### Pragmatist's Guide to Functional Geekery
 Basic functional concepts like immutable data, second-order functions, lambdas and function composition can already be found in the modern programmer’s toolkit. 
 
-During this talk you will learn about more advanced functional concepts and how they can solve real problems. I will talk about pattern matching, algebraic data types, type classes, functional abstractions and folding. 
+During this talk you will learn about more advanced functional concepts and how they can solve real problems. I will talk about pattern matching, algebraic data types, functional abstractions, folding and property-based tests. 
 
-I will show you a practical example written using today’s Java functional constructs and build up from there. I will use only JVM-based languages to show yo u how they can improve the code, make it more maintainable and testable. 
+I will show you a practical example written using today’s Java functional constructs and build up from there. I will use only Java & Vavr, which can improve the code, make it more maintainable and testable. 
 
   - [Slides](https://speakerdeck.com/miciek/pragmatists-guide-to-functional-geekery)
   - [Code](https://github.com/miciek/galactic-twitter)
