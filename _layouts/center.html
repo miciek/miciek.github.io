@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 {% include head.html %}
-<body>
+<body class="site{% if site.animated %} animated fade-in-down{% endif %}">
+    {% if site.google_tag_manager %}
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.google_tag_manager }}"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    {% endif %}
   <div class="site-wrap center">
     {% include header.html %}
 
