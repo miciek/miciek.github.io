@@ -16,7 +16,8 @@ a:hover {
 
 pre,
 code {
-  background-color: $lighter-gray;
+  color: $inline-code-color;
+  background-color: $inline-code-background-color;
   border-radius: $border-radius;
 }
 

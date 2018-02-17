@@ -2,15 +2,13 @@ pre,
 pre code {
   background-color: transparent;
   border-radius: $pre-border-radius;
+  color: $pre-code-color;
 }
 
 pre,
 code {
   font-family: $monospace-font-family;
-}
-
-code {
-  color: #7a7a7a;
+  font-size: $pre-font-size;
 }
 
 pre {
@@ -19,11 +17,6 @@ pre {
   overflow-x: scroll;
   margin-bottom: 0.88em;
   background-color: $pre-background-color;
-}
-
-.highlight .p {
-  font-size: 1.125rem;
-  line-height: 1;
 }
 
 pre {
