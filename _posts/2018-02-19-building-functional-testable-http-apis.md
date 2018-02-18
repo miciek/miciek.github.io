@@ -1,6 +1,8 @@
 ---
 layout: post
 title: "Building functional & testable HTTP APIs"
+summary: "This post introduces two simple functional programming techniques that help us build web apps from separated concerns: functions as parameters and type parameters. All code snippets come from real implementation of a Pac-Man web server."
+image: /images/building-functional-testable-http-apis/summary.png
 tags: scala beginner functional-programming http api architecture akka-http separation-of-concerns pac-man
 published: false
 ---
