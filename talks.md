@@ -17,6 +17,7 @@ Enter free monad. It lets us decouple those concerns by dividing our program int
   - [Code](https://github.com/miciek/free-prisoners)
 
 ##### Given at
+  - *[Kraków Scala User Group](http://www.meetup.com/Krakow-Scala-User-Group/) (February 2018)* 
   - *[Scala eXchange](https://skillsmatter.com/conferences/8784-scala-exchange-2017) (December 2017)* [[Video](https://skillsmatter.com/skillscasts/10961-freestyle-free-and-tagless-separation-of-concerns-on-steroids)]
 
 ### Developer on Detox
