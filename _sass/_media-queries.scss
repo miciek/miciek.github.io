@@ -1,4 +1,9 @@
 @media screen and (min-width: $viewport-min) {
+  h1,
+  .h1 {
+    font-size: $h1-small;
+  }
+
   pre,
   code {
     font-size: $pre-font-size-small;
@@ -8,11 +13,6 @@
 @media screen and (min-width: $viewport-small) {
   html {
     font-size: 16px;
-  }
-
-  h1,
-  .h1 {
-    font-size: $h1;
   }
 
   .site-header {
@@ -49,16 +49,16 @@
   .social-icons-right {
     text-align: right;
   }
-
-  pre,
-  code {
-    font-size: $pre-font-size-small;
-  }
 }
 
 @media screen and (min-width: $viewport-medium) {
   html {
     font-size: 18px;
+  }
+
+  h1,
+  .h1 {
+    font-size: $h1-medium;
   }
 
   pre,
@@ -70,6 +70,11 @@
 @media screen and (min-width: $viewport-large) {
   html {
     font-size: 20px;
+  }
+
+  h1,
+  .h1 {
+    font-size: $h1;
   }
 
   pre,
