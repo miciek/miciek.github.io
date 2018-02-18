@@ -179,19 +179,19 @@ Whenever you are naming a concept, you need to choose a name that will minimise 
 ### Maybe we should use abbreviations?
 Takang and others run an experiment to test the following hypothesis: *"programs that contain 'full' identifier names are more understandable than those with abbreviated identifier names"*<sup>[7](#program-comprehensibility)</sup>. However, quantitative data collected doesn't support this hypothesis. Binkley and others shed some light on this discovery by presenting the following two code snippets<sup>[6](#identifier-length)</sup>. Which one do you think takes longer to process?
 
-{% highlight js %}
+```javascript
 distance_between_abscissae = first_abscissa-second_abscissa
 distance_between_ordinates = first_ordinate-second_ordinate
 cartesian_distance = square_root(
   distance_between_abscissae * distance_between_abscissae
   + distance_between_ordinates * distance_between_ordinates)
-{% endhighlight %}
+```
 
-{% highlight js %}
+```javascript
 dx = x1 - x2
 dy = y1 - y2
 dist = sqrt(dx * dx + dy * dy)
-{% endhighlight %}
+```
 
 In a different paper Lawrie and others conclude that *"abbreviations are just as useful as the full-words"*<sup>[8](#effective-identifier)</sup>. However, please remember that we need to use only generally known abbreviations, like `dist` for distance, `len` for length and `char` for character. When you use `char` as an abbreviation for `characteristic`, the above conclusion doesn't hold.
 

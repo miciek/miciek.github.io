@@ -16,11 +16,11 @@ This web service is going to define one endpoint, which will be hit each time a 
 
 `GET /junctions/<junctionId>/decisionForContainer/<containerId>` returns
 
-{% highlight json %}
+```json
 {
   "targetConveyor": "<conveyorId>"
 }
-{% endhighlight %}
+```
 
 Before we start implementation, I'd like to point out some assumptions:
 
@@ -38,19 +38,19 @@ We will use plain Akka, no additional extensions, especially no clustering (yet)
 ## Step 0: Defining domain and internal API
 Let's define what language our components (actors) will use to communicate and how our domain will be modeled. This can be easily represented using Scala case classes:
 
-{% highlight scala %}
+```scala
 object Domain {
   case class Junction(id: Int)
 
   case class Container(id: Int)
 }
-{% endhighlight %}
+```
 
 We have only two domain objects. One represents a `Junction`, the other one represents a `Container`.
 
 Our service won't receive any JSON data, it will just return JSON object: `Go(targetConveyor)`. It will be automatically marshaled into JSON thanks to the implicit default conversion defined in its companion object:
 
-{% highlight scala %}
+```scala
 object Messages {
   case class Go(targetConveyor: String)
 
@@ -58,13 +58,13 @@ object Messages {
     implicit val goJson = jsonFormat1(Go.apply)
   }
 }
-{% endhighlight %}
+```
 
 
 ## Step 1: Creating REST Interface layer
 Now it's time to code something real. To implement the HTTP service we will use `spray-http` with `spray-json`. Our service will only define one endpoint and, based on the passed parameters, it will call our business logic function and return the result wrapped in `Go` object.
 
-{% highlight scala %}
+```scala
 class RestInterface(exposedPort: Int) extends Actor with HttpServiceBase with ActorLogging {
   val route: Route = {
     path("junctions" / IntNumber / "decisionForContainer" / IntNumber) { (junctionId, containerId) =>
@@ -85,7 +85,7 @@ class RestInterface(exposedPort: Int) extends Actor with HttpServiceBase with Ac
   implicit val system = context.system
   IO(Http) ! Http.Bind(self, interface = "0.0.0.0", port = exposedPort)
 }
-{% endhighlight %}
+```
 
 I defined an actor which would be handling HTTP Requests. Inside this actor I created a `route` which is constructed from nested `Directives`.
 
@@ -95,18 +95,18 @@ I defined an actor which would be handling HTTP Requests. Inside this actor I cr
 
 Right now we have almost everything we need to do our first test run. The only missing bit is the entry point for the application.
 
-{% highlight scala %}
+```scala
 object SingleNodeApp extends App {
   implicit val system = ActorSystem("sorter")
   system.actorOf(RestInterface.props(8080))
 }
-{% endhighlight %}
+```
 
 
 
 Let's run this application and see how it works.
 
-{% highlight bash %}
+```bash
 ± % http localhost:8080/junctions/2/decisionForContainer/3
 HTTP/1.1 200 OK
 Content-Length: 36
@@ -117,7 +117,7 @@ Server: spray-can/1.3.3
 {
     "targetConveyor": "CVR_2_9288"
 }
-{% endhighlight %}
+```
 
 We see that after scanning container #3 on junction #2, our service made a decision to push the container onto conveyor `CVR_2_9288`. The current architecture looks like this:
 
@@ -133,7 +133,7 @@ Remember that numbers presented in this section may (and will) differ depending 
 ### Note about constraining Akka
 In order for all of our tests to be meaningful we will need to constraint Akka. I am using a 4-core processor. For each running Actor System, we will constraint the parallelism of its default `MessageDispatcher` to 2. This will allow us to simulate a service which struggles to get resources.
 
-{% highlight json %}
+```json
 actor {
   provider = "akka.cluster.ClusterActorRefProvider"
 
@@ -145,28 +145,28 @@ actor {
     }
   }
 }
-{% endhighlight %}
+```
 
 ### Testing our first implementation
 Now it's time to test what we currently have.
 
 `URLs.txt`:
-{% highlight bash %}
+```bash
 http://127.0.0.1:8080/junctions/1/decisionForContainer/1
 http://127.0.0.1:8080/junctions/2/decisionForContainer/4
 http://127.0.0.1:8080/junctions/3/decisionForContainer/5
 http://127.0.0.1:8080/junctions/4/decisionForContainer/2
 http://127.0.0.1:8080/junctions/5/decisionForContainer/7
-{% endhighlight %}
+```
 
-{% highlight bash %}
+```bash
 ± % cat URLs.txt | parallel -j 5 'ab -ql -n 2000 -c 1 -k {}' | grep 'Requests per second'
 Requests per second:    34.78 [#/sec] (mean)
 Requests per second:    34.22 [#/sec] (mean)
 Requests per second:    33.77 [#/sec] (mean)
 Requests per second:    33.82 [#/sec] (mean)
 Requests per second:    33.98 [#/sec] (mean)
-{% endhighlight %}
+```
 
 We defined our 5 URLs (one for each junction) to be called in parallel, and each of them:
 
@@ -183,18 +183,18 @@ We just have one actor (= one thread) that sequentially makes a decision for all
 
 Firstly let's add a new message to our `Messages`.
 
-{% highlight scala %}
+```scala
 object Messages {
   case class WhereShouldIGo(junction: Junction, container: Container)
   // ...
 }
-{% endhighlight %}
+```
 
 The message `WhereShouldIGo` will be sent to the actor responsible for making a decision.
 
 The decider actor will be very simple. It should be able to receive message `WhereShouldIGo` and reply with `Go` based on the logic that we have in the `whereShouldContainerGo` function.
 
-{% highlight scala %}
+```scala
 class SortingDecider extends Actor with ActorLogging {
   def receive: Receive = {
     case WhereShouldIGo(junction, container) => {
@@ -204,11 +204,11 @@ class SortingDecider extends Actor with ActorLogging {
     }
   }
 }
-{% endhighlight %}
+```
 
 Now we need to modify our `RestInterface` to take one `decider` actor as dependency and use it whenever a decision needs to be made.
 
-{% highlight scala %}
+```scala
 class RestInterface(decider: ActorRef, exposedPort: Int) extends Actor with HttpServiceBase with ActorLogging {
   val route: Route = {
     path("junctions" / IntNumber / "decisionForContainer" / IntNumber) { (junctionId, containerId) =>
@@ -225,29 +225,29 @@ class RestInterface(decider: ActorRef, exposedPort: Int) extends Actor with Http
 
   // ...
 }
-{% endhighlight %}
+```
 
 Let's pass this actor to our `RestInterface` during construction phase.
 
-{% highlight scala %}
+```scala
 object SingleNodeApp extends App {
   implicit val system = ActorSystem("sorter")
 
   val decider = system.actorOf(Props[SortingDecider])
   system.actorOf(Props(classOf[RestInterface], decider, 8080))
 }
-{% endhighlight %}
+```
 
 What have we gained by introducing the actor to just wrap a function call? Let's check.
 
-{% highlight bash %}
+```bash
 ± % cat URLs.txt | parallel -j 5 'ab -ql -n 2000 -c 1 -k {}' | grep 'Requests per second'
 Requests per second:    34.49 [#/sec] (mean)
 Requests per second:    34.49 [#/sec] (mean)
 Requests per second:    34.49 [#/sec] (mean)
 Requests per second:    34.50 [#/sec] (mean)
 Requests per second:    34.52 [#/sec] (mean)
-{% endhighlight %}
+```
 
 Nothing, we gained nothing. Our code is still sequential and we added yet another layer of abstraction. But we are not done yet.
 
@@ -256,7 +256,7 @@ We need to create another layer: an actor that will create `SortingDeciders` per
 
 ![One actor per junction + routing](/images/scalability-using-sharding-from-akka-cluster/step3.png)
 
-{% highlight scala %}
+```scala
 class DecidersGuardian extends Actor {
   def receive = {
     case m: WhereShouldIGo =>
@@ -265,28 +265,28 @@ class DecidersGuardian extends Actor {
       actor forward m
   }
 }
-{% endhighlight %}
+```
 
 Let's add our new `DecidersGuardian` actor as a dependency for `RestInterface`:
-{% highlight scala %}
+```scala
 object SingleNodeApp extends App {
   implicit val system = ActorSystem("sorter")
 
   val decider = system.actorOf(Props[DecidersGuardian])
   system.actorOf(Props(classOf[RestInterface], decider, 8080))
 }
-{% endhighlight %}
+```
 
 Right now, when our `RestInterface` gets 2 messages for different junctions, it will forward them to two different actors and they will be able to make decisions in parallel. Therefore, we should get a substantial improvement:
 
-{% highlight bash %}
+```bash
 ± % cat URLs.txt | parallel -j 5 'ab -ql -n 2000 -c 1 -k {}' | grep 'Requests per second'
 Requests per second:    67.36 [#/sec] (mean)
 Requests per second:    69.03 [#/sec] (mean)
 Requests per second:    67.75 [#/sec] (mean)
 Requests per second:    66.88 [#/sec] (mean)
 Requests per second:    66.28 [#/sec] (mean)
-{% endhighlight %}
+```
 
 ## Scalability testing
 Until now, we have been concerned only about the performance of our service. Performance is how fast something can be done in terms of time. `Requests per second` metric that we have been using so far is a good example. So what's the difference between performance and scalability?
@@ -311,7 +311,7 @@ There are just two steps that we need to do in order to shard `SortingDecider`. 
 
 Both functions are called each time a `ShardRegion` receives a message. First a `extractShardId` function is called and it returns a shard id. Then Akka checks on which node this particular shard is kept. If this is another node, the message is forwarded there without additional work from our side. If this is the right node, `extractEntityId` function is evaluated. It returns entity id, which is an identifier of the particular actor. The message is forwarded to the actor and is processed there. If the actor doesn't exist, it is automatically created. In our case we will have one actor per junction, so our `extractEntityId` function will return just junction id. This is how it looks in the code:
 
-{% highlight scala %}
+```scala
 object SortingDecider {
   def props = Props[SortingDecider]
 
@@ -331,11 +331,11 @@ object SortingDecider {
 class SortingDecider extends Actor {
   // ...
 }
-{% endhighlight %}
+```
 
 Second step is to define our new `App` that will set up sharding based on the defined `SortingDecider` companion object. We will reuse all other actors we have created (including `RestInterface`).
 
-{% highlight scala %}
+```scala
 object ShardedApp extends App {
   val config = ConfigFactory.load("sharded")
   val system = ActorSystem(config getString "clustering.cluster.name", config)
@@ -350,49 +350,49 @@ object ShardedApp extends App {
   val decider = ClusterSharding(system).shardRegion(SortingDecider.shardName)
   system.actorOf(Props(classOf[RestInterface], decider, config getInt "application.exposed-port"))
 }
-{% endhighlight %}
+```
 
 ### Running one node
 Let's run just one node. The output of the performance test should be the same as in our manual solution. Let's check whether this is true.
 
-{% highlight bash %}
+```bash
 java -jar target/SortingDecider-1.0-SNAPSHOT-uber.jar
-{% endhighlight %}
+```
 
-{% highlight bash %}
+```bash
 ± % cat URLs.txt | parallel -j 5 'ab -ql -n 2000 -c 1 -k {}' | grep 'Requests per second'
 Requests per second:    68.39 [#/sec] (mean)
 Requests per second:    66.30 [#/sec] (mean)
 Requests per second:    65.99 [#/sec] (mean)
 Requests per second:    64.86 [#/sec] (mean)
 Requests per second:    64.54 [#/sec] (mean)
-{% endhighlight %}
+```
 
 As you see, we get a similar `Requests per second` values, because we still use just one JVM instance (= one computer). In this scenario, the application can only scale up.
 
 ### Running two nodes
 When we run the second node, it should automatically form a cluster with the first one and then use both nodes to create `SortingDecider` actors. This should also make our application process more requests. We use the same jar to run the second node, we just need to redefine exposed web interface port and Akka Cluster node port:
 
-{% highlight bash %}
+```bash
 java -Dapplication.exposed-port=8081 -Dclustering.port=2552 -jar target/SortingDecider-1.0-SNAPSHOT-uber.jar
-{% endhighlight %}
+```
 
 Before we execute our test, we also need to set up a simple round-robin based load balancer:
 
-{% highlight bash %}
+```bash
 haproxy -f src/main/resources/haproxy.conf
-{% endhighlight %}
+```
 
 This will run a server on port `8000` and just forward all the traffic to both `8080` (our first node) and `8081` (our second node) interchangeably. In our last test, we will use a different `URLs` file (`shardedURLs.txt`) to accomodate for this change.
 
-{% highlight bash %}
+```bash
 ± % cat shardedURLs.txt | parallel -j 5 'ab -ql -n 2000 -c 1 -k {}' | grep 'Requests per second'
 Requests per second:    106.80 [#/sec] (mean)
 Requests per second:    108.15 [#/sec] (mean)
 Requests per second:    100.60 [#/sec] (mean)
 Requests per second:    99.92 [#/sec] (mean)
 Requests per second:    100.07 [#/sec] (mean)
-{% endhighlight %}
+```
 
 As we see, we have improved the performance noticeably.
 

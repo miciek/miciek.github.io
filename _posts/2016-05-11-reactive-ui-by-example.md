@@ -30,7 +30,7 @@ Let's create a web Snake game. This won't take long, I promise. About 100 lines 
 ### Vector
 In order to do anything productive, we need to create a Vector class which will hold our 2D positions and sizes.
 
-{% highlight js %}
+```javascript
 // Vector.js
 
 export default class Vector {
@@ -62,12 +62,12 @@ export default class Vector {
     return new Vector(pos.y, -pos.x)
   }
 }
-{% endhighlight %}
+```
 
 ### Board component
 Now we will create our first *React* component, which will be called... `Board`!
 
-{% highlight js %}
+```javascript
 // Board.jsx
 
 export default class Board extends React.Component {
@@ -76,22 +76,22 @@ export default class Board extends React.Component {
               x {this.props.size.y}</h1>
   }
 }
-{% endhighlight %}
+```
 
 and main.jsx which will bootstrap our app:
 
-{% highlight js %}
+```javascript
 // main.jsx
 
 React.render(<Board size={new Vector(20, 20)} />,
              document.getElementById("app"))
-{% endhighlight %}
+```
 
 Let's run `npm start` and see that right now the browser displays:
 
-{% highlight html %}
+```html
 This is board 20 x 20
-{% endhighlight %}
+```
 
 Not the coolest thing, but let's see what's happening inside. `main.jsx` is an entry point to the application. It defines the root React component that will contain all other components and will be rendered inside our empty DOM element called "app" which is defined inside `index.html` file. The `Board` component gets one property called `size` which is a `Vector(20, 20)`. That means that our board will have 20 rows and 20 columns.
 
@@ -99,7 +99,7 @@ To render the Board, React engine calls `render` function. It has access to the 
 
 Let's make our board fancier. We will use Flexbox to generate a grid and each cell will have one of three colors: grey if empty, green if snake and red if fruit. These are our styles:
 
-{% highlight css %}
+```css
 /* style.css */
 
 .board {
@@ -127,11 +127,11 @@ Let's make our board fancier. We will use Flexbox to generate a grid and each ce
 .fruit {
   background-color: #ff5605;
 }
-{% endhighlight %}
+```
 
 As you see, thanks to Flexbox we are able to just define some divs and the rest will be taken care of by the browser. Let's see how!
 
-{% highlight js %}
+```javascript
 // Board.jsx
 
 export default class Board extends Component {
@@ -165,7 +165,7 @@ export default class Board extends Component {
     return <div className={style.board}>{rows}</div>
   }
 }
-{% endhighlight %}
+```
 
 There are just 2 things going on here. The first one is called `propTypes`. The properties that are passed to our component (like `size`) can be "type-checked" by React. Here, we are saying that `size` is a `Vector`, `snakePositions` is an array of `Vectors`, and fruitPosition is another `Vector`. All of them are required. If parent component doesn't pass any of them or passes an object with a wrong type, React will show us a warning.
 
@@ -176,7 +176,7 @@ That's it! We have our static board, which has a very nice API (3 properties tha
 ### SnakeGame component
 `SnakeGame` component will define our game logic and will delegate drawing to its child component: `Board`. Let's first define all `props` and our `render` function:
 
-{% highlight js %}
+```javascript
 export default class SnakeGame extends Component {
   static propTypes = {
     boardSize: PropTypes.instanceOf(Vector).isRequired
@@ -209,7 +209,7 @@ export default class SnakeGame extends Component {
     )
   }
 }
-{% endhighlight %}
+```
 
 There is one new thing here: `state`. You can treat `state` as internal props. They behave similarly: if `state` or `props` change, the `render` function is called. The only difference is that `props` are passed from the outside and `state` can only be set inside the component.
 
@@ -220,7 +220,7 @@ We defined four props: `boardSize`, which must be defined, and 3 initial game pr
 ### Snake logic using streams
 Let's define our first streams! We will use [Bacon.js](https://baconjs.github.io/) as our streams library, but any other streams library would suffice. Their APIs are also very similar so learning one API is often enough. Each *stream operator* that I am going to introduce will have a link to a wonderful [RxMarbles website](http://rxmarbles.com/) where you can interactively learn how a particular operator works.
 
-{% highlight js %}
+```javascript
 export default class SnakeGame extends Component {
   // ...
 
@@ -235,7 +235,7 @@ export default class SnakeGame extends Component {
 
   // ...
 }
-{% endhighlight %}
+```
 
 We created 4 streams:
 
@@ -248,7 +248,7 @@ It's worth noting that both `lefts` and `rights` streams are build on top the sa
 
 Let's use the streams we've just created to do some magic.
 
-{% highlight js %}
+```javascript
 export default class SnakeGame extends Component {
   // ...
 
@@ -272,7 +272,7 @@ export default class SnakeGame extends Component {
 
   // ...
 }
-{% endhighlight %}
+```
 
 We created 3 additional streams using two stream operators: [map](http://rxmarbles.com/#map) and [merge](http://rxmarbles.com/#merge):
 
@@ -291,7 +291,7 @@ We created 3 additional streams using two stream operators: [map](http://rxmarbl
 ### Eating and scoring
 Now we need to connect all the dots and add eating and scoring logic using the streams we have already defined. Please pay attention how much reusability we have here. We are building new functionalities using already defined streams.
 
-{% highlight js %}
+```javascript
 export default class SnakeGame extends Component {
   // ...
 
@@ -314,7 +314,7 @@ export default class SnakeGame extends Component {
 
   // ...
 }
-{% endhighlight %}
+```
 
 Let's dive into details. The code above makes our snake bigger by using `scan` operator again. It accumulates values from `snakeHeadPositions` into an array of last `initialSnakeLength + score` elements. This array is then passed to our `Board` component and rendered.
 
