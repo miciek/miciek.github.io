@@ -6,6 +6,7 @@ description: "I write mostly to remember things better. I do Scala, Elm, JavaScr
 baseurl:     ""
 url:         "http://michalplachta.com"
 date_format: "%b %-d, %Y"
+future: false
 header_pages:
  - about.md
  - talks.md
