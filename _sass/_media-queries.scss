@@ -1,3 +1,10 @@
+@media screen and (min-width: $viewport-min) {
+  pre,
+  code {
+    font-size: $pre-font-size-small;
+  }
+}
+
 @media screen and (min-width: $viewport-small) {
   html {
     font-size: 16px;
@@ -42,17 +49,32 @@
   .social-icons-right {
     text-align: right;
   }
+
+  pre,
+  code {
+    font-size: $pre-font-size-small;
+  }
 }
 
 @media screen and (min-width: $viewport-medium) {
   html {
     font-size: 18px;
   }
+
+  pre,
+  code {
+    font-size: $pre-font-size-medium;
+  }
 }
 
 @media screen and (min-width: $viewport-large) {
   html {
     font-size: 20px;
+  }
+
+  pre,
+  code {
+    font-size: $pre-font-size-large;
   }
 }
 
