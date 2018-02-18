@@ -1,6 +1,7 @@
 # Site settings
 title:       Michał Płachta's Blog
 author:      Michał Płachta
+email:       miciek@gmail.com
 description: "I write mostly to remember things better. I do Scala, Elm, JavaScript and a little bit of many others."
 baseurl:     ""
 url:         "http://michalplachta.com"
@@ -54,7 +55,6 @@ facebook_appid:
 facebook_comments_number: 10
 
 # Social icons
-email:
 github_username: miciek
 reddit_username:
 bitbucket_username:
