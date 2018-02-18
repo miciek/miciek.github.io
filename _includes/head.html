@@ -56,10 +56,12 @@
     <meta property="og:locale" content="{{ site.text.og_locale }}">
     <meta property="og:type" content="article">
     <meta property="og:title" content="{% if page.title %}{{ page.title | xml_escape }}{% else %}{{ site.title | xml_escape }}{% endif %}">
-    <meta property="og:description" content="{% if page.description %}{{ page.description | xml_escape }}{% else %}{{ site.description | xml_escape }}{% endif %}">
+    <meta property="og:description" content="{% if page.summary %}{{ page.summary | xml_escape }}{% else %}{{ site.description | xml_escape }}{% endif %}">
     <meta property="og:url" content="{{ site.url }}{{ page.url }}">
     <meta property="og:site_name" content="{{ site.title | xml_escape }}">
-    {% if site.post_preview_image %}
+    {% if page.image %}
+    <meta property="og:image" content="{{ site.url }}{{ page.image }}">
+    {% else %}
     <meta property="og:image" content="{{ site.url }}/images/me.jpg">
     {% endif %}
 
@@ -72,7 +74,9 @@
     <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}" />
     <meta name="twitter:description" content="{% if page.summary %}{{ page.summary }}{% else %}{{ site.description }}{% endif %}" />
     <meta name="twitter:url" content="{{ site.url }}{{ page.url }}" />
-    {% if site.post_preview_image %}
+    {% if page.image %}
+    <meta name="twitter:image" content="{{ site.url }}{{ page.image }}" />
+    {% else %}
     <meta name="twitter:image" content="{{ site.url }}/images/me.jpg" />
     {% endif %}
 
