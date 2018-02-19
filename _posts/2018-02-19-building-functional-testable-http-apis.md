@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "Building functional & testable HTTP APIs"
-summary: "Learn about two functional techniques that help in separation of concerns: functions as parameters and type parameters. All code snippets come from real implementation of a Pac-Man web server."
+summary: "Learn about two functional techniques that help in separation of concerns: functions as parameters and type parameters."
 image: /images/building-functional-testable-http-apis/summary.png
-tags: scala beginner functional-programming http api architecture akka-http separation-of-concerns pac-man
+tags: scala beginner functional-programming api architecture akka-http separation-of-concerns pac-man
 ---
 
 Majority of us intuitively know what *separation of concerns* is. However, knowing something and using it in practice are two different things. Developers in many projects are drowning in *entangled* spaghetti-like codebases. We need better tools that force us to think about the responsibilities more often. In this post I will introduce two simple functional techniques that will help us step up the game: **functions as parameters** and **type parameters**. 
