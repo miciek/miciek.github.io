@@ -1,10 +1,9 @@
 ---
 layout: post
 title: "Building functional & testable HTTP APIs"
-summary: "This post introduces two simple functional programming techniques that help us build web apps from separated concerns: functions as parameters and type parameters. All code snippets come from real implementation of a Pac-Man web server."
+summary: "Learn about two functional techniques that help in separation of concerns: functions as parameters and type parameters. All code snippets come from real implementation of a Pac-Man web server."
 image: /images/building-functional-testable-http-apis/summary.png
 tags: scala beginner functional-programming http api architecture akka-http separation-of-concerns pac-man
-published: false
 ---
 
 Majority of us intuitively know what *separation of concerns* is. However, knowing something and using it in practice are two different things. Developers in many projects are drowning in *entangled* spaghetti-like codebases. We need better tools that force us to think about the responsibilities more often. In this post I will introduce two simple functional techniques that will help us step up the game: **functions as parameters** and **type parameters**. 
@@ -90,6 +89,8 @@ final case class PacManStateResponse(pacMan: PacMan)
 
 We have defined several `routes` using [Akka HTTP](https://doc.akka.io/docs/akka-http/current/index.html) Route DSL and that looks completely fine. What's not fine is how much the HTTP module knows about other concerns in the application, namely `var state`, `GameEngine` and `GameState`. Let's analyse these problems carefully.
 
+![Standard approach](/images/building-functional-testable-http-apis/before.png)
+
 ### Problems with standard approach
 Firstly, `HttpRoutes` knows everything about how state is implemented. Should HTTP know anything about state? I don't think so, this concern should be separated.
 
@@ -146,15 +147,15 @@ We got rid of the dependency to `GameState` in one place, but we can do even bet
 This is how the code that handles game creation looks like:
 ```scala
 val startedGame: Either[String, GameState] =
-    GameEngine.start(request.gridName, Grid.fromName)
+  GameEngine.start(request.gridName, Grid.fromName)
     
 startedGame match {
-    case Right(game) =>
-      val gameId = state.size
-      state = state + (gameId -> game)
-      complete(StartGameResponse(gameId))
-    case Left(errorMessage) =>
-      complete((StatusCodes.NotFound, errorMessage))
+  case Right(game) =>
+    val gameId = state.size
+    state = state + (gameId -> game)
+    complete(StartGameResponse(gameId))
+  case Left(errorMessage) =>
+    complete((StatusCodes.NotFound, errorMessage))
 }
 ```
 
@@ -233,18 +234,22 @@ object HttpRoutes extends Directives {
 ```
 
 ## Connecting the dots
-So far, so good. We got rid of `GameState` and `GameEngine` dependencies by replacing them with `G` and function parameters in `HttpRoutes`. However, our application still needs both of them to be useful. We need to pass the right arguments when creating the HTTP routes.
+So far, so good. We got rid of `GameState` and `GameEngine` dependencies by replacing them with `G` and function parameters in `HttpRoutes`. However, our application still needs both of them to be useful. We need to pass the right arguments when creating the HTTP routes. Additionally, the application needs to know how to handle the state and since it is a different concern it will be handled by `MultipleGamesAtomicState`[^atomicState].
 
 ```scala
-private val atomicState: MultipleGamesAtomicState = ??? // using CAS operations
+object App extends HttpApp {
+  private val atomicState: MultipleGamesAtomicState = ??? // see footnotes
 
-val route: Route =
+  val route: Route =
     createGameRoute(GameEngine.start(_, Grid.fromName), atomicState.addNewGame) ~
     getGameRoute[GameState](atomicState.getGame, _.pacMan) ~
     ...
+}
 ```
 
 And that's all we need! The above piece of code has responsibility of composing all our other concerns into a usable application.
+
+![Connecting the refactored concerns](/images/building-functional-testable-http-apis/after.png)
 
 ## And better testability for free!
 There is another quick win we've got after doing the aforementioned refactorings. We can test our HTTP layer in total isolation! That means we can have *unit tests* for our endpoints without worrying about state or game logic. For example let's see the test for `getGameRoute` function:
@@ -307,3 +312,4 @@ Functional programming is about composition and separation of concerns. We can u
 [^tarpit]: *"Complexity is the single major difficulty in the successful development of large-scale software systems."* ["Out of the Tarpit"](http://curtclifton.net/papers/MoseleyMarks06a.pdf) - Ben Moseley, Peter Marks
 [^dijkstra]: *"Intelligent thinking is that one is willing to study in depth an aspect of one's subject matter in isolation for the sake of its own consistency"* ["On the role of scientific thought"](https://www.cs.utexas.edu/users/EWD/transcriptions/EWD04xx/EWD447.html) - Edsger Dijkstra
 [^runar]: ["Constraints Liberate, Liberties Constrain"](https://www.youtube.com/watch?v=GqmsQeSzMdw) - Runar Bjarnason
+[^atomicState]: The state is handled by [Monix Atomic](https://monix.io/docs/2x/execution/atomic.html). I will cover this in one of the next posts.
