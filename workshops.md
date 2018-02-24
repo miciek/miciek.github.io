@@ -4,6 +4,24 @@ title: My Workshops
 permalink: /workshops/
 ---
 
+### TDDing Functional Web Apps
+Get some theoretical and practical overview of the TDD approach & Functional Programming by creating a multiplayer Pac-Man game server.
+
+- First steps in Scala and Scalatest.
+- Test Driven Development (baby steps, starting with the game logic and moving towards HTTP).
+- Purely functional approach (separated data and behaviors, no exceptions, ADTs, Options).
+- Modeling using immutable structures.
+- Making impossible states impossible.
+- Using optics to deal with immutable changing data.
+- Using function composition.
+- Using refined types.
+- Using Akka HTTP + Circe.
+- Using Monix Atomic to handle state.
+- Separate concerns by using functions as input parameters.
+
+##### Run at
+  - *[Lambda Days](http://www.lambdadays.org/) (February 2018)*
+
 ### Akka in Scala
 Get some theoretical and practical overview of the actor model and asynchronous programming.
 
