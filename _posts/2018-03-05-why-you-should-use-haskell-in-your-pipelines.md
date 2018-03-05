@@ -60,24 +60,25 @@ I assume you are now somewhat convinced that Haskell _can be_ the tool to use in
 
 Based on the above, I decided to create an average example pipeline, which will look like that:
 
-1. build and test applications in subdirectories,
-1. build Docker image,
-1. deploy locally (kill the old container & run the container using specific port),
-1. wait for the deployment to finish with the correct version,
+1. build applications in subdirectories (`frontend` and `backend`),
+1. build Docker images,
+1. deploy locally (kill the old containers & run new ones using specific port),
+1. verify that deployment has finished with the correct version,
 1. send notification with the result of the pipeline.
 
-The pipeline itself can be encoded as a simple list of steps in Bash:
+Some of the above will be faked as much as possible so that we can stay focused on the real deal: the pipeline scripts. For example, "building" the applications means generating the version and zipping static files, because I didn't want to use any build tool in the example. The pipeline itself can be encoded as a simple list of steps in Bash:
 
 ```bash
 #!/usr/bin/env bash
-./buildAndTest.sh
+
+./buildApps.sh
 ./buildDockerImages.sh
-./deploy.sh
+./deployApps.sh
 ./checkDeployment.sh
 ./notify.sh
 ```
 
-This script, named `bash_pipeline.sh`, is just needed for the purpose of this post and it wouldn't be needed in normal circumstances, because you would encode these steps in a YAML file, e.g. when using [Travis CI](https://travis-ci.org/) or [Gitlab CI](https://about.gitlab.com/features/gitlab-ci-cd/). Configuration of these tools are out of the scope of this blog post, but if you are curious how to use Haskell in one of the above, please have a look at the [companion code repository](https://github.com/miciek/bashing-out-with-haskell).
+This script, named `bash_pipeline.sh`, is only needed for the purpose of this post and it wouldn't be needed in normal circumstances. Normally, we would encode these steps in a YAML file, e.g. when using [Travis CI](https://travis-ci.org/) or [Gitlab CI](https://about.gitlab.com/features/gitlab-ci-cd/). Configuration of these tools are out of the scope of this blog post, but if you are curious how to use Haskell in one of the above, please have a look at the [companion code repository](https://github.com/miciek/bashing-out-with-haskell).
 
 I assume that your pipelines are far more sophisticated than the one above, but I hope this is still enough to show you how Haskell scripts can help even in this simple case.
 
@@ -87,6 +88,10 @@ So what would be the standard Bash approach to our example pipeline?
 
 ## Haskell to the rescue!
 
+### Anatomy of a Haskell script
+
+Second line is Stack specific. It means that it will always use [LTS Haskell 10.8 (ghc-8.2.2)](https://www.stackage.org/lts-10.8) and that the script will not get outdated after years.
+
 ## The Twist: pipeline monitoring
 
 Imagine that we now want to add metrics to our pipeline. We want to know how long do they take, and what are the success and failure ratios for each of the states.
@@ -95,23 +100,38 @@ That means we need to be able to push metrics to Prometheus Push Gateway from ou
 
 ## FAQ
 
-### But you can have functions in Bash!
+#### But you can have functions in Bash!
 
-### Why do I need to learn another language?
+#### Why do I need to learn another language?
 
-### Isn't it all hype forced to us by developers who are always (and will be) bored?
+#### Isn't it all hype forced to us by developers who are always (and will be) bored?
 
-### Bash is the right tool for the job (TM)
+#### Bash is the right tool for the job (TM)
 
-### Python is the right tool for this job (TM)
+#### Python is the right tool for this job (TM)
 
-### Go is the right tool for this job (TM)
+#### Go is the right tool for this job (TM)
 
-### What if I want to quickly change the behavior?
+#### What if I want to quickly change the behavior?
 
-### Isn't it too slow?
+#### Isn't it too slow?
 
-### But why can't I use the language I use for the project?
+#### But why can't I use the language I use for the project?
+
+#### My manager says that this is just a hype and I need to get back to work instead of trying to learn new things.
+
+Well, getting out of the comfort zone is one of the things that make organizations great. Learning new things can potentially benefit the whole organization in different, surprising places. Haskell is a different approach, it is already proven to work. Learning Haskell in a safe environment like pipelines will benefit your team, even when the main project is written using different technology. Haskell-inspired ideas are coming into languages:
+
+* JavaScript (ramda),
+* TypeScript,
+* Elm,
+* PureScript,
+* Scala (scalaz, cats, scalacheck),
+* Java (Vavr),
+* Kotlin,
+* F#.
+
+And many more! Those ideas are similar in different languages. So, if you are a manager and you are reading this, please encourage your team to try Haskell out. They will get frustrated, because it's a new language, unfamiliar language, but this will have real benefits, unlike the "benefits" of learning advanced Bash.
 
 ### But why can't I use my build tool to do all that?
 
