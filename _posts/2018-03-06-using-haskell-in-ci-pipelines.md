@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Why you should use Haskell in your pipelines"
-summary: ""
+title: "Using Haskell in CI pipelines"
+summary: "Learn how to make your CI pipelines robust by replacing Bash scripts with Haskell scripts"
 image: /images/haskell-in-pipelines/summary.png
-tags: haskell ci continuous-delivery devops scripting turtle
+tags: haskell ci continuous-delivery devops scripting turtle bash shell
 published: false
 ---
 
@@ -71,10 +71,10 @@ Some of the above will be faked as much as possible so that we can stay focused 
 ```bash
 #!/usr/bin/env bash
 
-./buildApps.sh
-./buildDockerImages.sh
-./deployApps.sh
-./checkDeployment.sh
+./build_apps.sh
+./build_images.sh
+./deploy_apps.sh
+./check_deployment.sh
 ./notify.sh
 ```
 
@@ -140,6 +140,15 @@ Using plugins, like Docker plugin.
 ## Summary
 
 The main premise however, is that we need to get better at scripting our pipelines. Quick and dirty hacking is no longer a viable option when the product consists of several systems.
+
+## Acknowledgments
+
+This post wouldn't be possible if not for two great websites that allowed me to write _working_ Bash scripts. I am grateful to have met you:
+
+* [Explain Shell](https://explainshell.com)
+* [Stack Overflow](https://stackoverflow.com/)
+
+I did my best to write _readable_ Bash scripts, but I may be biased. So if you think some of the scripts in this post can be written in a nicer way, please let me know. I will happily apply all fixes.
 
 ---
 
