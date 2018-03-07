@@ -30,9 +30,15 @@ One thing is missing. There is no **programming language**. Every tool has its o
 
 And many users choose Bash or Python, because they can get the job done quickly. And they are right. But there's a catch.
 
-The catch is that the scripts need to be maintained and extended. Once a small script that calls `curl`, now a big 200-hundred line beast with many `curls`, `ifs` and `echos`. And no tests.
+The catch is that the scripts need to be maintained and extended. Once a small script that calls `curl`, now a big 200-hundred line beast with many `curls`, `ifs`, `seds` and `awks`. And no tests. This has been enough for majority of us in recent years, but as our infrastructures get bigger, we will need sharper scripting language. Language, which will enable us to:
 
-In Python, the situation is not that bad, but still far from perfect. The thing is that you could, _possibly_, be writing unit tests for your CI Python scripts. And if you do write them, please don't read the rest of the post, because you are doing just fine!
+* handle automatic deployments of many components,
+* build complex quality gates, based on outputs from pipelines of other components,
+* validate API contracts,
+* push pipeline metrics to Prometheus or another monitoring solution,
+* allow to test all those things to avoid regression.
+
+In Python, the situation is not that bad, but still far from perfect. The thing is that you could, _possibly_, be writing unit tests for your CI Python scripts. And if you do write them and have a good coverage, please don't read the rest of the post, because you are doing just fine!
 
 The rest of the post is for you if you write CI scripts in Bash or any other dynamically typed language, you don't have (m)any tests for them, and every time you want to change it, you end up changing a thing and then running, debugging and fixing dozens of problems in your script until it does what you want.
 
@@ -42,9 +48,9 @@ So why do I think Haskell is the right tool for the job? There are several reaso
 
 Haskell has strong types and type inference. Haskell doesn't let you do many things, it makes you rethink the solution when you are adding more features. That's the whole point: to make us more aware of what our scripts are doing.
 
-Haskell can be overwhelming, but in this post I just want to show you a bare minimum, simple Haskell, which helps in majority of cases. You and your team need to decide whether that's enough or you want to go deeper than that.
+And this awareness can't be easily achieved using dynamic, imperative language, because they always promote quick solutions. Haskell development is slower, because its compiler makes you think about each step of the solution, especially when you want to quickly add something. In the world where side-effects are reigning, this can be life saving experience.
 
-The rest of the reasons can be found in FAQ section at the end of this post.
+Haskell can be overwhelming, but in this post I just want to show you a bare minimum, simple Haskell, which helps in majority of cases. You and your team need to decide whether that's enough or you want to go deeper than that.
 
 ## What needs to be done?
 
@@ -82,15 +88,21 @@ This script, named `bash_pipeline.sh`, is only needed for the purpose of this po
 
 I assume that your pipelines are far more sophisticated than the one above, but I hope this is still enough to show you how Haskell scripts can help even in this simple case.
 
-## Bash hacker approach
-
-So what would be the standard Bash approach to our example pipeline?
-
-## Haskell to the rescue!
-
 ### Anatomy of a Haskell script
 
 Second line is Stack specific. It means that it will always use [LTS Haskell 10.8 (ghc-8.2.2)](https://www.stackage.org/lts-10.8) and that the script will not get outdated after years.
+
+## Deathmatch: Bash vs Haskell
+
+Now it's time to do old school face to face. Let's compare our example pipeline written using Bash and Haskell!
+
+I won't bash Bash's readability in this post. It would be easy and sometimes funny... Instead, I want to focus on maintainability of Bash's scripts. It should showcase common problems imperative dynamically typed languages have in side-effect heavy applications.
+
+So what would be the standard Bash approach to our example pipeline?
+
+First bug is already in the first line of the Bash script. And we only get to know it, because [Haskell makes us think about dates](https://two-wrongs.com/haskell-time-library-tutorial).
+
+Second bug is in the way we build the applications by going through directories. Our Bash script works, because there are two hidden directories. Haskell version makes us rethink this strategy by providing a better filter.
 
 ## The Twist: pipeline monitoring
 
