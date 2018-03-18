@@ -4,7 +4,7 @@ title: About me
 permalink: /about/
 ---
 
-I am a polyglot software engineer specialised in developing distributed applications. Also a tea drinker, cyclist & functional programming enthusiast. I love the human component in software projects. I currently work as team leader at <a href="http://ocadotechnology.com">Ocado Technology</a>, where we are building actor-based software for automated warehouses.
+I am a polyglot software engineer specialised in developing distributed applications. Also a tea drinker, cyclist & functional programming enthusiast. I love the human component in software projects. I currently work as team leader at <a href="https://wearerealitygames.com/">Reality Games</a>, where we are building games based on big data.
 
 This is a blog about programming and stuff related to programming and managing software projects. I write mostly to remember things better, but also to share things that fascinate me.
 
