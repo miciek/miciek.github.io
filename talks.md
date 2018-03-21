@@ -49,7 +49,7 @@ I will show you a practical example written using today’s Java functional cons
 ##### Given at
   - *[Devoxx Community Day](http://www.devoxx.pl) (June 2017)*
   - *[Devoxx PL](http://www.devoxx.pl) (June 2017)* [[Video](https://www.youtube.com/watch?v=0o3yJ5HbkAU)]
-  - *[JBCNConf](http://www.jbcnconf.com/2017/) (June 2017)*
+  - *[JBCNConf](http://www.jbcnconf.com/2017/) (June 2017)* [[Video](https://www.youtube.com/watch?v=r9rd86lZCK4)]
   - *[jPrime](http://jprime.io) (May 2017)* [[Video](https://www.youtube.com/watch?v=tMwXjqJtq1Q)]
   - *[Geecon](http://geecon.org) (May 2017)* (no live coding) [[Video](https://www.youtube.com/watch?v=9TDonyktXdY)]
   - *[Devoxx UK](http://www.devoxx.co.uk) (May 2017)* (no live coding) [[Video](https://www.youtube.com/watch?v=3bkb6U5jJbs)]
