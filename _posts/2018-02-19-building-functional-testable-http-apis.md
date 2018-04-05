@@ -6,7 +6,7 @@ image: /images/building-functional-testable-http-apis/summary.png
 tags: scala beginner functional-programming api architecture akka-http separation-of-concerns pac-man
 ---
 
-Majority of us intuitively know what *separation of concerns* is. However, knowing something and using it in practice are two different things. Developers in many projects are drowning in *entangled* spaghetti-like codebases. We need better tools that force us to think about the responsibilities more often. In this post I will introduce two simple functional techniques that will help us step up the game: **functions as parameters** and **type parameters**. 
+Majority of us intuitively know what *separation of concerns* is. However, knowing something and using it in practice are two different things. Developers in many projects are drowning in entangled spaghetti-like codebases. We need better tools that force us to think about the responsibilities more often. In this post I will introduce two simple functional techniques that will help us step up the game: **functions as parameters** and **type parameters**. 
 
 To show you how these tools can help us create separated concerns, let's use a practical example. We are going to create a Pac-Man web server.
 
@@ -94,7 +94,7 @@ We have defined several `routes` using [Akka HTTP](https://doc.akka.io/docs/akka
 ### Problems with standard approach
 Firstly, `HttpRoutes` knows everything about how state is implemented. Should HTTP know anything about state? I don't think so, this concern should be separated.
 
-Secondly, `HttpRoutes` knows almost everything about `GameEngine`. It knows that it exists, it knows about `start` function. It may seem natural, because it's job is to provide additional interface for `GameEngine`. However, I'd argue that this coupling is too tight. `HttpRoutes` doesn't need to know anything about `GameEngine`. It needs to be able to start a game, which is not the same thing.
+Secondly, `HttpRoutes` knows almost everything about `GameEngine`. It knows that it exists, it knows about `start` function. It may seem natural, because its job is to provide additional interface for `GameEngine`. However, I'd argue that this coupling is too tight. `HttpRoutes` doesn't need to know anything about `GameEngine`. It needs to be able to start a game, which is not the same thing.
 
 Finally, the whole thing is totally untestable. HTTP & JSON should have their own unit tests that check whether the API is properly implemented. These particular tests shouldn't test any game logic, which should be tested separately in `GameEngine` unit tests. 
 
