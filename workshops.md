@@ -20,6 +20,7 @@ Get some theoretical and practical overview of the TDD approach & Functional Pro
 - Separate concerns by using functions as input parameters.
 
 ##### Run at
+  - *[Scalar](http://www.scalar-conf.com/) (April 2018)*
   - *[Lambda Days](http://www.lambdadays.org/) (February 2018)*
 
 ### Akka in Scala
