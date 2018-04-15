@@ -1,0 +1,174 @@
+<!doctype html>
+<!--
+  Based on
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Set of workshops for wanna-be and advanced Scala developers">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>TDDing Functional Web Apps - Scala Sphere 2018</title>
+
+    <!-- Page styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <div class="header mdl-layout__header mdl-layout__header--waterfall">
+        <div class="mdl-layout__header-row">
+          <span class="title mdl-layout-title">
+            <b>TDDing Functional Web App</b> Scala Sphere 2018
+          </span>
+          <!-- Add spacer, to align navigation to the right in desktop -->
+          <div class="mdl-layout-spacer"></div>
+          <span class="mobile-title mdl-layout-title">
+            <b>TDDing Functional Web Apps</b>
+          </span>
+        </div>
+      </div>
+
+      <div class="content mdl-layout__content">
+        <div class="section">
+          <h4><pre>git clone https://github.com/miciek/workshop-scalasphere.git</pre></h4>
+        </div>
+        <div class="section">
+          <div class="section-title mdl-typography--display-1-color-contrast">Description</div>
+          <div class="section-body">
+            <a name="akka-in-scala"></a>
+            <p class="mdl-typography--font-bold mdl-typography--subhead">Akka in Scala</p>
+            <div class="mdl-typography--font-light mdl-typography--body-2">
+              <p>
+                Get some theoretical and practical overview of the TDD approach & Functional Programming by creating the multiplayer Pac-Man game server.
+
+                <ul>
+                  <li>Test Driven Development (baby steps, starting with the game logic and moving towards HTTP).</li>
+                  <li>Purely functional approach (separated data and behaviors, no exceptions, ADTs, Options).</li>
+                  <li>Modeling using immutable structures.</li>
+
+                  <li>Making impossible states impossible.</li>
+
+                  <li>Using function composition.</li>
+
+                  <li>Using Monix Atomic to handle state.</li>
+
+                  <li>Separate concerns by using functions as input parameters.</li>
+                </ul>
+              </p>
+
+              <p>
+                Table of Contents:
+                <ul>
+                  <li>Part I: Immutability (warm-up)</li>
+                  <li>Part II: Introduction to stateless tests & TDD using Scalatest</li>
+                  <li>Part III: Separating the concerns using functions</li>
+                  <li>Part IV: Handling state</li>
+                  <li>(optional) Part V: Connecting all dots</li>
+                </ul>
+              </p>
+
+              <p>
+                Prerequisites:
+                <ul>
+                  <li>Familiarity with Scala syntax.</li>
+                  <li>See weeks 1 & 2 of <a href="https://www.coursera.org/course/progfun">Functional Programming Principles in Scala</a>.</li>
+                  <li>Please bring your laptop with Scala enabled environment and IDE.</li></ul>
+              </p>
+
+              <a class="link mdl-button mdl-js-button mdl-typography--text-uppercase" href="https://github.com/miciek/tdding-workshop-scalar">
+               Go to Github page <i class="material-icons">chevron_right</i>
+              </a>
+            </div>
+
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-title mdl-typography--display-1-color-contrast">After the workshop</div>
+          <p class="section-body mdl-typography--font-light mdl-typography--body-1"></p>
+          <div class="card-container mdl-grid">
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card">
+              <div class="contact-card slack-color mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand">
+                  <h4>
+                    Fill out<br/>
+                    feedback form
+                  </h4>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfkIDu_jgnDkAsf3F3-Jc3GwVrP8mpr_hmveuIAKNcDjAie8g/viewform?usp=sf_link" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                   Give feedback (10 seconds)
+                  </a>
+                  <div class="mdl-layout-spacer"></div>
+                  <i class="material-icons">mail</i>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card">
+              <div class="contact-card mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand">
+                  <h4>
+                    Contact the instructor<br/> using contact form
+                  </h4>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a href="http://michalplachta.com/contact/" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    contact form
+                  </a>
+                  <div class="mdl-layout-spacer"></div>
+                  <i class="material-icons">mail</i>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--4-col-phone mdl-card">
+              <div class="contact-card twitter-color mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand">
+                  <h4>
+                    Contact the instructor<br/> using Twitter
+                  </h4>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a href="https://twitter.com/miciek" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                    @miciek on Twitter
+                  </a>
+                  <div class="mdl-layout-spacer"></div>
+                  <img class="card-icon" src="images/twitter-logo.png" alt="Contact using Twitter" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  </body>
+</html>
