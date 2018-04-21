@@ -8,18 +8,18 @@ permalink: /workshops/
 Get some theoretical and practical overview of the TDD approach & Functional Programming by creating a multiplayer Pac-Man game server.
 
 - First steps in Scala and Scalatest.
+- Letting the tools help you (linting, scalafmt).
 - Test Driven Development (baby steps, starting with the game logic and moving towards HTTP).
 - Purely functional approach (separated data and behaviors, no exceptions, ADTs, Options).
 - Modeling using immutable structures.
-- Making impossible states impossible.
-- Using optics to deal with immutable changing data.
-- Using function composition.
-- Using refined types.
-- Using Akka HTTP + Circe.
+- Separating the concerns by using functions as input parameters.
 - Using Monix Atomic to handle state.
-- Separate concerns by using functions as input parameters.
+- Using optics to deal with immutable changing data.
+- Making impossible states impossible (design, refined types).
+- Using function composition to connect all the dots.
 
 ##### Run at
+  - *[Scala Sphere](https://scala.sphere.it/) (April 2018)*
   - *[Scalar](http://www.scalar-conf.com/) (April 2018)*
   - *[Lambda Days](http://www.lambdadays.org/) (February 2018)*
 
