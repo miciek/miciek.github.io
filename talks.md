@@ -6,6 +6,15 @@ permalink: /talks/
 
 Here is the list of my talks with links to videos, slides and code repositories:
 
+### Building testable APIs using functions & meshes
+In this live coding talk you will learn about functional techniques that encourage separation of concerns. I will build a stateful HTTP API from highly isolated components that are easier to test than entangled spaghetti-like codebases. I will show you how tests can help us scaffold the architecture and how should we approach testing in the era of microservices. In the session I will use immutability, type parameters and function parameters as tools to implement a very practical example: Pac-Man game web server. I will code in Scala using Akka HTTP and deploy to Kubernetes with Istio service mesh.
+
+  - [Slides](https://speakerdeck.com/miciek/building-testable-apis-using-functions-and-meshes)
+  - [Code](https://github.com/miciek/pacman-multiplayer-fp)
+
+##### Given at
+  - *[Geecon](https://2018.geecon.org/) (May 2018)*
+
 ### Freestyle, Free & Tagless: Separation of Concerns on Steroids
 You will learn how to cut your applications into isolated, independent pieces using Freestyle library with free monads or tagless final style. The session is based on a multiplayer, purely functional version of Prisoner’s Dillema.
 
