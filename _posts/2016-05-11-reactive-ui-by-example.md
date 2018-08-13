@@ -25,7 +25,7 @@ When developing web applications, we need to deal with many different events fly
 In order to achieve sanity, we need to stop focusing on individual events and start thinking about streams of events. When the smallest notion we have is a stream, we can declaratively define what happens when something appears in this stream. We can transform our streams using map & filter functions. We can combine our streams using merge & combine functions.
 
 ## Enough! Enter Snake!
-Let's create a web Snake game. This won't take long, I promise. About 100 lines of code and we are done! If you want to follow the steps that I am describing here, please checkout the [the empty snake project](https://github.com/miciek/web-snake-react-bacon/tree/workshop-init) and develop the game while you are reading!
+Let's create a web Snake game. This won't take long, I promise. About 100 lines of code and we are done! If you want to follow the steps that I am describing here, please checkout the [the snake project](https://github.com/miciek/web-snake-react-bacon/tree/c20f6102f1485a289cec78ba3c6cc40800bb7158), remove the `Vector.jsx`, `Board.jsx` and `SnakeGame.jsx` files and develop the game while you are reading!
 
 ### Vector
 In order to do anything productive, we need to create a Vector class which will hold our 2D positions and sizes.
@@ -329,7 +329,7 @@ We have just implemented basic snake game functionality using reactive approach!
 {% include snake.html %}
 
 ### Resources 
- - [Empty Snake GitHub project with all boilerplate in place](https://github.com/miciek/web-snake-react-bacon/tree/workshop-init) - just checkout and start coding. Together with this post you should be able to create a simple Snake game,
- - [The current working version of the code](https://github.com/miciek/web-snake-react-bacon/) - if you just want to review the code I created, checkout this repository and run it with `npm start`.
+ - [The version of the code from the time this post was written](https://github.com/miciek/web-snake-react-bacon/tree/c20f6102f1485a289cec78ba3c6cc40800bb7158) - just checkout and start coding. Together with this post you should be able to create a simple Snake game,
+ - [The current working version of the code](https://github.com/miciek/web-snake-react-bacon/) - if you just want to review the code I created and how it evolves over time (after this post is published), checkout this repository and run it with `npm start`.
  - [RxMarbles](http://rxmarbles.com/) - learn stream operators interactively!
  - [Building Snake using Streams](https://speakerdeck.com/miciek/building-snake-using-streams) - slides from my step-by-step tutorial talk (lots of additional visuals)
