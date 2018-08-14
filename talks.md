@@ -13,7 +13,7 @@ In this live coding talk you will learn about functional techniques that encoura
   - [Code](https://github.com/miciek/pacman-multiplayer-fp)
 
 ##### Given at
-  - *[Geecon](https://2018.geecon.org/) (May 2018)*
+  - *[Geecon](https://2018.geecon.org/) (May 2018)* [[Video](https://www.youtube.com/watch?v=2iX5gH2zWbs)]
 
 ### Freestyle, Free & Tagless: Separation of Concerns on Steroids
 You will learn how to cut your applications into isolated, independent pieces using Freestyle library with free monads or tagless final style. The session is based on a multiplayer, purely functional version of Prisoner’s Dillema.
