@@ -2,9 +2,9 @@
 title:       Michał Płachta's Blog
 author:      Michał Płachta
 email:       miciek@gmail.com
-description: "Tea drinker, cyclist, speaker & functional programming enthusiast. Does Scala, Elm, JavaScript and a little bit of many other."
+description: "Blog about software engineering. I write about technical and organisational problems and try to come up with solutions based on experiments and research."
 baseurl:     ""
-url:         "http://michalplachta.com"
+url:         "https://michalplachta.com"
 date_format: "%b %-d, %Y"
 future: false
 header_pages:
@@ -110,7 +110,7 @@ text:
     subject:  'New submission!'
     submit:   'Say Hello'
     ajax:
-      sending:  'sending..'
+      sending:  'Sending...'
       sent:     'Message sent!'
       error:    'Error!'
   thanks: 'Thanks for contacting me. I will reply as soon as possible.'

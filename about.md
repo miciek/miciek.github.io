@@ -1,13 +1,13 @@
 ---
 layout: page
-title: About me
+title: About
 permalink: /about/
 ---
 
-I am a polyglot software engineer specialised in developing distributed applications. Also a tea drinker, cyclist & functional programming enthusiast. I love the human component in software projects. I currently work as team leader at <a href="https://wearerealitygames.com/">Reality Games</a>, where we are building games based on big data.
+I am a software engineer developing software and collaborative working environments. I am currently using functional programming (Scala) and DevOps culture approach. I know and use several programming languages.  I currently work at <a href="https://wearerealitygames.com/">Reality Games</a>, where we are building games based on big data. 
 
-This is a blog about programming and stuff related to programming and managing software projects. I write mostly to remember things better, but also to share things that fascinate me.
+This is a blog about software engineering. I write about technical and organisational problems and try to come up with solutions based on experiments and research.
 
-Follow me on [Twitter](https://twitter.com/miciek), if you want to know what stuff will get here in the near future. See my [Github](https://github.com/miciek) to see what I am currently up to.
+I welcome all the feedback, especially constructive one. Please contact me through [the contact page](/contact) or [Twitter](https://twitter.com/miciek). See my [Github](https://github.com/miciek) to see what I am currently up to.
 
 ![Michał Płachta]({{ site.url }}/images/me_conference.jpg)
