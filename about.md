@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-I am a software engineer developing software and collaborative working environments. I am currently using functional programming (Scala) and DevOps culture approach. I know and use several programming languages.  I currently work at <a href="https://wearerealitygames.com/">Reality Games</a>, where we are building games based on big data. 
+I am a software engineer developing software & collaborative working environments. I am currently using functional programming (Scala) and DevOps culture approach. I speak at conferences, run workshops & organise meetups to help others make better products. I currently work at <a href="https://wearerealitygames.com/">Reality Games</a>, where we are building games based on big data. 
 
 This is a blog about software engineering. I write about technical and organisational problems and try to come up with solutions based on experiments and research.
 
