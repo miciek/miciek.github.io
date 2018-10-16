@@ -6,14 +6,19 @@ permalink: /talks/
 
 Here is the list of my talks with links to videos, slides and code repositories:
 
-### Building testable APIs using functions & meshes
-In this live coding talk you will learn about functional techniques that encourage separation of concerns. I will build a stateful HTTP API from highly isolated components that are easier to test than entangled spaghetti-like codebases. I will show you how tests can help us scaffold the architecture and how should we approach testing in the era of microservices. In the session I will use immutability, type parameters and function parameters as tools to implement a very practical example: Pac-Man game web server. I will code in Scala using Akka HTTP and deploy to Kubernetes with Istio service mesh.
+### Tear down this pyramid... using functions and meshes
+In this live coding talk you will learn about techniques you can use to better test your microservice architecture. We will build a stateful HTTP-based Pac-Man game engine from highly isolated and testable components using pure functions, type parameters, side cars and service meshes.
 
-  - [Slides](https://speakerdeck.com/miciek/building-testable-apis-using-functions-and-meshes)
-  - [Code](https://github.com/miciek/pacman-multiplayer-fp)
+I will build a stateful HTTP API from highly isolated components that are easier to test than entangled spaghetti-like codebases. I will show you how tests can help us scaffold the architecture and how should we approach testing in the era of microservices. In the session I will use immutability, type parameters and function parameters as tools to implement a very practical example: Pac-Man collectibles microservice. I will code in Scala using Akka HTTP and deploy to Kubernetes with [Linkerd](https://linkerd.io) service mesh.
+
+  - [Slides](https://speakerdeck.com/miciek/tear-down-this-pyramid-dot-dot-dot-using-functions-and-meshes)
+  - [Service Code](https://github.com/miciek/pacman-collectibles)
+  - [Deployment Code](https://github.com/miciek/pacman-kubernetes-linkerd)
 
 ##### Given at
-  - *[Geecon](https://2018.geecon.org/) (May 2018)* [[Video](https://www.youtube.com/watch?v=2iX5gH2zWbs)]
+  - *[Agile & Automation Days](http://aadays.pl/) (October 2018)*
+  - *[JDD](https://jdd.org.pl) (October 2018)*
+  - *[Geecon](https://2018.geecon.org/) (May 2018)* (first version) [[Video](https://www.youtube.com/watch?v=2iX5gH2zWbs)] [[Slides](https://speakerdeck.com/miciek/building-testable-apis-using-functions-and-meshes)] [[Code](https://github.com/miciek/pacman-multiplayer-fp)]
 
 ### Freestyle, Free & Tagless: Separation of Concerns on Steroids
 You will learn how to cut your applications into isolated, independent pieces using Freestyle library with free monads or tagless final style. The session is based on a multiplayer, purely functional version of Prisoner’s Dillema.
