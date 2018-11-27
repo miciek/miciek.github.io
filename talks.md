@@ -17,7 +17,7 @@ I will build a stateful HTTP API from highly isolated components that are easier
 
 ##### Given at
   - *[Agile & Automation Days](http://aadays.pl/) (October 2018)*
-  - *[JDD](https://jdd.org.pl) (October 2018)*
+  - *[JDD](https://jdd.org.pl) (October 2018)* [[Video](https://www.youtube.com/watch?v=erf-Y2sb9SY)]
   - *[Geecon](https://2018.geecon.org/) (May 2018)* (first version) [[Video](https://www.youtube.com/watch?v=2iX5gH2zWbs)] [[Slides](https://speakerdeck.com/miciek/building-testable-apis-using-functions-and-meshes)] [[Code](https://github.com/miciek/pacman-multiplayer-fp)]
 
 ### Freestyle, Free & Tagless: Separation of Concerns on Steroids
