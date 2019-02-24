@@ -6,6 +6,16 @@ permalink: /talks/
 
 Here is the list of my talks with links to videos, slides and code repositories:
 
+### Fast & Functional
+In this talk we are going to create a functional and blazingly fast microservice. We will use functional programming abstractions to quickly mix & match different HTTP libraries, state implementations and concurrency configurations. Each step will be followed by a performance analysis using different tools from JVM toolbox. This talk is for you if you want to see how cats IO monad, async-profiler, flame graphs and wrk are used together to create microseconds-fast Scala service for YouTube videos statistics.
+
+  - [Slides](https://speakerdeck.com/miciek/fast-and-functional-66b89d68-5d8c-4d2b-9bc2-5fa4adf16734)
+  - [Code](https://github.com/miciek/influencer-stats)
+
+##### Given at
+  - *[Lambda Days](http://www.lambdadays.org) (February 2019)*
+  - *[coredump](http://coredump.events/2018/) (November 2018)*
+
 ### Tear down this pyramid... using functions and meshes
 In this live coding talk you will learn about techniques you can use to better test your microservice architecture. We will build a stateful HTTP-based Pac-Man game engine from highly isolated and testable components using pure functions, type parameters, side cars and service meshes.
 
