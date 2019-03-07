@@ -13,7 +13,7 @@ In this talk we are going to create a functional and blazingly fast microservice
   - [Code](https://github.com/miciek/influencer-stats)
 
 ##### Given at
-  - *[Lambda Days](http://www.lambdadays.org) (February 2019)*
+  - *[Lambda Days](http://www.lambdadays.org) (February 2019)* [[Video](https://www.youtube.com/watch?v=xAhrgxUeOvY)]
   - *[coredump](http://coredump.events/2018/) (November 2018)*
 
 ### Tear down this pyramid... using functions and meshes
