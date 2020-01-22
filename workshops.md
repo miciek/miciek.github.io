@@ -4,6 +4,57 @@ title: My Workshops
 permalink: /workshops/
 ---
 
+### Programming IO using the MTL style
+The objective of the workshop is to get some theoretical and practical overview of the functional approach to IO-based programming. You will learn how to program real applications using Scala, Cats, Cats Effect, Cats MTL, Meow MTL, and others.
+
+During the workshop, we will switch between quick introductions of the core features and longer step-by-step exercises. This will expose you to some features and tools needed to create and maintain production applications.
+
+This event is open for all programmers that know the basics of FP in Scala (immutability, pure functions, higher-order functions, type classes).
+
+1. Using `IO`.
+2. Handling errors (`Option` / `Either` / `EitherT` / `ApplicativeError` / `FunctorRaise` / `MonadError`).
+3. Handling State (`StateT` / `MonadState`).
+4. Tagless final & MTL style.
+5. Eithers in the business logic.
+6. Using mutable reference (`Ref`).
+7. Doing things concurrently (`Concurrent` / `Fiber`).
+8. Purely functional waiting for values (`Deferred`).
+
+##### Run at
+  - [Kraków Scala User Group](https://www.meetup.com/pl-PL/Krakow-Scala-User-Group/events/265178928/) (October 2019)
+
+### FP for Java programmers
+If you have ever found yourself late at night debugging some impossible bug that "shouldn't have happened", only to find out that it was all about some obscure global state change, come join us and see what FP has to offer.
+
+During this workshop, you will learn how to deal with your worst enemies: shared mutable state and code you can't trust. You will do a set of exercises that focus on dealing with these problems using Java whenever possible and Scala in more advanced cases. You will learn the two fundamental tools of functional programming: pure functions and immutable values.
+
+This event is open for all programmers that know the basics of OOP in Java. Scala knowledge is not required. We will introduce & use only the very basic syntax constructs.
+
+1. What is a function?
+2. Exercise: Imperative vs Declarative
+3. Functions in Scala
+4. Exercise: Functions in Scala
+5. Coding imperatively
+6. Pure function: imperative vs functional
+7. Exercise: Refactoring to a pure function
+8. Pure functions and clean code
+9. Exercise: Pure or impure?
+10. Using Scala to write pure functions
+11. Testing pure functions
+12. Exercise: Testing pure functions
+13. Mutability is dangerous
+14. Exercise: Getting burnt by mutability
+15. Shared mutable state
+16. Dealing with the moving parts
+17. Building our intuitions about immutability
+18. Exercise: Immutable String API
+19. Purely functional approach to the shared mutable state
+20. Exercise: Practicing immutable slicing and appending
+21. Exercise: Purely functional approach to the shared mutable state
+
+##### Run at
+  - [Kraków Scala User Group](https://www.meetup.com/pl-PL/Krakow-Scala-User-Group/events/263551356/) (August 2019)
+
 ### TDDing Functional Web Apps
 Get some theoretical and practical overview of the TDD approach & Functional Programming by creating a multiplayer Pac-Man game server.
 
