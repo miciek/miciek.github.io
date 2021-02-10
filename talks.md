@@ -15,7 +15,7 @@ In this talk we are going to create a functional and blazingly fast microservice
 ##### Given at
   - *[Scala Matsuri](https://2019.scalamatsuri.org) (June 2019)* (long, slow version) [[Video](https://www.youtube.com/watch?v=L9-C33sHIhU)] [[Slides](https://speakerdeck.com/miciek/fast-and-functional-scala-matsuri-jp)]
   - *[Geecon](https://2019.geecon.org/) (May 2019)* [[Video](https://www.youtube.com/watch?v=tXrnnysRSYc)]
-  - *[JPoint](https://jpoint.ru/) (April 2019)*
+  - *[JPoint](https://jpoint.ru/) (April 2019)* [[Video](https://www.youtube.com/watch?v=C1QiYjAbrb0t5JZNS)]
   - *[Lambda Days](http://www.lambdadays.org) (February 2019)* [[Video](https://www.youtube.com/watch?v=xAhrgxUeOvY)]
   - *[coredump](http://coredump.events/2018/) (November 2018)*
 
