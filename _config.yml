@@ -15,10 +15,6 @@ header_pages:
 
 # Google services
 google_verification:
-# Use either direct GA implementation or set up GTM account
-# - using both will skew your data (leave blank to not use at all)
-google_analytics: UA-50961043-2
-google_tag_manager:
 
 # Bing services
 bing_verification:
@@ -45,12 +41,6 @@ disqus_shortname: michalplachta
 # txtpen post comments
 # (leave blank to disable txtpen)
 txtpen_sitename:
-
-# Facebook Comments plugin
-# (leave blank to disable Facebook Comments, otherwise set it to true)
-facebook_comments:
-facebook_appid:
-facebook_comments_number: 10
 
 # Social icons
 github_username: miciek
