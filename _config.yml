@@ -10,6 +10,7 @@ future: false
 header_pages:
  - about.md
  - talks.md
+ - book.md
  - workshops.md
  - contact.html
 
