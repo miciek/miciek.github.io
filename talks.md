@@ -15,6 +15,7 @@ In this talk we will show a real-world application that uses state, multiple thr
 
   - [Slides](https://speakerdeck.com/miciek/immutability-against-the-machine)
   - [Code](https://github.com/miciek/immutability-against-the-machine)
+  - [Book](/book)
 
 ##### Given at
   - *[JBCNConf](http://www.jbcnconf.com/2022/) (July 2022)*
