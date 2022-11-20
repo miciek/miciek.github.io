@@ -3,14 +3,16 @@
 ---
 @charset "UTF-8";
 
-/*!
-* Pixyll - A simple, beautiful Jekyll theme that's mobile first.
-* @author John Otander <johnotander@gmail.com> (http://johnotander.com/)
-* @link https://github.com/johnotander/pixyll
-* @license MIT
-*/
-
 @import 'variables';
+
+@import 'bulma/utilities/_all';
+@import 'bulma/base/_all';
+@import 'bulma/elements/_all';
+@import 'bulma/form/_all';
+@import 'bulma/components/_all';
+@import 'bulma/grid/_all';
+@import 'bulma/helpers/_all';
+@import 'bulma/layout/_all';
 
 @import 'basscss';
 
