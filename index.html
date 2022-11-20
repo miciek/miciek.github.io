@@ -5,15 +5,38 @@ image: /images/logo_og.jpg
 {% assign posts_count = paginator.posts | size %}
 
 <div class="home">
+  <div class="card">
+    <div class="card-image">
+      <figure class="image is-2by1">
+        <a href="https://www.manning.com/books/grokking-functional-programming?a_aid=michal&a_bid=7c041142" target="_blank">
+          <img src="/images/grokkingfp/book_promo_big.png" alt="Functional design, real-world examples, and hundreds of snippets and exercises">
+        </a>
+      </figure>
+    </div>
+    <div class="card-content">
+      <div class="media">
+        <div class="media-content">
+          <p class="title is-4">Grokking Functional Programming is out now!</p>
+          <p class="subtitle is-6">Learn FP in a fun and practical way</p>
+        </div>
+      </div>
+  
+      <div class="content">
+        <p>If you've worked on a team who struggled with lots of bugs and maintainability issues, this is a book for you!</p>
+        
+        <p>You will learn how to use functional programming techniques to create bulletproof and readable codebases.</p>
+        
+        <p>Hundreds of code snippets, illustrations, and exercises will make you a productive functional programmer.</p>
+
+        <p>⭐⭐⭐⭐⭐ 5 stars on <a href="https://www.goodreads.com/book/show/62893614-grokking-functional-programming">Goodreads</a>!</p>
+
+        <p>➡️ Grab your copy now from <a href="https://www.manning.com/books/grokking-functional-programming?a_aid=michal&a_bid=7c041142">Manning</a> or <a href="https://www.amazon.com/Grokking-Functional-Programming-Michal-Plachta/dp/1617291838/">Amazon</a>.</p>
+      </div>
+    </div>
+  </div>
+
   {% if posts_count > 0 %}
     <div class="posts">
-      <div class="post py3">
-        <p class="post-meta">Jul 19, 2022</p>
-        <a href="/book" class="post-link"><h3 class="h1 post-title">Immutability Against The Machine @JBCNConf!</h3></a>
-        <span class="post-summary">
-          I am speaking at 🇪🇸<a href="https://www.jbcnconf.com/2022/">JBCNConf</a>🇪🇸 this year! The talk is about functional programming and immutability. Please go the the <a href="/talks">Talks</a> section to get the abstract, code repository, and slides. If you are interested in learning more about FP in a more systamatic (and still fun!) way, have a look at the <a href="/book">Book</a> section (pssssst... the code I mentioned during presentation is <code class="language-plaintext highlighter-rouge">watchplachta40</code>). As always, I am <a href="/contact">waiting for your comments, questions, and feedback</a>. Enjoy the FP ride!
-        </span>
-      </div>
       {% for post in paginator.posts %}
         <div class="post py3">
           <p class="post-meta">{{ post.date | date: site.date_format }}</p>
