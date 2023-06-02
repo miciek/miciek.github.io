@@ -9,5 +9,5 @@ vendor/bundle
 _config.gh-pages.yml
 
 Gemfile.lock
-.swp
+*.swp
 .idea

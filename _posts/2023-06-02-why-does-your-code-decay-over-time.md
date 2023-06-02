@@ -6,7 +6,7 @@ image: images/why-does-your-code-decay-over-time/summary.png
 summary: "Code decay happens in every code base. We can use a few simple rules of thumb to make it more manageable."
 ---
 
-![Code Decay?](images/why-does-your-code-decay-over-time/summary.png)
+![Code Decay?](/images/why-does-your-code-decay-over-time/summary.png)
 
 You have just created a function that was bulletproof. You think it will stay like this forever, with no need to change because it's just perfect?
 
