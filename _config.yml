@@ -37,7 +37,7 @@ fb_page_id:
 
 # Disqus post comments
 # (leave blank to disable Disqus)
-disqus_shortname: michalplachta
+disqus_shortname:
 
 # txtpen post comments
 # (leave blank to disable txtpen)
