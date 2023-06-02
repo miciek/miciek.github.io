@@ -26,12 +26,12 @@ Hence the term: **DECAY**. Code decay leads to costly delays in development, inc
 
 One way of dealing with this problem is to write the software in a way that is easy to refactor:
 
-- not creating abstractions
-- small functions
-- pure functions
-- separation of logic and side effects
-- immutable values
-- writing WHAT needs to happen instead of HOW it should happen 
+- not creating unnecessary abstractions
+- using small functions
+- using pure functions
+- separating logic and side effects
+- using immutable values
+- writing WHAT needs to happen instead of HOW it should happen
 
 Using these guidelines will make your code fun to change by your teammates! 
 
