@@ -2,7 +2,7 @@
 layout: post
 title: Why does your code decay over time?
 tags: quick-note refactoring clean-code abstraction
-image: images/why-does-your-code-decay-over-time/summary.png
+image: /images/why-does-your-code-decay-over-time/summary.png
 summary: "Code decay happens in every code base. We can use a few simple rules of thumb to make it more manageable."
 ---
 
