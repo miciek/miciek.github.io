@@ -18,10 +18,12 @@ In this talk we will show a real-world application that uses state, multiple thr
   - [Book](/book)
 
 ##### Given at
-  - *[Silesia Java User Group](https://www.meetup.com/Silesia-JUG/) (February 2023)*
-  - *[Kraków Scala User Group](http://www.meetup.com/Krakow-Scala-User-Group/) (December 2022)*
+  - *[Øredev](https://oredev.org) (November 2023)*
+  - *[Warsaw Java User Group](https://www.meetup.com/warszawa-jug/events/296074859/) (September 2023)*
+  - *[Silesia Java User Group](https://www.meetup.com/silesia-jug/events/291485916/) (February 2023)*
+  - *[Kraków Scala User Group](https://www.meetup.com/krakow-scala-user-group/events/289928834/) (December 2022)*
   - *[J-Santa](https://www.j-santa.pl/) (December 2022)*
-  - *[Polish Java User Group](https://www.meetup.com/Polish-Java-User-Group/) (December 2022)*
+  - *[Polish Java User Group](https://www.meetup.com/polish-java-user-group/events/290020330/) (December 2022)*
   - *[JBCNConf](http://www.jbcnconf.com/2022/) (July 2022)* [[Video](https://www.youtube.com/watch?v=1LbEh8q-0E0)]
   - *[Devoxx PL](http://www.devoxx.pl) (June 2022)* [[Video](https://www.youtube.com/watch?v=gzgGLsLnj_U)]
 
@@ -191,7 +193,7 @@ A live coding of Snake game using JavaScript, React and streams.
   - [Code](https://github.com/miciek/web-snake-react-bacon)
 
 ##### Given at
-  - *[Meet.js Kraków](http://meetjs.pl) (January 2016)* [[Video PL](http://krakow.meetjs.pl/160112/)]
+  - *[Meet.js Kraków](http://meetjs.pl) (January 2016)* [[Video PL](https://www.youtube.com/watch?v=XcdbbD3Spoo)]
 
 ### Typeclasses in a galaxy far, far away
 Introduction to typeclasses.
