@@ -18,7 +18,7 @@ In this talk we will show a real-world application that uses state, multiple thr
   - [Book](/book)
 
 ##### Given at
-  - *[Øredev](https://oredev.org) (November 2023)*
+  - *[Øredev](https://oredev.org) (November 2023)* [[Video](https://www.youtube.com/watch?v=n0cR8itBwpo)]
   - *[Warsaw Java User Group](https://www.meetup.com/warszawa-jug/events/296074859/) (September 2023)*
   - *[Silesia Java User Group](https://www.meetup.com/silesia-jug/events/291485916/) (February 2023)*
   - *[Kraków Scala User Group](https://www.meetup.com/krakow-scala-user-group/events/289928834/) (December 2022)*
