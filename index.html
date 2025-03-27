@@ -37,6 +37,13 @@ image: /images/logo_og.jpg
 
   {% if posts_count > 0 %}
     <div class="posts">
+      <div class="post py3">
+        <p class="post-meta">Mar 27, 2025</p>
+        <a href="/book" class="post-link"><h3 class="h1 post-title">Retrying the retries design @Scalar!</h3></a>
+        <span class="post-summary">
+          Hello Scalar! The slides for the talk are <a href="https://michalplachta.com/slides/retries">here</a>. You can find the code examples at <a href="https://github.com/polyvariant/orety">Github</a>. If you are interested in learning more about FP in a more systamatic (and still fun!) way, have a look at the <a href="/book">Book</a> section (pssssst... use the code <code class="language-plaintext highlighter-rouge">watchplachta40</code>). As always, I am <a href="/contact">waiting for your comments, questions, and feedback</a>. Enjoy the FP ride!
+        </span>
+      </div>
       {% for post in paginator.posts %}
         <div class="post py3">
           <p class="post-meta">{{ post.date | date: site.date_format }}</p>
